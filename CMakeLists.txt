@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION "3.19.2")
+cmake_minimum_required(VERSION "3.10")
+project("Rail" LANGUAGES CXX)
 
-project("ShapeHierarchies" LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-O2")	##optimization flag
 
 add_library(train train.h train.cpp)
 add_library(station station.h station.cpp)
@@ -11,5 +13,3 @@ add_executable(main main.cpp)
 
 set_target_properties(train station platform controller PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(main train station platform controller)
-
-set(CMAKE_CXX_FLAGS "-O2")	##optimization flag
