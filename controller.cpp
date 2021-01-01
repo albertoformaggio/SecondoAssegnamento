@@ -74,35 +74,52 @@ void Controller::GetTimetable(string timetable)
 		istringstream ss(line);
 
 		ss >> train_id >> first_station >> train_type;
-		Train tr;
+		Train* tr;
 		switch (train_type)
 		{
 		case 0:
-			tr = RegionalTrain(train_id);
-			trains_.push_back(tr);
+			*tr = RegionalTrain(train_id);				//Devo inserirci un riferimento con &
 			break;
 		case 1:
-			tr = HSTrain(train_id);
-			trains_.push_back(tr);
+			*tr = HSTrain(train_id);
 			break;
 		case 2:
-			tr = HSTrainSuper(train_id);
-			trains_.push_back(tr);
+			*tr = HSTrainSuper(train_id);
+			
 			break;
 		}
-		
-		bool forward = first_station == 0;
-		for (int i = 0; i < stations_.size(); i++)
-		{	
-			const int x = forward ? i : (stations_.size()-1) - i;
-			if (!(tr.getType() != "Regional" && stations_[i].getType() == "Local"))		//COME FARE QUESTO CHECK?		Se il treno non è regionale e la stazione è locale, allora non ci sarà nessun evento di fermata del treno a tale stazione
+
+		if (ss.eof())
+		{
+			cerr << "Il treno non ha un orario di partenza: non può esistere";
+		}
+		else
+		{
+			trains_.push_back(tr);
+			bool forward = first_station == 0;
+			for (int i = 0; i < stations_.size(); i++)
 			{
-				int time;
-				ss >> time;
-				Event e(EventType::kTrainStop, time, tr, stations_[i]);
-				events_.push_back(e);
+				const int x = forward ? i : (stations_.size() - 1) - i;
+				if (!(tr.getType() != "Regional" && stations_[i].getType() == "Local"))		//COME FARE QUESTO CHECK?		Se il treno non è regionale e la stazione è locale, allora non ci sarà nessun evento di fermata del treno a tale stazione
+				{
+					int time;
+					ss >> time;													//COMPLETARE CON I TEMPI NECESSARI SE MANCANTI
+					if (!ss.eofbit)
+					{
+						Event e(EventType::kTrainStop, time, tr, stations_[i]);
+						events_.push_back(e);
+					}
+					else
+					{
+						Event last = events_[events_.size() - 1];	//Ottengo l'ultimo evento di fermata inserito
+						const Station& lastStation = last.GetStation();		//manca copy constructor/move constructor
+						const Train& lastTrain = last.GetTrain();
+						//Pensa, non hai il tempo vecchio ciao ciao
+
+					}	//Fai attenzione perchè se il file non ha nemmeno l'orario di partenza, l'elemento precedente è errato (o non è presente, o è di un altro treno)
+				}
 			}
-		}	
+		}
 	}
 
 	time_file.close();

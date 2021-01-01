@@ -9,6 +9,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <memory>
 
 #ifndef controller_h
 #define controller_h
@@ -25,8 +26,8 @@ private:
 	void GetTimetable(std::string timetable);
 	//void GetTimes(std::istringstream ss, int st_index, int train_type);
 
-	std::vector<Station> stations_;
-	std::vector<Train> trains_;
+	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
+	std::vector<Train*> trains_;
 	std::vector<Event> events_;		//Pensa se è meglio usare pq o vector
 };
 
