@@ -1,28 +1,25 @@
+#include "event.h"
+#include "train.h"
+#include "station.h"
+#include <vector>
+#include <string>
+
+#ifndef controller_h
+#define controller_h
+
 class Controller
 {
 public:
-	Controller(string line_descr, string timetable);
+	Controller(std::string line_descr, std::string timetable);
 
 
 private:
-	void getStations(string line_descr);
-	void getTimetable(string timetable);
+	void GetStations(std::string line_descr);
+	void GetTimetable(std::string timetable);
 
-	vector<Station> stations_;
-	vector<Train> trains_;
-	priority_queue<Event> events_;
+	std::vector<Station> stations_;
+	std::vector<Train> trains_;
+	priority_queue<Event> events_;		//Pensa se è meglio usare pq o vector
 };
 
-"line_description.txt"
-"timetable.txt" ifstream
-
-//treno orario stazione
-
-struct Event 
-{
-	
-};
-
-
-
-//quando creo il controller ci saranno solo gli eventi di arrivo (conosco solo quelli grazie al file)
+#endif // !controller_h

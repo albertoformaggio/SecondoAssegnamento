@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "-O2")	##optimization flag
 add_library(train train.h train.cpp)
 add_library(station station.h station.cpp)
 add_library(platform platform.h platform.cpp)
-add_library(controller controller.h controller.cpp)
+add_library(controller controller.h controller.cpp event.h event.cpp)
 
 add_executable(main main.cpp)
 
