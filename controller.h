@@ -3,6 +3,7 @@
 #include "station.h"
 #include <vector>
 #include <string>
+#include <fstream>
 
 #ifndef controller_h
 #define controller_h
@@ -10,6 +11,7 @@
 class Controller
 {
 public:
+	class FileNotFoundException { };
 	Controller(std::string line_descr, std::string timetable);
 
 
@@ -19,7 +21,7 @@ private:
 
 	std::vector<Station> stations_;
 	std::vector<Train> trains_;
-	priority_queue<Event> events_;		//Pensa se è meglio usare pq o vector
+	//priority_queue<Event> events_;		//Pensa se è meglio usare pq o vector
 };
 
 #endif // !controller_h

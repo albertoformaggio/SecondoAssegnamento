@@ -5,15 +5,15 @@
 #define Event_h
 class Event
 {
-	Event(EventType e_type, Time time, Train train, Station st);
-	Time GetTime() const;
+	Event(EventType e_type, int time, Train train, Station st);
+	int GetTime() const;
 	Train GetTrain() const;
 	EventType GetType() const;
 	Station GetStation() const;
 
 private:
 	EventType type_;
-	Time time_;
+	int time_;
 	Train train_;
 	Station station_;
 };
