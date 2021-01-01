@@ -1,9 +1,14 @@
+/*!
+	@author Formaggio Alberto
+*/
+
 #include "event.h"
 #include "train.h"
 #include "station.h"
 #include <vector>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 #ifndef controller_h
 #define controller_h
@@ -18,10 +23,11 @@ public:
 private:
 	void GetStations(std::string line_descr);
 	void GetTimetable(std::string timetable);
+	//void GetTimes(std::istringstream ss, int st_index, int train_type);
 
 	std::vector<Station> stations_;
 	std::vector<Train> trains_;
-	//priority_queue<Event> events_;		//Pensa se è meglio usare pq o vector
+	std::vector<Event> events_;		//Pensa se è meglio usare pq o vector
 };
 
 #endif // !controller_h

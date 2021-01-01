@@ -1,11 +1,23 @@
+/*!
+	@author Formaggio Alberto
+*/
 #include "train.h"
 #include "station.h"
 
 #ifndef Event_h
 #define Event_h
+enum class EventType
+{
+	kTrainRequest,
+	kStationAnswer,
+	kTrainStop,
+	kTrainDeparture,
+};
+
 class Event
 {
-	Event(EventType e_type, int time, Train train, Station st);
+public:
+	Event(EventType e_type, int time, Train& train, Station& st);
 	int GetTime() const;
 	Train GetTrain() const;
 	EventType GetType() const;
@@ -18,12 +30,5 @@ private:
 	Station station_;
 };
 
-enum class EventType
-{
-	kTrainRequest,
-	kStationAnswer,
-	kTrainStop,
-	kTrainDeparture,
-};
 
 #endif // !Event
