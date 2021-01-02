@@ -4,7 +4,7 @@
 
 #include "platform.h"
 #include "train.h"
-
+#include <queue>
 #include <iostream>
 #include <vector>
 
@@ -21,7 +21,7 @@ public:
 	bool hasParkedTrain();
 	void addParkedTrain(Train t);
 
-	explicit Station(std::vector<Platform> tracks, int distance, std::string name, int number, std::vector<Train> parked);
+	explicit Station(std::vector<Platform> tracks, int distance, std::string name, int number, std::priority_queue<Train> parked);
 	~Station();
 	//3 tipi standard, transit, parcheggio
 
@@ -29,7 +29,7 @@ private:
 	const int kDistanceFromOrigin;
 	const std::string st_name;
 	const int trainNumber;
-	std::vector<Train> parked;
+	std::priority_queue<Train> parked;
 	std::vector<Platform> platforms;
 };
 

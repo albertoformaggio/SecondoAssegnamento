@@ -1,7 +1,7 @@
 /* @author Michele Rieppi */
 #include "station.h"
 
-Station::Station(std::vector<Platform> tracks, int distance, std::string name, int number, std::vector<Train> park)
+Station::Station(std::vector<Platform> tracks, int distance, std::string name, int number, std::priority_queue<Train> park)
 	: kDistanceFromOrigin{ distance }, st_name{ name }, trainNumber{ number }, parked{ park }
 {
 		/*	Creo 4 binari standard per la stazione principale */
@@ -21,7 +21,7 @@ Station::~Station(){
 }
 
 void Station::addParkedTrain(Train t) {
-	parked.push_back(t);
+	parked.push(t);
 }
 
 
