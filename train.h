@@ -1,8 +1,11 @@
+#include "station.h"
+#include "platform.h"
+
 class Train
 {
 public:
-	void setSpeed();
-	void editDelay();
-	Platform requirePlatform(Station st);
-	void leaving(Platform pl);	//Quando parte semplicemente setta pl a libero 
+	virtual void setSpeed() = 0;
+	virtual void editDelay() = 0 ;
+	virtual Platform requirePlatform(Station st) = 0;
+	virtual void leaving(Platform pl) = 0;	//Quando parte semplicemente setta pl a libero 
 };
