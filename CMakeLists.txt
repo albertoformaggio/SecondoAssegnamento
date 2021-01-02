@@ -4,7 +4,7 @@ project("Rail" LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-O2")	##optimization flag
 
-add_library(train train.h train.cpp)
+add_library(train train.h train.cpp RegionalTrain.h HSTrain.h HSTrainSuper.h RegionalTrain.cpp HSTrain.cpp HSTrainSuper.cpp)
 add_library(station station.h station.cpp)
 add_library(platform platform.h platform.cpp)
 add_library(controller controller.h controller.cpp event.h event.cpp)
