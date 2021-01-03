@@ -6,29 +6,40 @@
 
 #ifndef Event_h
 #define Event_h
-enum class EventType
-{
-	kTrainRequest,
-	kStationAnswer,
-	kTrainStop,
-	kTrainDeparture,
-};
 
 class Event
 {
 public:
-	Event(EventType e_type, int time, Train& train, Station& st);
+	Event(int time, Train& train, Station& st);
 	int GetTime() const;
-	const Train& GetTrain() const;
-	EventType GetType() const;
-	const Station& GetStation() const;
+	Train* GetTrain() const;
+	Station* GetStation() const;
+	virtual void performAction() = 0;
 
 private:
-	EventType type_;
 	int time_;
-	Train* train_;
+	Train* train_;		//forse unique_ptr ?
 	Station* station_;
 };
 
+class PlatformRequest : public Event
+{
+	void performAction() override;
+};
+
+class StationAnswer : public Event
+{
+	void performAction() override;
+};
+
+class TrainStop : public Event
+{
+	void performAction() override;
+};
+
+class TrainDeparture : public Event
+{
+	void performAction() override;
+};
 
 #endif // !Event
