@@ -2,6 +2,9 @@
 	@author Formaggio Alberto
 */
 
+#ifndef controller_h
+#define controller_h
+
 #include "event.h"
 #include "train.h"
 #include "HSTrain.h"
@@ -13,9 +16,6 @@
 #include <fstream>
 #include <sstream>
 #include <memory>
-
-#ifndef controller_h
-#define controller_h
 
 class Controller
 {

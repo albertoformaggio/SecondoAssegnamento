@@ -11,9 +11,9 @@ class Event
 {
 public:
 	Event(int time, Train& train, Station& st);
-	int GetTime() const;
-	Train* GetTrain() const;
-	Station* GetStation() const;
+	int GetTime() const { return time_; }
+	Train* GetTrain() const { return train_; }
+	Station* GetStation() const { return station_; }
 	virtual void performAction() = 0;
 
 private:
