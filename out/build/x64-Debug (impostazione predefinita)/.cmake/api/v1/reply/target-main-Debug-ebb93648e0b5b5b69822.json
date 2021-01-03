@@ -61,15 +61,15 @@
 	[
 		{
 			"backtrace" : 2,
+			"id" : "controller::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
 			"id" : "train::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
 			"id" : "station::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "controller::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
@@ -146,13 +146,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "stationS.cpp",
+			"path" : "localStation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "platformT.cpp",
+			"path" : "transitPlatform.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

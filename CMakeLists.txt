@@ -4,12 +4,12 @@ project("Rail" LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-O2")	##optimization flag
 
-add_library(train train.h train.cpp RegionalTrain.h HSTrain.h HSTrainSuper.h RegionalTrain.cpp HSTrain.cpp HSTrainSuper.cpp "stationS.cpp" "platformT.cpp")
-add_library(station station.h "stationP.cpp" "stationS.cpp" "platformT.cpp")
-add_library(platform platform.h "platformS.cpp" "stationS.cpp" "platformT.cpp")
-add_library(controller controller.h controller.cpp event.h event.cpp "stationS.cpp" "platformT.cpp")
+add_library(train train.h train.cpp RegionalTrain.h HSTrain.h HSTrainSuper.h RegionalTrain.cpp HSTrain.cpp HSTrainSuper.cpp "localStation.cpp" "transitPlatform.cpp")
+add_library(station station.h "mainStation.cpp" "localStation.cpp" "transitPlatform.cpp")
+add_library(platform platform.h "standardPlatform.cpp" "localStation.cpp" "transitPlatform.cpp")
+add_library(controller controller.h controller.cpp event.h event.cpp "localStation.cpp" "transitPlatform.cpp")
 
-add_executable(main main.cpp "stationS.cpp" "platformT.cpp")
+add_executable(main main.cpp "localStation.cpp" "transitPlatform.cpp")
 
 set_target_properties(train station platform controller PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(main train station platform controller)

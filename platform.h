@@ -7,17 +7,29 @@
 class Platform
 {
 public:
-	void fixSpeed(Train t);
+
+	const bool type;	//0 standard 1 transit
+
+
 	bool isEmpty();
 	void reserve();
 	void free();
 
-	Platform(bool t, bool s);
 	~Platform();
 
+protected: 
+	Platform(bool t, bool s);
+
 private:
-	const bool type;	//0 standard 1 transit
 	bool status;		//0 free 1 occupato
+};
+
+class transitPlatform : public Platform {
+
+};
+
+class standardPlatform : public Platform {
+	void fixSpeed(Train t);
 };
 
 #endif
