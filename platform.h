@@ -1,10 +1,10 @@
 /* @author Michele Rieppi */
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ifndef platform_h
+#define platform_h
 
-#include "train.h"
+#include "station.h"
 
-class Platform
+class Platform //da rivedere i tipi bool
 {
 public:
 
@@ -24,10 +24,12 @@ protected:
 };
 
 class transitPlatform : public Platform {
+public:
 	transitPlatform(bool t, bool s);
 };
 
 class standardPlatform : public Platform {
+public:
 	standardPlatform(bool t, bool s);
 
 	void fixSpeed(Train t);

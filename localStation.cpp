@@ -6,26 +6,26 @@ localStation::localStation(int distance, std::string name)
 {
 	/*	Creo 6 binari standard per la stazione secondaria */
 	Platform* bs1 = new standardPlatform(0, 0);
-	addTrack(&bs1);
+	addStandardPlatform(bs1);
 	Platform* bs2 = new standardPlatform(0, 0);
-	addTrack(&bs2);
+	addStandardPlatform(bs2);
 	Platform* bs3 = new standardPlatform(0, 0);
-	addTrack(&bs3);
+	addStandardPlatform(bs3);
 	Platform* bs4 = new standardPlatform(0, 0);
-	addTrack(&bs4);
+	addStandardPlatform(bs4);
 	Platform* bt1 = new transitPlatform(1, 0);
-	addTrack(&bt1);
+	addTransitPlatform(bt1);
 	Platform* bt2 = new transitPlatform(1, 0);
-	addTrack(&bt2);
+	addTransitPlatform(bt2);
 
 
 }
 
-Platform localStation::getTransitPlatform(){
-	if (bt1.isEmpty() == 0)
-		return bt1;
-	else if (bt2.isEmpty() == 0)
-		return bt2;
+transitPlatform* localStation::getTransitPlatform(){
+	if (platforms[0] == nullptr)
+		return platforms[0];
+	else if (parked[1] == nullptr)
+		return platforms[1];
 }
 
 transitPlatform localStation::getStandardPlatform(){
@@ -36,6 +36,10 @@ Station::~Station() {
 
 }
 
-void Station::addTrack(Platform& track) {
-	parked.push_back(track);
+void Station::addStandardPlatform(Platform* track){
+	platforms.push_back(&track);
+}
+
+void localStation::addTransitPlatform(Platform* track){
+	platforms.push_back(&track)
 }

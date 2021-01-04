@@ -1,6 +1,6 @@
 /* @author Michele Rieppi */
-#ifndef STATION_H
-#define STATION_H
+#ifndef station_h
+#define station_h
 
 #include "platform.h"
 #include "train.h"
@@ -16,7 +16,12 @@ public:
 	const int kDistanceFromOrigin;
 	const std::string st_name;
 
-	
+
+	bool hasParkedTrain();
+	Train getParkedTrain();
+	void addParkedTrain(Train t);
+	Train removeParkedTrain();
+
 	bool hasStandardPlatform(); //??
 	bool hasTransitPlatform();	//??
 
@@ -24,7 +29,7 @@ public:
 
 protected:
 
-	void addTrack(Platform& track);
+	void addStandardPlatform(Platform* track);
 
 	explicit Station(int distance, std::string name)
 		: kDistanceFromOrigin{ distance }, st_name{ name } {}
@@ -38,17 +43,15 @@ class mainStation : public Station {
 
 	mainStation(int distance, std::string name);
 
-	bool hasParkedTrain();
-	Train getParkedTrain();
-	void addParkedTrain(Train t);
-	Train removeParkedTrain();
 	standardPlatform getStandardPlatform();
 };
 
 class localStation : public Station {
 
 	localStation(int distance, std::string name);
-	transitPlatform getTransitPlatform();
+	
+	void addTransitPlatform(Platform* track);
+	Platform* getTransitPlatform();
 	standardPlatform getStandardPlatform();
 };
 
