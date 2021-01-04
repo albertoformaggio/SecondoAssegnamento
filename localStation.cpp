@@ -14,9 +14,9 @@ localStation::localStation(int distance, std::string name)
 	Platform* bs4 = new standardPlatform(0, 0);
 	addTrack(&bs4);
 	Platform* bt1 = new transitPlatform(1, 0);
-	addTrack(bt1);
+	addTrack(&bt1);
 	Platform* bt2 = new transitPlatform(1, 0);
-	addTrack(bt2);
+	addTrack(&bt2);
 
 
 }
@@ -28,10 +28,14 @@ Platform localStation::getTransitPlatform(){
 		return bt2;
 }
 
+transitPlatform localStation::getStandardPlatform(){
+	return ;
+}
+
 Station::~Station() {
 
 }
 
 void Station::addTrack(Platform& track) {
-	parked.push(track);
+	parked.push_back(track);
 }

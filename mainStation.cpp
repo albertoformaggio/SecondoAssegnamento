@@ -1,3 +1,5 @@
+#include "station.h"
+#include "station.h"
 /* @author Michele Rieppi */
 #include "station.h"
 
@@ -20,13 +22,33 @@ Station::~Station(){
 
 }
 
-void Station::addParkedTrain(Train t) {
-	parked.push(t);
+bool mainStation::hasParkedTrain(){
+	if (parked.size() > 0)
+		return true;
+	return false;
+}
+
+Train mainStation::getParkedTrain(){
+	return ;
+}
+
+void mainStation::addParkedTrain(Train t) {
+	parked.push_back(&t);
+}
+
+Train mainStation::removeParkedTrain() {
+	return parked.pop_back();
+}
+
+standardPlatform mainStation::getStandardPlatform(){
+	return ;
 }
 
 void Station::addTrack(Platform& track){
-	parked.push(track);
+	parked.push_back(track);
 }
+
+
 
 
 

@@ -1,7 +1,7 @@
 /* @author Michele Rieppi */
 #include "platform.h"
 
-standardPlatform::standardPlatform(bool t, bool s)
+standardPlatform::standardPlatform(bool t, bool s) //Mancano controlli
 	:Platform(type, status) {}
 
 Platform::~Platform(){
@@ -21,5 +21,5 @@ void Platform::reserve() {
 }
 
 void standardPlatform::fixSpeed(Train t) {
-	t.setSpeed = 80;
+	t.setSpeed();
 }

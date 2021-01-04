@@ -18,10 +18,9 @@ public:
 	~Platform();
 
 protected: 
-	Platform(bool t, bool s) : type{ t }, status{ s }, {};
-
-private:
+	Platform(bool t, bool s) : type{ t }, status{ s } {}
 	bool status;		//0 free 1 occupato
+	
 };
 
 class transitPlatform : public Platform {

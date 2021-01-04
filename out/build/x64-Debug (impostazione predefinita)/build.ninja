@@ -57,20 +57,6 @@ build CMakeFiles\controller.dir\event.cpp.obj: CXX_COMPILER__controller_Debug ..
   TARGET_COMPILE_PDB = CMakeFiles\controller.dir\controller.pdb
   TARGET_PDB = controller.pdb
 
-build CMakeFiles\controller.dir\localStation.cpp.obj: CXX_COMPILER__controller_Debug ..\..\..\localStation.cpp || cmake_object_order_depends_target_controller
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\controller.dir
-  OBJECT_FILE_DIR = CMakeFiles\controller.dir
-  TARGET_COMPILE_PDB = CMakeFiles\controller.dir\controller.pdb
-  TARGET_PDB = controller.pdb
-
-build CMakeFiles\controller.dir\transitPlatform.cpp.obj: CXX_COMPILER__controller_Debug ..\..\..\transitPlatform.cpp || cmake_object_order_depends_target_controller
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\controller.dir
-  OBJECT_FILE_DIR = CMakeFiles\controller.dir
-  TARGET_COMPILE_PDB = CMakeFiles\controller.dir\controller.pdb
-  TARGET_PDB = controller.pdb
-
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target controller
@@ -79,7 +65,7 @@ build CMakeFiles\controller.dir\transitPlatform.cpp.obj: CXX_COMPILER__controlle
 #############################################
 # Link the static library controller.lib
 
-build controller.lib: CXX_STATIC_LIBRARY_LINKER__controller_Debug CMakeFiles\controller.dir\controller.cpp.obj CMakeFiles\controller.dir\event.cpp.obj CMakeFiles\controller.dir\localStation.cpp.obj CMakeFiles\controller.dir\transitPlatform.cpp.obj
+build controller.lib: CXX_STATIC_LIBRARY_LINKER__controller_Debug CMakeFiles\controller.dir\controller.cpp.obj CMakeFiles\controller.dir\event.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\controller.dir
@@ -126,20 +112,6 @@ build CMakeFiles\train.dir\HSTrainSuper.cpp.obj: CXX_COMPILER__train_Debug ..\..
   TARGET_COMPILE_PDB = CMakeFiles\train.dir\train.pdb
   TARGET_PDB = train.pdb
 
-build CMakeFiles\train.dir\localStation.cpp.obj: CXX_COMPILER__train_Debug ..\..\..\localStation.cpp || cmake_object_order_depends_target_train
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\train.dir
-  OBJECT_FILE_DIR = CMakeFiles\train.dir
-  TARGET_COMPILE_PDB = CMakeFiles\train.dir\train.pdb
-  TARGET_PDB = train.pdb
-
-build CMakeFiles\train.dir\transitPlatform.cpp.obj: CXX_COMPILER__train_Debug ..\..\..\transitPlatform.cpp || cmake_object_order_depends_target_train
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\train.dir
-  OBJECT_FILE_DIR = CMakeFiles\train.dir
-  TARGET_COMPILE_PDB = CMakeFiles\train.dir\train.pdb
-  TARGET_PDB = train.pdb
-
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target train
@@ -148,7 +120,7 @@ build CMakeFiles\train.dir\transitPlatform.cpp.obj: CXX_COMPILER__train_Debug ..
 #############################################
 # Link the static library train.lib
 
-build train.lib: CXX_STATIC_LIBRARY_LINKER__train_Debug CMakeFiles\train.dir\train.cpp.obj CMakeFiles\train.dir\RegionalTrain.cpp.obj CMakeFiles\train.dir\HSTrain.cpp.obj CMakeFiles\train.dir\HSTrainSuper.cpp.obj CMakeFiles\train.dir\localStation.cpp.obj CMakeFiles\train.dir\transitPlatform.cpp.obj
+build train.lib: CXX_STATIC_LIBRARY_LINKER__train_Debug CMakeFiles\train.dir\train.cpp.obj CMakeFiles\train.dir\RegionalTrain.cpp.obj CMakeFiles\train.dir\HSTrain.cpp.obj CMakeFiles\train.dir\HSTrainSuper.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\train.dir
@@ -181,13 +153,6 @@ build CMakeFiles\station.dir\localStation.cpp.obj: CXX_COMPILER__station_Debug .
   TARGET_COMPILE_PDB = CMakeFiles\station.dir\station.pdb
   TARGET_PDB = station.pdb
 
-build CMakeFiles\station.dir\transitPlatform.cpp.obj: CXX_COMPILER__station_Debug ..\..\..\transitPlatform.cpp || cmake_object_order_depends_target_station
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\station.dir
-  OBJECT_FILE_DIR = CMakeFiles\station.dir
-  TARGET_COMPILE_PDB = CMakeFiles\station.dir\station.pdb
-  TARGET_PDB = station.pdb
-
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target station
@@ -196,7 +161,7 @@ build CMakeFiles\station.dir\transitPlatform.cpp.obj: CXX_COMPILER__station_Debu
 #############################################
 # Link the static library station.lib
 
-build station.lib: CXX_STATIC_LIBRARY_LINKER__station_Debug CMakeFiles\station.dir\mainStation.cpp.obj CMakeFiles\station.dir\localStation.cpp.obj CMakeFiles\station.dir\transitPlatform.cpp.obj
+build station.lib: CXX_STATIC_LIBRARY_LINKER__station_Debug CMakeFiles\station.dir\mainStation.cpp.obj CMakeFiles\station.dir\localStation.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\station.dir
@@ -222,13 +187,6 @@ build CMakeFiles\platform.dir\standardPlatform.cpp.obj: CXX_COMPILER__platform_D
   TARGET_COMPILE_PDB = CMakeFiles\platform.dir\platform.pdb
   TARGET_PDB = platform.pdb
 
-build CMakeFiles\platform.dir\localStation.cpp.obj: CXX_COMPILER__platform_Debug ..\..\..\localStation.cpp || cmake_object_order_depends_target_platform
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\platform.dir
-  OBJECT_FILE_DIR = CMakeFiles\platform.dir
-  TARGET_COMPILE_PDB = CMakeFiles\platform.dir\platform.pdb
-  TARGET_PDB = platform.pdb
-
 build CMakeFiles\platform.dir\transitPlatform.cpp.obj: CXX_COMPILER__platform_Debug ..\..\..\transitPlatform.cpp || cmake_object_order_depends_target_platform
   FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = CMakeFiles\platform.dir
@@ -244,7 +202,7 @@ build CMakeFiles\platform.dir\transitPlatform.cpp.obj: CXX_COMPILER__platform_De
 #############################################
 # Link the static library platform.lib
 
-build platform.lib: CXX_STATIC_LIBRARY_LINKER__platform_Debug CMakeFiles\platform.dir\standardPlatform.cpp.obj CMakeFiles\platform.dir\localStation.cpp.obj CMakeFiles\platform.dir\transitPlatform.cpp.obj
+build platform.lib: CXX_STATIC_LIBRARY_LINKER__platform_Debug CMakeFiles\platform.dir\standardPlatform.cpp.obj CMakeFiles\platform.dir\transitPlatform.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\platform.dir
@@ -281,20 +239,6 @@ build CMakeFiles\main.dir\main.cpp.obj: CXX_COMPILER__main_Debug ..\..\..\main.c
   TARGET_COMPILE_PDB = CMakeFiles\main.dir\
   TARGET_PDB = main.pdb
 
-build CMakeFiles\main.dir\localStation.cpp.obj: CXX_COMPILER__main_Debug ..\..\..\localStation.cpp || cmake_object_order_depends_target_main
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\main.dir
-  OBJECT_FILE_DIR = CMakeFiles\main.dir
-  TARGET_COMPILE_PDB = CMakeFiles\main.dir\
-  TARGET_PDB = main.pdb
-
-build CMakeFiles\main.dir\transitPlatform.cpp.obj: CXX_COMPILER__main_Debug ..\..\..\transitPlatform.cpp || cmake_object_order_depends_target_main
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\main.dir
-  OBJECT_FILE_DIR = CMakeFiles\main.dir
-  TARGET_COMPILE_PDB = CMakeFiles\main.dir\
-  TARGET_PDB = main.pdb
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target main
@@ -303,7 +247,7 @@ build CMakeFiles\main.dir\transitPlatform.cpp.obj: CXX_COMPILER__main_Debug ..\.
 #############################################
 # Link the executable main.exe
 
-build main.exe: CXX_EXECUTABLE_LINKER__main_Debug CMakeFiles\main.dir\main.cpp.obj CMakeFiles\main.dir\localStation.cpp.obj CMakeFiles\main.dir\transitPlatform.cpp.obj | train.lib station.lib platform.lib controller.lib || controller.lib platform.lib station.lib train.lib
+build main.exe: CXX_EXECUTABLE_LINKER__main_Debug CMakeFiles\main.dir\main.cpp.obj | train.lib station.lib platform.lib controller.lib || controller.lib platform.lib station.lib train.lib
   FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = train.lib  station.lib  platform.lib  controller.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
