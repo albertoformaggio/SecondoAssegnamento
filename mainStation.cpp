@@ -6,13 +6,13 @@ mainStation::mainStation(int distance, std::string name)
 {
 		/*	Creo 4 binari standard per la stazione principale */
 		Platform* bs1 = new standardPlatform(0, 0);
-		//tracks.push_back(bs1);
+		addTrack(&bs1);
 		Platform* bs2 = new standardPlatform(0, 0);
-		//tracks.push_back(bs2);
+		addTrack(&bs2);
 		Platform* bs3 = new standardPlatform(0, 0);
-		//tracks.push_back(bs3);
+		addTrack(&bs3);
 		Platform* bs4 = new standardPlatform(0, 0);
-		//tracks.push_back(bs4);
+		addTrack(&bs4);
 		
 }
 
@@ -23,6 +23,13 @@ Station::~Station(){
 void Station::addParkedTrain(Train t) {
 	parked.push(t);
 }
+
+void Station::addTrack(Platform& track){
+	parked.push(track);
+}
+
+
+
 
 
 

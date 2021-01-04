@@ -18,17 +18,19 @@ public:
 	~Platform();
 
 protected: 
-	Platform(bool t, bool s);
+	Platform(bool t, bool s) : type{ t }, status{ s }, {};
 
 private:
 	bool status;		//0 free 1 occupato
 };
 
 class transitPlatform : public Platform {
-
+	transitPlatform(bool t, bool s);
 };
 
 class standardPlatform : public Platform {
+	standardPlatform(bool t, bool s);
+
 	void fixSpeed(Train t);
 };
 

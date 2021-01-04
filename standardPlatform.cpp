@@ -1,7 +1,12 @@
 /* @author Michele Rieppi */
 #include "platform.h"
 
-Platform::Platform(bool t, bool s) : type{ t }, status{ s } {}
+standardPlatform::standardPlatform(bool t, bool s)
+	:Platform(type, status) {}
+
+Platform::~Platform(){
+
+}
 
 bool Platform::isEmpty() {
 	return status == 0;
@@ -15,6 +20,6 @@ void Platform::reserve() {
 	status = 1;
 }
 
-void Platform::fixSpeed(Train t) {
+void standardPlatform::fixSpeed(Train t) {
 	t.setSpeed = 80;
 }

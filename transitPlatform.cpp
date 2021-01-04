@@ -1,10 +1,15 @@
 /* @author Michele Rieppi */
 #include "platform.h"
 
-Platform::Platform(bool t, bool s) : type { t }, status{ s } {}
+transitPlatform::transitPlatform(bool t, bool s)
+	:Platform(type, status) {}
 
 bool Platform::isEmpty(){
 	return status == 0;
+}
+
+Platform::~Platform(){
+
 }
 
 void Platform::free(){
