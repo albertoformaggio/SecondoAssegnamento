@@ -1,3 +1,4 @@
+
 #include "train.h"
 
 class HSTrainSuper : public train
@@ -10,3 +11,4 @@ public:
 	Platform requirePlatform(Station st) override;
 	void leaving(Platform pl) override;
 };
+

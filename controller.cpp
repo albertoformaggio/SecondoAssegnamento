@@ -33,7 +33,7 @@ void Controller::GetStations(string line_descr)
 	int distance = 0;
 
 	//Suppongo la prima stazione come principale, Ha distanza 0 dall'origine. Nel file è solo presente il nome
-	stations_.push_back(MainStation(station_name, distance));
+	stations_.push_back(new MainStation(station_name, distance));
 
 	string line;
 	while (!lines_file.eof())
@@ -45,9 +45,9 @@ void Controller::GetStations(string line_descr)
 		station_name = line.substr(0, line.size() - 4);
 		
 		if (station_type_number == 0)
-			stations_.push_back(MainStation(station_name, distance));
+			stations_.push_back(new MainStation(station_name, distance));
 		else
-			stations_.push_back(LocalStation(station_name, distance));
+			stations_.push_back(new LocalStation(station_name, distance));
 	}
 
 	lines_file.close();
@@ -67,6 +67,9 @@ void Controller::GetTimetable(string timetable)
 	}
 
 	int train_id, first_station, train_type, time;
+	const int reg = 1;
+	const int hs = 2;
+	const int hs_super = 3;
 	while (!time_file.eof())
 	{
 		string line;
@@ -77,46 +80,46 @@ void Controller::GetTimetable(string timetable)
 		Train* tr;
 		switch (train_type)
 		{
-		case 0:
-			*tr = RegionalTrain(train_id);				//Devo inserirci un riferimento con &
+		case reg:
+			*tr = new RegionalTrain(train_id);				//Devo inserirci un riferimento con &
 			break;
-		case 1:
-			*tr = HSTrain(train_id);
+		case hs:
+			*tr = new HSTrain(train_id);
 			break;
-		case 2:
-			*tr = HSTrainSuper(train_id);
+		case hs_super:
+			*tr = new HSTrainSuper(train_id);
 			
 			break;
 		}
 
-		if (ss.eof())
+		if (ss.eof()) //Se il file non ha nemmeno l'orario di partenza, ignoro il treno passato
 		{
-			cerr << "Il treno non ha un orario di partenza: non può esistere";
+			cerr << "Il treno " << train_id << " non ha un orario di partenza: non può esistere";
 		}
 		else
 		{
 			trains_.push_back(tr);
 			bool forward = first_station == 0;
+			const int delay_time = 10;
 			for (int i = 0; i < stations_.size(); i++)
 			{
+				Station* current_station = stations_[i];
 				const int x = forward ? i : (stations_.size() - 1) - i;
-				if (!(tr.getType() != "Regional" && stations_[i].getType() == "Local"))		//COME FARE QUESTO CHECK?		Se il treno non è regionale e la stazione è locale, allora non ci sarà nessun evento di fermata del treno a tale stazione
+				if (train_type != reg && dynamic_cast<LocalStation*>(current_station) != nullptr)		//COME FARE QUESTO CHECK?		Se il treno non è regionale e la stazione è locale, allora non ci sarà nessun evento di fermata del treno a tale stazione
 				{
 					int time;
 					ss >> time;													//COMPLETARE CON I TEMPI NECESSARI SE MANCANTI
-					if (!ss.eofbit)
+					if (ss.eofbit)
 					{
-						Event e(EventType::kTrainStop, time, tr, stations_[i]);
-						events_.push_back(e);
+						Event* last = events_[events_.size() - 1];	//Ottengo l'ultimo evento di fermata inserito
+						const Station* lastStation = last->GetStation();		//manca copy constructor/move constructor						
+						tr->averageSpeed(lastStation->kDistanceFromOrigin, current_station->kDistanceFromOrigin, last.GetTime(), delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
+																																					//Se l'orario di partenza non è valido (cioè negativo), calcolarlo usando il minor tempo possibile più ritardo (magari il ritardo lo metti con parametro di default = 0)
 					}
-					else
-					{
-						Event last = events_[events_.size() - 1];	//Ottengo l'ultimo evento di fermata inserito
-						const Station& lastStation = last.GetStation();		//manca copy constructor/move constructor
-						const Train& lastTrain = last.GetTrain();
-						//Pensa, non hai il tempo vecchio ciao ciao
+					
 
-					}	//Fai attenzione perchè se il file non ha nemmeno l'orario di partenza, l'elemento precedente è errato (o non è presente, o è di un altro treno)
+					Event* e = new TrainStop(time, tr, stations_[i]);
+					events_.push_back(e);
 				}
 			}
 		}
