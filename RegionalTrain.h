@@ -12,7 +12,7 @@ class RegionalTrain : public Train
 
 public:
 	const int v_max = 160;
-	RegionalTrain(Station st, int ID) : Train(Station st, int ID);
+	RegionalTrain(int ID) : Train(ID) {}
 	void setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) override;
 	void editDelay(int d) override;
 	Platform& requirePlatform(Station& st) override;
