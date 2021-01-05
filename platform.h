@@ -4,7 +4,6 @@
 #define platform_h
 
 #include "train.h"
-#include "station.h"
 
 class Platform{ //da rivedere i tipi bool
 

@@ -2,13 +2,13 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <string>
 
 #ifndef station_h
 #define station_h
 
 #include "platform.h"
 #include "train.h"
-
 
 class Station{
 public:
