@@ -1,21 +1,13 @@
 /* @author Michele Rieppi */
 #include "platform.h"
 
-transitPlatform::transitPlatform(bool t, bool s) //Mancano controlli
-	:Platform(type, status) {}
-
-bool Platform::isEmpty(){
-	return status == 0;
-}
+transitPlatform::transitPlatform(bool s) //Mancano controlli
+	:Platform(occupied) {}
 
 Platform::~Platform(){
 
 }
 
-void Platform::free(){
-	status = 0;
-}
-
-void Platform::reserve() {
-	status = 1;
+int transitPlatform::fixSpeed(Train& t) const {
+	return t.getSpeed();
 }
