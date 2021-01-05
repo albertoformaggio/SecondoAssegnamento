@@ -1,3 +1,7 @@
+/*
+	@author Anna Scarpa Falce
+*/
+
 #include "station.h"
 #include "platform.h"
 #include "event.h"

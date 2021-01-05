@@ -1,3 +1,7 @@
+/*
+	@author Anna Scarpa Falce
+*/
+
 #include "HSTrain.h"
 
 void HSTrain::setSpeed()

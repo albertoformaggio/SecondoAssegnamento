@@ -1,4 +1,6 @@
-
+/*
+	@author Anna Scarpa Falce
+*/
 #include "train.h"
 
 class HSTrainSuper : public train

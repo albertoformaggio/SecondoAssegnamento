@@ -1,5 +1,8 @@
-#include "train.h"
+/*
+	@author Anna Scarpa Falce
+*/
 
+#include "train.h"
 
 class RegionalTrain : public train
 {

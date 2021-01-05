@@ -1,3 +1,6 @@
+/*
+	@author Anna Scarpa Falce
+*/
 
 #include "HSTrainSuper.h"
 
