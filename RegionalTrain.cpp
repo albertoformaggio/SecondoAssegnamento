@@ -4,6 +4,12 @@
 
 #include "RegionalTrain.h"
 
+RegionalTrain::RegionalTrain(Station st, int ID)
+{
+	origin = st;
+	identifying_number = ID;
+	delay = 0;
+}
 void RegionalTrain::setSpeed(int dis_st1, int dis_st2, int time_leaving, int& time_arrival, int delay)
 {
 	if (time leaving < 0)
