@@ -15,7 +15,7 @@ private:
 	int speed;
 	int delay = 0;
 protected:
-	Train(Station st, int ID) : origin{st}, identifying_number { ID }
+	Train(int ID) : identifying_number{ ID } {}
 public:
 	const Station origin;
 	const int identifying_number;
