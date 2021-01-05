@@ -5,14 +5,14 @@
 #include "RegionalTrain.h"
 #include <cmath> 
 
-void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0);
+void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {
-	setAverageSpeed(from, to, time_leaving, time_arrival, dalay_time, v_max);
+	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
 
 void RegionalTrain::editDelay(int d)
 {
-	setDelay(getDelay() +d);
+	setDelay(getDelay() + d);
 }
 Platform& RegionalTrain::requirePlatform(Station& st)
 {
