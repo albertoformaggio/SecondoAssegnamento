@@ -3,21 +3,24 @@
 */
 
 #include "RegionalTrain.h"
+#include <cmath>
 
-void RegionalTrain::setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
+void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {
 	if (time_leaving < 0)
 		throw InvalidTime();
+	int d = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin);
 	if (time_arrival < time_leaving)
-		time_arrival =  / v_max + delay_time;
-	;
-	setSpeed( from.kDistanceFromOrigin (time_arrival - time_leaving - getDelay(*this));
-	if (getSpeed(*this)speed > v_maxsetSpeed(ed = )v_max;
+		time_arrival = (d / v_max) + delay_time;
+	
+	setSpeed(d/(time_arrival - time_leaving - getDelay()));
+	if (getSpeed() > v_max)
+		setSpeed(v_max);
 }
 
 void RegionalTrain::editDelay(int d)
 {
-	delay = delay + d;
+	setDelay(getDelay() +d);
 }
 Platform& RegionalTrain::requirePlatform(Station& st)
 {
@@ -25,9 +28,7 @@ Platform& RegionalTrain::requirePlatform(Station& st)
 	p.reserve();
 	return p;
 }
-void RegionalTrain::leaving(Platform pl)
+void RegionalTrain::leaving(Platform& pl)
 {
-	int time = ;
-	event e(4, time, *this, pl);
-	addEvent(e);
+	pl.free();
 }
