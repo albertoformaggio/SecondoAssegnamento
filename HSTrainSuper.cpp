@@ -10,7 +10,7 @@ void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int t
 }
 void HSTrainSuper::editDelay(int d)
 {
-
+	Train::editDelay(d);
 }
 Platform& HSTrainSuper::requirePlatform(Station& st)
 {

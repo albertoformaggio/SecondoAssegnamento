@@ -12,7 +12,7 @@ void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int 
 
 void RegionalTrain::editDelay(int d)
 {
-	setDelay(getDelay() + d);
+	Train::editDelay(d);
 }
 Platform& RegionalTrain::requirePlatform(Station& st)
 {
