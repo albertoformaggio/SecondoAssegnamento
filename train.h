@@ -1,7 +1,8 @@
 #include "station.h"
 #include "platform.h"
+#include "event.h"
 
-class Train
+class train
 {
 public:
 	virtual void setSpeed() = 0;
