@@ -32,7 +32,7 @@ void Controller::GetStations(string line_descr)
 	int distance = 0;
 	
 	//Suppongo la prima stazione come principale, Ha distanza 0 dall'origine. Nel file è solo presente il nome
-	stations_.push_back(new mainStation(station_name, distance));
+	stations_.push_back(new mainStation(distance, station_name));
 
 	string line;
 	while (!lines_file.eof())
@@ -44,9 +44,9 @@ void Controller::GetStations(string line_descr)
 		station_name = line.substr(0, line.size() - 4);
 		
 		if (station_type_number == 0)
-			stations_.push_back(new mainStation(station_name, distance));
+			stations_.push_back(new mainStation(distance, station_name));
 		else
-			stations_.push_back(new localStation(station_name, distance));
+			stations_.push_back(new localStation(distance, station_name));
 	}
 
 	lines_file.close();
