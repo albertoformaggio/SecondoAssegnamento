@@ -11,9 +11,9 @@
 class Event
 {
 public:
-	int GetTime() const { return time_; }
-	Train* GetTrain() const { return train_; }
-	Station* GetStation() const { return station_; }
+	inline int GetTime() const { return time_; }
+	inline Train* GetTrain() const { return train_; }
+	inline Station* GetStation() const { return station_; }
 	virtual void performAction() = 0;
 
 protected:
