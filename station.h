@@ -16,25 +16,28 @@ public:
 	const int kDistanceFromOrigin;
 	const std::string st_name;
 
-	bool hasParkedTrain();
+	bool hasParkedTrain() { return parked.empty(); }
 	Train* getParkedTrain();
-	void addParkedTrain(Train& t);
+	void addParkedTrain(Train& t) { parked.push(&t); }
 	Train* removeParkedTrain();
+
 	virtual standardPlatform getStandardPlatform() = 0;
 
 	~Station();
 
 protected:
 	
-	virtual void addStandardPlatform(Platform* track) = 0;
+	void addStandardPlatform(Platform* track) { standardPlatforms.push_back(&track); }
 
 	explicit Station(int distance, std::string name)
 		: kDistanceFromOrigin{ distance }, st_name{ name } {}
 	
+	std::vector<transitPlatform> transitPlatforms;
+
 private:
 	std::queue<Train*> parked;
 	std::vector<standardPlatform> standardPlatforms;
-	std::vector<transitPlatform> transitPlatforms;
+	
 
 };
 
@@ -43,22 +46,16 @@ public:
 	mainStation(int distance, std::string name);
 
 	standardPlatform getStandardPlatform() override;
-
-protected:
-	void addStandardPlatform(Platform* track) override;
 };
 
 class localStation : public Station {
 public:
 	localStation(int distance, std::string name);
 	
-	void addTransitPlatform(Platform* track);
+	void addTransitPlatform(Platform* track) { transitPlatforms.push_back(&track); } 
 
 	transitPlatform getTransitPlatform();
 	standardPlatform getStandardPlatform() override;
-
-protected:
-	void addStandardPlatform(Platform* track) override;
 };
 
 #endif

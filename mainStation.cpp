@@ -20,33 +20,24 @@ Station::~Station(){
 
 }
 
-bool Station::hasParkedTrain(){
-	return parked.size() > 0;
-}
-
 Train* Station::getParkedTrain(){
 	if (hasParkedTrain())
-		return parked.front();
-	else throw std::exception();
-}
-
-void Station::addParkedTrain(Train& t){
-	parked.push(&t);
+		throw std::exception();
+	else return parked.front();
 }
 
 Train* Station::removeParkedTrain(){
 	if (hasParkedTrain())
-		return parked.pop();
-	else throw std::exception();
+		throw std::exception();
+	else {
+		Train* rmv = parked.front();
+		parked.pop();
+		return rmv;
+	}
 }
 
-void mainStation::addStandardPlatform(Platform* track){
-	standardPlatforms.push_back(&track);
-
-}
-
-standardPlatform* mainStation::getStandardPlatform(){
-	return; //ritorna il primo elemento del vector di standardplatforms
+standardPlatform mainStation::getStandardPlatform(){
+	return; //Ritorna il primo elemento disponibile del vettore dei binari
 }
 
 

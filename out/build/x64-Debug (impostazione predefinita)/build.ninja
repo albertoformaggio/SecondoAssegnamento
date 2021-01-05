@@ -57,6 +57,13 @@ build CMakeFiles\controller.dir\event.cpp.obj: CXX_COMPILER__controller_Debug ..
   TARGET_COMPILE_PDB = CMakeFiles\controller.dir\controller.pdb
   TARGET_PDB = controller.pdb
 
+build CMakeFiles\controller.dir\trainStop.cpp.obj: CXX_COMPILER__controller_Debug ..\..\..\trainStop.cpp || cmake_object_order_depends_target_controller
+  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = CMakeFiles\controller.dir
+  OBJECT_FILE_DIR = CMakeFiles\controller.dir
+  TARGET_COMPILE_PDB = CMakeFiles\controller.dir\controller.pdb
+  TARGET_PDB = controller.pdb
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target controller
@@ -65,7 +72,7 @@ build CMakeFiles\controller.dir\event.cpp.obj: CXX_COMPILER__controller_Debug ..
 #############################################
 # Link the static library controller.lib
 
-build controller.lib: CXX_STATIC_LIBRARY_LINKER__controller_Debug CMakeFiles\controller.dir\controller.cpp.obj CMakeFiles\controller.dir\event.cpp.obj
+build controller.lib: CXX_STATIC_LIBRARY_LINKER__controller_Debug CMakeFiles\controller.dir\controller.cpp.obj CMakeFiles\controller.dir\event.cpp.obj CMakeFiles\controller.dir\trainStop.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\controller.dir
