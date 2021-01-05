@@ -4,17 +4,19 @@
 
 #include "train.h"
 
-class RegionalTrain : public train
+#ifndef RegionalTrain_h
+#define RegionalTrain_h
+
+class RegionalTrain : public Train
 {
-private:
-	const int v_max = 160;
-	int speed;
-	int delay;
-	const Station origin;
-	const int identifying_number;
+
 public:
-	void setSpeed(int dis_st1, int dis_st2, int time_leaving, int& time_arrival, int delay) override;
+	const int v_max = 160;
+	RegionalTrain(Station st, int ID) : Train(Station st, int ID);
+	void setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) override;
 	void editDelay(int d) override;
-	Platform requirePlatform(Station st) override;
+	Platform& requirePlatform(Station& st) override;
 	void leaving(Platform pl) override;
 };
+
+#endif

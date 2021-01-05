@@ -1,0 +1,4 @@
+Rovigo
+Monselice 1 50
+Terme Euganee 1 100
+Padova 0 150

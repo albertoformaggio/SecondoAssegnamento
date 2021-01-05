@@ -3,7 +3,9 @@
 */
 #include "train.h"
 
-class HSTrainSuper : public train
+#ifndef HSTrainSuper_h
+#define HSTrainSuper_h
+class HSTrainSuper : public Train
 {
 private:
 
@@ -14,3 +16,4 @@ public:
 	void leaving(Platform pl) override;
 };
 
+#endif

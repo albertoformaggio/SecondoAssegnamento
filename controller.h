@@ -22,12 +22,13 @@ class Controller
 public:
 	class FileNotFoundException { };
 	Controller(std::string line_descr, std::string timetable);
-
+	static constexpr int kMinDistanceBetweenStations = 20;
 
 private:
 	void GetStations(std::string line_descr);
 	void GetTimetable(std::string timetable);
-	//void GetTimes(std::istringstream ss, int st_index, int train_type);
+	void CheckValues();
+	void EraseEventsRelatedTo(Station& ev);
 
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
 	std::vector<Train*> trains_;

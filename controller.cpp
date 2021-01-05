@@ -111,19 +111,44 @@ void Controller::GetTimetable(string timetable)
 					ss >> time;													//COMPLETARE CON I TEMPI NECESSARI SE MANCANTI
 					if (ss.eofbit)
 					{
+						time = -1;
 						Event* last = events_[events_.size() - 1];	//Ottengo l'ultimo evento di fermata inserito
 						const Station* lastStation = last->GetStation();		//manca copy constructor/move constructor						
-						tr->averageSpeed(lastStation->kDistanceFromOrigin, current_station->kDistanceFromOrigin, last.GetTime(), delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
+						tr->setSpeed(*lastStation, *current_station, last->GetTime(), time, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
 																																					//Se l'orario di partenza non è valido (cioè negativo), calcolarlo usando il minor tempo possibile più ritardo (magari il ritardo lo metti con parametro di default = 0)
 					}
 					
-
 					Event* e = new TrainStop(time, tr, stations_[i]);
 					events_.push_back(e);
 				}
 			}
 		}
 	}
-
 	time_file.close();
+}
+
+void Controller::CheckValues()
+{
+	auto prev = stations_.begin();
+	auto cur = prev + 1;
+	while(cur != stations_.end())
+	{
+		int distance = abs((**cur).kDistanceFromOrigin - (**prev).kDistanceFromOrigin);
+		if (distance <= kMinDistanceBetweenStations)
+		{
+			EraseEventsRelatedTo(**cur);
+			cur = stations_.erase(cur);
+		}
+		cur++;
+		prev++;
+	}
+}
+
+void Controller::EraseEventsRelatedTo(Station& st)
+{
+	for(auto it = events_.begin(); it != events_.end(); it++)
+	{
+		if((**it).GetStation() == st)
+			it = events_.erase(it);
+	}
 }

@@ -1,25 +1,13 @@
 /* @author Michele Rieppi */
 #include "platform.h"
 
-standardPlatform::standardPlatform(bool t, bool s) //Mancano controlli
-	:Platform(type, status) {}
+standardPlatform::standardPlatform(bool s) //Mancano controlli
+	:Platform(occupied) {}
 
 Platform::~Platform(){
 
 }
 
-bool Platform::isEmpty() {
-	return status == 0;
-}
-
-void Platform::free() {
-	status = 0;
-}
-
-void Platform::reserve() {
-	status = 1;
-}
-
-void standardPlatform::fixSpeed(Train t) {
-	t.setSpeed();
+int standardPlatform::fixSpeed(Train& t) const{
+	return slowSpeed;
 }
