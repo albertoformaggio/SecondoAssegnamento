@@ -80,13 +80,13 @@ void Controller::GetTimetable(string timetable)
 		switch (train_type)
 		{
 		case reg:
-			*tr = new RegionalTrain(train_id);				//Devo inserirci un riferimento con &
+			tr = new RegionalTrain(train_id);				//Devo inserirci un riferimento con &
 			break;
 		case hs:
-			*tr = new HSTrain(train_id);
+			tr = new HSTrain(train_id);
 			break;
 		case hs_super:
-			*tr = new HSTrainSuper(train_id);
+			tr = new HSTrainSuper(train_id);
 			
 			break;
 		}
