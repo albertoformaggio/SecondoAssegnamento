@@ -4,7 +4,7 @@
 
 #include "HSTrain.h"
 
-void HSTrain::setSpeed(int dis_st1, int dis_st2, int time_leaving, int& time_arrival, int delay)
+void HSTrain::setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {
 	if (time leaving < 0)
 		throw InvalidTime();
@@ -18,7 +18,7 @@ void HSTrain::editDelay(int d)
 {
 
 }
-Platform HSTrain::requirePlatform(Station st)
+Platform& HSTrain::requirePlatform(Station& st)
 {
 
 }
