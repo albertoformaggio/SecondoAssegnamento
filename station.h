@@ -41,7 +41,7 @@ protected:
 };
 
 class mainStation : public Station {
-
+public:
 	mainStation(int distance, std::string name);
 
 	void addStandardPlatform(Platform* track) override;
@@ -50,7 +50,7 @@ class mainStation : public Station {
 };
 
 class localStation : public Station {
-
+public:
 	localStation(int distance, std::string name);
 	
 	void addTransitPlatform(Platform* track);
