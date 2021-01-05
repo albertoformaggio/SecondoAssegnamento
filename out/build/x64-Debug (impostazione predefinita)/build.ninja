@@ -84,13 +84,6 @@ build controller.lib: CXX_STATIC_LIBRARY_LINKER__controller_Debug CMakeFiles\con
 
 build cmake_object_order_depends_target_train: phony || CMakeFiles\train.dir
 
-build CMakeFiles\train.dir\train.cpp.obj: CXX_COMPILER__train_Debug ..\..\..\train.cpp || cmake_object_order_depends_target_train
-  FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
-  OBJECT_DIR = CMakeFiles\train.dir
-  OBJECT_FILE_DIR = CMakeFiles\train.dir
-  TARGET_COMPILE_PDB = CMakeFiles\train.dir\train.pdb
-  TARGET_PDB = train.pdb
-
 build CMakeFiles\train.dir\RegionalTrain.cpp.obj: CXX_COMPILER__train_Debug ..\..\..\RegionalTrain.cpp || cmake_object_order_depends_target_train
   FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = CMakeFiles\train.dir
@@ -120,7 +113,7 @@ build CMakeFiles\train.dir\HSTrainSuper.cpp.obj: CXX_COMPILER__train_Debug ..\..
 #############################################
 # Link the static library train.lib
 
-build train.lib: CXX_STATIC_LIBRARY_LINKER__train_Debug CMakeFiles\train.dir\train.cpp.obj CMakeFiles\train.dir\RegionalTrain.cpp.obj CMakeFiles\train.dir\HSTrain.cpp.obj CMakeFiles\train.dir\HSTrainSuper.cpp.obj
+build train.lib: CXX_STATIC_LIBRARY_LINKER__train_Debug CMakeFiles\train.dir\RegionalTrain.cpp.obj CMakeFiles\train.dir\HSTrain.cpp.obj CMakeFiles\train.dir\HSTrainSuper.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -O2 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = CMakeFiles\train.dir

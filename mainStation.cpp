@@ -21,35 +21,32 @@ Station::~Station(){
 }
 
 bool Station::hasParkedTrain(){
-	return parked.size() > 0;
-}
-
-Train& Station::getParkedTrain() {
 	if (parked.size() > 0)
 		return ;
 	throw std::exception();
-
 }
 
-void Station::addParkedTrain(Train& t) {
+Train& Station::getParkedTrain(){
+	// TODO: inserire l'istruzione return qui
+}
+
+void Station::addParkedTrain(Train& t){
 	parked.push_back(&t);
 }
 
-Train& Station::removeParkedTrain() {
-	if(this->hasParkedTrain() == true)
-		return ;
+Train& Station::removeParkedTrain(){
+	if (this->hasParkedTrain() == true)
+		return parked.pop_back();
 }
 
-standardPlatform mainStation::getStandardPlatform(){
-	return ;
+void mainStation::addStandardPlatform(Platform* track){
+	standardPlatforms.push_back(&track);
+
 }
 
-void Station::addStandardPlatform(Platform* track) {
-	platforms.push_back(&track);
+standardPlatform* mainStation::getStandardPlatform(){
+	return nullptr;
 }
-
-
-
 
 
 

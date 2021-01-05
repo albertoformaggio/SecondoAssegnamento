@@ -8,6 +8,6 @@ Platform::~Platform(){
 
 }
 
-int standardPlatform::fixSpeed(Train& t) const{
+int standardPlatform::fixSpeed(Train& t) const {
 	return slowSpeed;
 }

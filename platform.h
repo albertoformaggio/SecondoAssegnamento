@@ -10,7 +10,7 @@ class Platform{ //da rivedere i tipi bool
 
 public:
 
-	virtual int fixSpeed(Train& t) = 0;
+	virtual int fixSpeed(Train& t) const = 0;
 
 	bool isEmpty() { return status == true; }	//ritorna true se il binario è libero false altrimenti
 	void reserve() { occupied = true; }			//mette il binario occupato

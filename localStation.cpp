@@ -21,26 +21,37 @@ localStation::localStation(int distance, std::string name)
 
 }
 
-
-transitPlatform* localStation::getTransitPlatform(){
-	if (platforms[0] == nullptr)
-		return platforms[0];
-	else if (parked[1] == nullptr)
-		return platforms[1];
+bool Station::hasParkedTrain() {
+	if (parked.size() > 0)
+		return;
+	throw std::exception();
 }
 
-standardPlatform localStation::getStandardPlatform(){
-	return ;
+Train& Station::getParkedTrain() {
+	// TODO: inserire l'istruzione return qui
 }
 
-Station::~Station() {
-
+void Station::addParkedTrain(Train& t) {
+	parked.push_back(&t);
 }
 
-void Station::addStandardPlatform(Platform* track){
-	platforms.push_back(&track);
+Train& Station::removeParkedTrain() {
+	if (this->hasParkedTrain() == true)
+		return parked.pop_back();
 }
 
 void localStation::addTransitPlatform(Platform* track){
-	platforms.push_back(&track)
+
+}
+
+void localStation::addStandardPlatform(Platform* track){
+
+}
+
+transitPlatform* localStation::getTransitPlatform(){
+	return nullptr;
+}
+
+standardPlatform* localStation::getStandardPlatform(){
+	return nullptr;
 }
