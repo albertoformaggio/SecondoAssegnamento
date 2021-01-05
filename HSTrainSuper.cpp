@@ -6,17 +6,11 @@
 
 void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {
-	if (time leaving < 0)
-		throw InvalidTime();
-	if (time_arrival < time_leaving)
-		time_arrival = (dis_st2 - dis_st1) / v_max + delay;
-	speed = (dis_st2 - dis_st1) / (time_arrval - time_leaving - delay);
-	if (speed > v_max)
-		speed = v_max;
+	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
 void HSTrainSuper::editDelay(int d)
 {
-
+	Train::editDelay(d);
 }
 Platform& HSTrainSuper::requirePlatform(Station& st)
 {
