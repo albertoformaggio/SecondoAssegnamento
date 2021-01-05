@@ -4,7 +4,7 @@
 
 #include "HSTrainSuper.h"
 
-void HSTrainSuper::setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
+void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {
 	if (time leaving < 0)
 		throw InvalidTime();
@@ -22,7 +22,7 @@ Platform& HSTrainSuper::requirePlatform(Station& st)
 {
 
 }
-void HSTrainSuper::leaving(Platform pl)
+void HSTrainSuper::leaving(Platform& pl)
 {
 
 }

@@ -113,7 +113,7 @@ void Controller::GetTimetable(string timetable)
 						time = -1;
 						Event* last = events_[events_.size() - 1];	//Ottengo l'ultimo evento di fermata inserito
 						const Station* lastStation = last->GetStation();		//manca copy constructor/move constructor						
-						tr->setSpeed(*lastStation, *current_station, last->GetTime(), time, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
+						tr->setAverageSpeed(*lastStation, *current_station, last->GetTime(), time, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
 																																					//Se l'orario di partenza non è valido (cioè negativo), calcolarlo usando il minor tempo possibile più ritardo (magari il ritardo lo metti con parametro di default = 0)
 					}
 					

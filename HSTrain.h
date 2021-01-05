@@ -11,11 +11,12 @@ class HSTrain : public Train
 private:
 
 public:
+	const int v_max = 240;
 	HSTrain(int ID) : Train(ID) {}
-	void setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) override;
+	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) override;
 	void editDelay(int d) override;
 	Platform& requirePlatform(Station& st) override;
-	void leaving(Platform pl) override;
+	void leaving(Platform& pl) override;
 };
 
 #endif
