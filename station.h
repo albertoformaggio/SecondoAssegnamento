@@ -1,6 +1,7 @@
 /* @author Michele Rieppi */
 #include <iostream>
 #include <vector>
+#include <queue>
 
 #ifndef station_h
 #define station_h
@@ -17,9 +18,9 @@ public:
 
 
 	bool hasParkedTrain();
-	Train& getParkedTrain();
+	Train* getParkedTrain();
 	void addParkedTrain(Train& t);
-	Train& removeParkedTrain();
+	Train* removeParkedTrain();
 
 
 	~Station();
@@ -33,7 +34,7 @@ protected:
 		: kDistanceFromOrigin{ distance }, st_name{ name } {}
 	
 
-	std::vector<Train*> parked;
+	std::queue<Train*> parked;
 	std::vector<standardPlatform*> standardPlatforms;
 	std::vecotr<transitPlatform*> transitPlatforms;
 

@@ -27,7 +27,7 @@ bool Station::hasParkedTrain() {
 	throw std::exception();
 }
 
-Train& Station::getParkedTrain() {
+Train* Station::getParkedTrain() {
 	// TODO: inserire l'istruzione return qui
 }
 
@@ -35,7 +35,7 @@ void Station::addParkedTrain(Train& t) {
 	parked.push_back(&t);
 }
 
-Train& Station::removeParkedTrain() {
+Train* Station::removeParkedTrain() {
 	if (this->hasParkedTrain() == true)
 		return parked.pop_back();
 }

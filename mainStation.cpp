@@ -21,22 +21,23 @@ Station::~Station(){
 }
 
 bool Station::hasParkedTrain(){
-	if (parked.size() > 0)
-		return ;
-	throw std::exception();
+	return parked.size() > 0;
 }
 
-Train& Station::getParkedTrain(){
-	// TODO: inserire l'istruzione return qui
+Train* Station::getParkedTrain(){
+	if (hasParkedTrain())
+		return parked.front();
+	else throw std::exception();
 }
 
 void Station::addParkedTrain(Train& t){
-	parked.push_back(&t);
+	parked.push(&t);
 }
 
-Train& Station::removeParkedTrain(){
-	if (this->hasParkedTrain() == true)
-		return parked.pop_back();
+Train* Station::removeParkedTrain(){
+	if (hasParkedTrain())
+		return parked.pop();
+	else throw std::exception();
 }
 
 void mainStation::addStandardPlatform(Platform* track){
@@ -45,7 +46,7 @@ void mainStation::addStandardPlatform(Platform* track){
 }
 
 standardPlatform* mainStation::getStandardPlatform(){
-	return nullptr;
+	return; //ritorna il primo elemento del vector di standardplatforms
 }
 
 
