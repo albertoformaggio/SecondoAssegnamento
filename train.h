@@ -15,7 +15,7 @@ private:
 	int speed;
 	int delay = 0;
 protected:
-	Train(Station st, int ID) : origin{st}, identifying_number { ID }
+	Train(int ID) : identifying_number{ ID } {}
 public:
 	const Station origin;
 	const int identifying_number;
@@ -25,7 +25,7 @@ public:
 	inline int setDelay(int d) { delay = d; }
 	virtual void setSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) = 0;
 	virtual void editDelay(int d) = 0 ;
-	virtual Platform requirePlatform(Station st) = 0;
+	virtual Platform& requirePlatform(Station& st) = 0;
 	virtual void leaving(Platform p1) = 0;	//Quando parte semplicemente setta pl a libero 
 	class InvalidTime {};
 };
