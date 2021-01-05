@@ -4,7 +4,6 @@
 #include "controller.h"
 #include <iostream>
 
-
 using namespace std;
 
 Controller::Controller(string line_descr, string timetable)
@@ -31,9 +30,9 @@ void Controller::GetStations(string line_descr)
 	string station_name;
 	lines_file >> station_name;
 	int distance = 0;
-
+	
 	//Suppongo la prima stazione come principale, Ha distanza 0 dall'origine. Nel file è solo presente il nome
-	stations_.push_back(new MainStation(station_name, distance));
+	stations_.push_back(new mainStation(station_name, distance));
 
 	string line;
 	while (!lines_file.eof())
@@ -45,9 +44,9 @@ void Controller::GetStations(string line_descr)
 		station_name = line.substr(0, line.size() - 4);
 		
 		if (station_type_number == 0)
-			stations_.push_back(new MainStation(station_name, distance));
+			stations_.push_back(new mainStation(station_name, distance));
 		else
-			stations_.push_back(new LocalStation(station_name, distance));
+			stations_.push_back(new localStation(station_name, distance));
 	}
 
 	lines_file.close();
@@ -105,7 +104,7 @@ void Controller::GetTimetable(string timetable)
 			{
 				Station* current_station = stations_[i];
 				const int x = forward ? i : (stations_.size() - 1) - i;
-				if (train_type != reg && dynamic_cast<LocalStation*>(current_station) != nullptr)		//COME FARE QUESTO CHECK?		Se il treno non è regionale e la stazione è locale, allora non ci sarà nessun evento di fermata del treno a tale stazione
+				if (train_type != reg && dynamic_cast<localStation*>(current_station) != nullptr)		//COME FARE QUESTO CHECK?		Se il treno non è regionale e la stazione è locale, allora non ci sarà nessun evento di fermata del treno a tale stazione
 				{
 					int time;
 					ss >> time;													//COMPLETARE CON I TEMPI NECESSARI SE MANCANTI
@@ -136,7 +135,7 @@ void Controller::CheckValues()
 		int distance = abs((**cur).kDistanceFromOrigin - (**prev).kDistanceFromOrigin);
 		if (distance <= kMinDistanceBetweenStations)
 		{
-			EraseEventsRelatedTo(**cur);
+			EraseEventsRelatedTo(*cur);
 			cur = stations_.erase(cur);
 		}
 		cur++;
@@ -144,7 +143,7 @@ void Controller::CheckValues()
 	}
 }
 
-void Controller::EraseEventsRelatedTo(Station& st)
+void Controller::EraseEventsRelatedTo(Station* st)
 {
 	for(auto it = events_.begin(); it != events_.end(); it++)
 	{

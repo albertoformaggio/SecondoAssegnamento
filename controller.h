@@ -28,7 +28,7 @@ private:
 	void GetStations(std::string line_descr);
 	void GetTimetable(std::string timetable);
 	void CheckValues();
-	void EraseEventsRelatedTo(Station& ev);
+	void EraseEventsRelatedTo(Station* ev);
 
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
 	std::vector<Train*> trains_;
