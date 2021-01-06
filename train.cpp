@@ -4,15 +4,15 @@
 
 #include "train.h"
 
-void Train::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed)
+void Train::setAverageSpeed(Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed)
 {
 	if (time_leaving < 0)
 		throw InvalidTime();
-	int d = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin);
+	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin)-2*5; //funzione per avere dist da parcheggio(5);
 	if (time_arrival < time_leaving)
-		time_arrival = (d / max_speed) + delay_time;
-
-	setSpeed(d / (time_arrival - time_leaving - getDelay()));
+		time_arrival = (distance / max_speed) + delay_time;
+	int time = (time_arrival - time_leaving - getDelay() - 2*5 / from.getStandardPlatform().slowSpeed);
+	setSpeed(distance / time );
 	if (getSpeed() > max_speed)
 		setSpeed(max_speed);
 }
