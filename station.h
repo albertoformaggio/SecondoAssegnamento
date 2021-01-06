@@ -22,7 +22,7 @@ public:
 	Train* removeParkedTrain();
 
 	standardPlatform getStandardPlatform();
-
+	virtual transitPlatform getTransitPlatform() = 0;
 	~Station();
 
 protected:
@@ -44,7 +44,7 @@ private:
 class mainStation : public Station {
 public:
 	mainStation(int distance, std::string name);
-
+	transitPlatform getTransitPlatform() override { return transitPlatform(0); }
 };
 
 class localStation : public Station {
@@ -53,7 +53,7 @@ public:
 
 	void addTransitPlatform(transitPlatform track) { transitPlatforms.push_back(track); }
 
-	transitPlatform getTransitPlatform();
+	transitPlatform getTransitPlatform() override;
 };
 
 #endif

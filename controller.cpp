@@ -151,3 +151,4 @@ void Controller::EraseEventsRelatedTo(Station* st)
 			it = events_.erase(it);
 	}
 }
+
