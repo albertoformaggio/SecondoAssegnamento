@@ -53,7 +53,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main-Debug-24b172f472df524fbe14.json",
+					"jsonFile" : "target-main-Debug-fafb0614efe302cb00fb.json",
 					"name" : "main",
 					"projectIndex" : 0
 				},
@@ -84,8 +84,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/User/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)",
-		"source" : "C:/Users/User/source/repos/SecondoAssegnamento"
+		"build" : "C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)",
+		"source" : "C:/Users/miche/source/repos/SecondoAssegnamento"
 	},
 	"version" : 
 	{

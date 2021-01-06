@@ -27,16 +27,17 @@ public:
 
 protected:
 	
-	void addStandardPlatform(Platform* track) { standardPlatforms.push_back(&track); }
+	void addStandardPlatform(standardPlatform track) { standardPlatforms.push_back(track); }
 
 	explicit Station(int distance, std::string name)
 		: kDistanceFromOrigin{ distance }, st_name{ name } {}
 	
 	std::vector<transitPlatform> transitPlatforms;
+	std::vector<standardPlatform> standardPlatforms;
 
 private:
 	std::queue<Train*> parked;
-	std::vector<standardPlatform> standardPlatforms;
+	
 	
 
 };
@@ -52,7 +53,7 @@ class localStation : public Station {
 public:
 	localStation(int distance, std::string name);
 	
-	void addTransitPlatform(Platform* track) { transitPlatforms.push_back(&track); } 
+	void addTransitPlatform(transitPlatform track) { transitPlatforms.push_back(track); } 
 
 	transitPlatform getTransitPlatform();
 	standardPlatform getStandardPlatform() override;
