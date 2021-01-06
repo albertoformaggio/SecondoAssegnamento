@@ -7,8 +7,8 @@
 #ifndef station_h
 #define station_h
 
+class Train;
 #include "platform.h"
-#include "train.h"
 
 class Station{
 public:

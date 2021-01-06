@@ -3,6 +3,8 @@
 */
 
 #include "HSTrain.h"
+#include "platform.h"
+#include "station.h"
 
 void HSTrain::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {

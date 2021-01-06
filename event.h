@@ -5,8 +5,8 @@
 #ifndef Event_h
 #define Event_h
 
-#include "train.h"
-#include "station.h"
+class Train;
+class Station;
 
 class Event
 {

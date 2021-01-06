@@ -1,12 +1,13 @@
 /*
 	@author Anna Scarpa Falce
 */
+#include <cmath>
 
 #ifndef train_h
 #define train_h
 
-#include "station.h"
-#include "platform.h"
+class Station;
+class Platform;
 
 class Train
 {
