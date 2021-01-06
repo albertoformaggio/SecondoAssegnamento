@@ -28,6 +28,7 @@ Platform& HSTrainSuper::requirePlatform(Station& st)
 		p.reserve();
 		return p;
 	}
+	
 }
 /*void HSTrainSuper::leaving(Platform& pl)
 {
