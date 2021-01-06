@@ -10,7 +10,10 @@
 class Train;
 #include "platform.h"
 
-class Station{
+#ifndef station_h
+#define station_h
+
+class Station {
 public:
 
 	const int kDistanceFromOrigin;
@@ -21,24 +24,23 @@ public:
 	void addParkedTrain(Train& t) { parked.push(&t); }
 	Train* removeParkedTrain();
 
-	virtual standardPlatform getStandardPlatform() = 0;
+	standardPlatform getStandardPlatform();
 
 	~Station();
 
 protected:
-	
+
 	void addStandardPlatform(standardPlatform track) { standardPlatforms.push_back(track); }
 
 	explicit Station(int distance, std::string name)
 		: kDistanceFromOrigin{ distance }, st_name{ name } {}
-	
+
 	std::vector<transitPlatform> transitPlatforms;
 	std::vector<standardPlatform> standardPlatforms;
 
 private:
+
 	std::queue<Train*> parked;
-	
-	
 
 };
 
@@ -46,17 +48,15 @@ class mainStation : public Station {
 public:
 	mainStation(int distance, std::string name);
 
-	standardPlatform getStandardPlatform() override;
 };
 
 class localStation : public Station {
 public:
 	localStation(int distance, std::string name);
-	
-	void addTransitPlatform(transitPlatform track) { transitPlatforms.push_back(track); } 
+
+	void addTransitPlatform(transitPlatform track) { transitPlatforms.push_back(track); }
 
 	transitPlatform getTransitPlatform();
-	standardPlatform getStandardPlatform() override;
 };
 
 #endif
