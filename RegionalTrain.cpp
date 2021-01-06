@@ -7,7 +7,7 @@
 #include "station.h"
 #include <cmath> 
 
-void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
+void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time)
 {
 	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
