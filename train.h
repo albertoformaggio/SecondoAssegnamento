@@ -6,7 +6,6 @@
 #define train_h
 
 #include "station.h"
-#include "platform.h"
 
 class Train
 {
@@ -15,7 +14,7 @@ private:
 	int delay = 0;
 protected:
 	Train(int ID) : identifying_number{ ID } {}
-	
+
 public:
 	const int identifying_number;
 	const int distanceFromPark = 5;
@@ -27,9 +26,10 @@ public:
 	virtual void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) = 0;
 	virtual Platform& requirePlatform(Station& st) = 0;
 	class InvalidTime {};
-	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed);
+	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0, int max_speed = 0);
 	void editDelay(int d);
 	void leaving(Platform& pl);
 };
+
 
 #endif
