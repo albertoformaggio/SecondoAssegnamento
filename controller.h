@@ -23,11 +23,13 @@ public:
 	class FileNotFoundException { };
 	Controller(std::string line_descr, std::string timetable);
 	static constexpr int kMinDistanceBetweenStations = 20;
+	void printEvents();		//SOLO PER DEBUGGING
 
 private:
 	void GetStations(std::string line_descr);
 	void GetTimetable(std::string timetable);
-	void CheckValues();
+	void CheckTimetable();
+	void CheckStations();
 	void EraseEventsRelatedTo(Station* ev);
 
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
