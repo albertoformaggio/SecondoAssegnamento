@@ -6,6 +6,13 @@
 #include "station.h"
 #include "platform.h"
 
+void Train::setSpeed(int s)
+{ 
+	if (s < 0)
+		throw InvalidSpeed();
+	speed = s; 
+}
+
 void Train::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed)
 {
 	if (time_leaving < 0)

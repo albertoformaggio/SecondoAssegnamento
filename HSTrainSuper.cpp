@@ -10,10 +10,14 @@ void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int t
 {
 	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
-/*void HSTrainSuper::editDelay(int d)
+
+void HSTrainSuper::setSpeed(int s)
 {
-	Train::editDelay(d);
-}*/
+	Train::setSpeed(s);     //da controllare se chiama da sola quella base o no
+	if (s > v_max)
+		Train::setSpeed(v_max);
+}
+
 Platform& HSTrainSuper::requirePlatform(Station& st)
 {
 	if (st.isLocal())
@@ -30,7 +34,3 @@ Platform& HSTrainSuper::requirePlatform(Station& st)
 	}
 	
 }
-/*void HSTrainSuper::leaving(Platform& pl)
-{
-	Train::leaving(pl);
-}*/
