@@ -25,10 +25,10 @@ public:
 	virtual void setSpeed(int s) = 0;
 	inline void setDelay(int d) { delay = d; }
 	virtual void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) = 0;
-	virtual Platform& requirePlatform(Station& st) = 0;
+	virtual Platform& requirePlatform(Station* st) = 0;	//Ho messo io il puntatore qui che se no non compila
 	class InvalidTime {};
 	class InvalidSpeed {};
-	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0, int max_speed = 0);
+	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed);	//Ho tolto l'uguale a 0 perchè non ci va
 	void editDelay(int d);
 	void leaving(Platform& pl);
 };
