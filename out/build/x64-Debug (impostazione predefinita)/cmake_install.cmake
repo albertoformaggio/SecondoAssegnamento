@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/miche/source/repos/SecondoAssegnamento
+# Install script for directory: C:/Users/User/source/repos/SecondoAssegnamento
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/miche/Source/Repos/SecondoAssegnamento/out/install/x64-Debug (impostazione predefinita)")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/User/source/repos/SecondoAssegnamento/out/install/x64-Debug (impostazione predefinita)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/User/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

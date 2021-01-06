@@ -1,7 +1,3 @@
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/controller.dir
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/train.dir
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/station.dir
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/platform.dir
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/edit_cache.dir
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/main.dir
-C:/Users/miche/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/rebuild_cache.dir
+C:/Users/User/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/Rail.dir
+C:/Users/User/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/edit_cache.dir
+C:/Users/User/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/rebuild_cache.dir
