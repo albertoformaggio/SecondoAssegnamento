@@ -25,7 +25,7 @@ public:
 	virtual void setSpeed(int s);
 	inline void setDelay(int d) { delay = d; }
 	virtual void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) = 0;
-	virtual Platform& requirePlatform(Station& st) = 0;
+	virtual Platform& requirePlatform(Station* st) = 0;
 	class InvalidTime {};
 	class InvalidSpeed {};
 	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0, int max_speed = 0);

@@ -18,18 +18,18 @@ void HSTrain::setSpeed(int s)
 		Train::setSpeed(v_max);
 }
 
-Platform& HSTrain::requirePlatform(Station& st)
+Platform& HSTrain::requirePlatform(Station* st)
 {
-	
-	if (st.isLocal())
+	localStation* ls = dynamic_cast<localStation*>(st);
+	if (ls != nullptr)
 	{
-		Platform& p = st.getTransitPlatform();
+		Platform& p = ls->getTransitPlatform();
 		p.reserve();
 		return p;
 	}
 	else
 	{
-		Platform& p = st.getStandardPlatform();
+		Platform& p = st->getStandardPlatform();
 		p.reserve();
 		return p;
 	}
