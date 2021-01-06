@@ -10,17 +10,17 @@ void RegionalTrain::setAverageSpeed(const Station& from, const Station& to, int 
 	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
 
-void RegionalTrain::editDelay(int d)
+/*void RegionalTrain::editDelay(int d)
 {
 	Train::editDelay(d);
-}
+}*/
 Platform& RegionalTrain::requirePlatform(Station& st)
 {
 	Platform& p = st.getStandardPlatform();
 	p.reserve();
 	return p;
 }
-void RegionalTrain::leaving(Platform& pl)
+/*void RegionalTrain::leaving(Platform& pl)
 {
 	Train::leaving(pl);
-}
+}*/
