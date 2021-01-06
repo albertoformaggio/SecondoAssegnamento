@@ -15,7 +15,7 @@ class RegionalTrain : public Train
 public:
 	const int v_max = 160; 
 	RegionalTrain(int ID) : Train(ID) {}
-	void setAverageSpeed(/*const*/ Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0);
+	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) override;
 	//void editDelay(int d);
 	Platform& requirePlatform(Station& st) override;
 	//void leaving(Platform& pl) override;
