@@ -5,12 +5,12 @@
 #ifndef controller_h
 #define controller_h
 
-#include "event.h"
+#include "station.h"
 #include "train.h"
 #include "HSTrain.h"
 #include "HSTrainSuper.h"
 #include "RegionalTrain.h"
-#include "station.h"
+#include "event.h"
 #include <vector>
 #include <string>
 #include <fstream>

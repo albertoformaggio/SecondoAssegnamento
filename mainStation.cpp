@@ -5,13 +5,13 @@ mainStation::mainStation(int distance, std::string name)
 	: Station(distance, name) 
 {
 		/*	Creo 4 binari standard per la stazione principale */
-		Platform* bs1 = new standardPlatform(false);
+		standardPlatform bs1 = standardPlatform(false);
 		addStandardPlatform(bs1);
-		Platform* bs2 = new standardPlatform(false);
+		standardPlatform bs2 = standardPlatform(false);
 		addStandardPlatform(bs2);
-		Platform* bs3 = new standardPlatform(false);
+		standardPlatform bs3 = standardPlatform(false);
 		addStandardPlatform(bs3);
-		Platform* bs4 = new standardPlatform(false);
+		standardPlatform bs4 = standardPlatform(false);
 		addStandardPlatform(bs4);
 		
 }
