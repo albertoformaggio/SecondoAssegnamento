@@ -4,7 +4,7 @@
 
 #include "HSTrainSuper.h"
 
-void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
+void HSTrainSuper::setAverageSpeed(/*const*/ Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0)
 {
 	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
@@ -14,7 +14,18 @@ void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int t
 }*/
 Platform& HSTrainSuper::requirePlatform(Station& st)
 {
-
+	if (st.isLocal())
+	{
+		Platform& p = st.getTransitPlatform();
+		p.reserve();
+		return p;
+	}
+	else
+	{
+		Platform& p = st.getStandardPlatform();
+		p.reserve();
+		return p;
+	}
 }
 /*void HSTrainSuper::leaving(Platform& pl)
 {
