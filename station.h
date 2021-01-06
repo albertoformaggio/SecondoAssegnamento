@@ -16,7 +16,7 @@ public:
 	const int kDistanceFromOrigin;
 	const std::string st_name;
 
-	bool hasParkedTrain() { return parked.empty(); }
+	virtual bool hasParkedTrain() { return parked.empty(); }
 	Train* getParkedTrain();
 	void addParkedTrain(Train& t) { parked.push(&t); }
 	Train* removeParkedTrain();
