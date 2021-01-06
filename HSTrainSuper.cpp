@@ -18,5 +18,5 @@ Platform& HSTrainSuper::requirePlatform(Station& st)
 }
 void HSTrainSuper::leaving(Platform& pl)
 {
-
+	Train::leaving(pl);
 }

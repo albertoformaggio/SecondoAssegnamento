@@ -14,9 +14,20 @@ void HSTrain::editDelay(int d)
 }
 Platform& HSTrain::requirePlatform(Station& st)
 {
-
+	Platform& p;
+	if (st.isLocal())
+	{
+		p = st.getTransitPlatform();
+		p.reserve();
+	}
+	else
+	{
+		p = st.getStandardPlatform();
+		p.reserve();
+	}
+	return p;
 }
 void HSTrain::leaving(Platform& pl)
 {
-
+	Train::leaving(pl);
 }

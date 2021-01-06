@@ -22,5 +22,5 @@ Platform& RegionalTrain::requirePlatform(Station& st)
 }
 void RegionalTrain::leaving(Platform& pl)
 {
-	pl.free();
+	Train::leaving(pl);
 }
