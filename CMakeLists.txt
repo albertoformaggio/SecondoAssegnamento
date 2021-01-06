@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS "-O2")	##optimization flag
 
 file(GLOB SRCFILES
 	*.cpp
-	*.h)
+	*.h
+	*.txt)
 
 add_executable("${PROJECT_NAME}" ${SRCFILES})
