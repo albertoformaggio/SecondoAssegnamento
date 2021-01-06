@@ -8,8 +8,8 @@
 
 void Train::setSpeed(int s)
 { 
-	if (s < 0)
-		throw InvalidSpeed();
+	/*if (s < 0)
+		throw InvalidSpeed();*/
 	speed = s; 
 }
 
