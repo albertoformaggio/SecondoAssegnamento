@@ -16,7 +16,7 @@ void HSTrainSuper::setAverageSpeed(const Station& from, const Station& to, int t
 }*/
 Platform& HSTrainSuper::requirePlatform(Station& st)
 {
-	if (st.isLocal())
+	/*if (st.isLocal())
 	{
 		Platform& p = st.getTransitPlatform();
 		p.reserve();
@@ -27,8 +27,8 @@ Platform& HSTrainSuper::requirePlatform(Station& st)
 		Platform& p = st.getStandardPlatform();
 		p.reserve();
 		return p;
-	}
-	
+	}*/
+	return st.getStandardPlatform();
 }
 /*void HSTrainSuper::leaving(Platform& pl)
 {
