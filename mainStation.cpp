@@ -36,8 +36,14 @@ Train* Station::removeParkedTrain(){
 	}
 }
 
-standardPlatform mainStation::getStandardPlatform(){
-	return; //Ritorna il primo elemento disponibile del vettore dei binari
+standardPlatform Station::getStandardPlatform(){
+	if (standardPlatforms.size() > 0)
+		for (int i = 0; i < standardPlatforms.size(); i++) {
+			if (standardPlatforms[i].isEmpty()) {
+				return standardPlatforms[0];
+				break;
+			}
+		}
 }
 
 
