@@ -10,9 +10,6 @@
 class Train;
 #include "platform.h"
 
-#ifndef station_h
-#define station_h
-
 class Station {
 public:
 

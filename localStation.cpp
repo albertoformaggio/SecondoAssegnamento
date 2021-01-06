@@ -38,9 +38,22 @@ Train* Station::removeParkedTrain() {
 }
 
 transitPlatform localStation::getTransitPlatform(){
-	return ;
+	if(transitPlatforms.size() > 0)
+		for (int i = 0; i < transitPlatforms.size(); i++) {
+			if (transitPlatforms[i].isEmpty()) {
+				return transitPlatforms[i];
+				break;
+			}
+		}
 }
 
-standardPlatform localStation::getStandardPlatform(){
-	return ;
+standardPlatform Station::getStandardPlatform() {
+	if (standardPlatforms.size() > 0)
+		for (int i = 0; i < standardPlatforms.size(); i++) {
+			if (standardPlatforms[i].isEmpty()) {
+				return standardPlatforms[i];
+				break;
+			}
+		}
 }
+

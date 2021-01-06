@@ -10,15 +10,27 @@ void HSTrain::setAverageSpeed(const Station& from, const Station& to, int time_l
 {
 	Train::setAverageSpeed(from, to, time_leaving, time_arrival, delay_time, v_max);
 }
-void HSTrain::editDelay(int d)
+/*void HSTrain::editDelay(int d)
 {
 	Train::editDelay(d);
-}
+}*/
 Platform& HSTrain::requirePlatform(Station& st)
 {
-
+	
+	if (st.isLocal())
+	{
+		Platform& p = st.getTransitPlatform();
+		p.reserve();
+		return p;
+	}
+	else
+	{
+		Platform& p = st.getStandardPlatform();
+		p.reserve();
+		return p;
+	}
 }
-void HSTrain::leaving(Platform& pl)
+/*void HSTrain::leaving(Platform& pl)
 {
-
-}
+	Train::leaving(pl);
+}*/

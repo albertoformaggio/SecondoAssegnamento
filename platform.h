@@ -1,9 +1,11 @@
 /* @author Michele Rieppi */
 
+#include "train.h"
+
 #ifndef platform_h
 #define platform_h
 
-#include "train.h"
+
 
 class Platform{ //da rivedere i tipi bool
 
@@ -35,7 +37,7 @@ public:
 
 class standardPlatform : public Platform {
 public:
-	const int slowSpeed = 80;
+	const int slowSpeed = 80;		//DA CONTROLLARE ED IN CASO INSERIRE IN STATION PER AVERCI ACCESSO DAI METODI TRAIN
 
 	standardPlatform(bool s);
 
