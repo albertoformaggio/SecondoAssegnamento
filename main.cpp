@@ -2,5 +2,5 @@
 
 int main()
 {
-	Controller c("line_description.txt","timetables.txt");
+	Controller c("ne_description.txt","timetables.txt");
 }
