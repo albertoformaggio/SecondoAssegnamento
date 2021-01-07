@@ -1,0 +1,11 @@
+# ninja log v5
+12	221	631713347	build.ninja	e5a31bd78ca83cb8
+33	562	631713348	CMakeFiles/Rail.dir/event.cpp.obj	2da3d32e8d61b7ce
+0	573	631713348	CMakeFiles/Rail.dir/trainStop.cpp.obj	a727a00f84c85add
+7	605	631713348	CMakeFiles/Rail.dir/transitPlatform.cpp.obj	818b0f12b17d8340
+574	821	631713348	CMakeFiles/Rail.dir/standardPlatform.cpp.obj	6fbb3facd214e3d7
+20	951	631713348	CMakeFiles/Rail.dir/HSTrain.cpp.obj	ed0f277bb87176d6
+13	969	631713348	CMakeFiles/Rail.dir/HSTrainSuper.cpp.obj	26009afa905f2b08
+562	1239	631713348	CMakeFiles/Rail.dir/RegionalTrain.cpp.obj	3d36f410def72d69
+605	1288	631713348	CMakeFiles/Rail.dir/mainStation.cpp.obj	27f660923e0a0d5c
+821	1388	631713349	CMakeFiles/Rail.dir/main.cpp.obj	141c72c79a25c860
