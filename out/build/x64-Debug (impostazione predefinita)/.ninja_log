@@ -9,3 +9,7 @@
 562	1239	631713348	CMakeFiles/Rail.dir/RegionalTrain.cpp.obj	3d36f410def72d69
 605	1288	631713348	CMakeFiles/Rail.dir/mainStation.cpp.obj	27f660923e0a0d5c
 821	1388	631713349	CMakeFiles/Rail.dir/main.cpp.obj	141c72c79a25c860
+1	138	631743686	build.ninja	e5a31bd78ca83cb8
+18	965	631743687	CMakeFiles/Rail.dir/train.cpp.obj	149655bf1dbfdfcc
+13	998	631743687	CMakeFiles/Rail.dir/station.cpp.obj	5b273143dbeb0a86
+7	1005	631743687	CMakeFiles/Rail.dir/localStation.cpp.obj	ceafb16b43510822
