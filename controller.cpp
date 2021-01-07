@@ -176,7 +176,7 @@ void Controller::printEvents()
 {
 	for (int i = 0; i < events_.size(); i++)
 	{
-		cout << events_[i]->GetStation()->st_name << " " << events_[i]->GetTrain()->identifying_number << " " << events_[i]->GetTime() << endl;
+		events_[i]->performAction();
 	}
 }
 
@@ -185,7 +185,7 @@ void Controller::CheckTimetable()
 	for (int i = 0; i < trains_.size(); i++)
 	{
 		Train* tr = trains_.at(i);
-		vector<Event*> ev = getEventsRelatedTo(tr);
+		vector<Event*> ev = GetEventsRelatedTo(tr);
 		for (int j = 0; j < ev.size() - 1; j++)
 		{
 			int speed = 0;
@@ -197,17 +197,24 @@ void Controller::CheckTimetable()
 			if(true)
 			{
 				int evaluated_delay = arrive_time - ev[j]->GetTime();
-				for (int k = j + 1; k < ev.size(); k++)
+				int k = j + 1;
+				for (k; k < ev.size(); k++)
 				{
 					int cur_time = events_[k]->GetTime();
 					events_[k]->SetTime(cur_time + evaluated_delay);
 				}
+				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j]->GetStation()->st_name << " non compatibile con la velocità del treno. " << k - j << " orari cambiati di conseguenza";
 			}
 		}
 	}
 }
 
-vector<Event*> Controller::getEventsRelatedTo(Train* tr)
+void Controller::handleEvent(TrainStop& ts)
+{
+	ts.performAction();
+}
+
+vector<Event*> Controller::GetEventsRelatedTo(Train* tr)
 {
 	vector<Event*> events;
 	for (int i = 0; i < events_.size(); i++)
@@ -227,7 +234,7 @@ vector<Event*> Controller::getEventsRelatedTo(Train* tr)
 	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * Train::distanceFromPark; //funzione per avere dist da parcheggio(5);
 	if (time_arrival < time_leaving)
 		time_arrival = (int)(distance / tr->v_max) * minPerHours + delay_time;
-	int time = (time_arrival - time_leaving - tr.getDelay() - 2 * Train::distanceFromPark / Train::speedInStation) / minPerHours;
+	int time = (time_arrival - time_leaving - tr->getDelay() - 2 * Train::distanceFromPark / Train::speedInStation) / minPerHours;
 	int speed = distance / time;
 	
 	return speed; //Se speed è troppo elevata agisco di conseguenza nel chiamante
