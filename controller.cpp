@@ -182,5 +182,25 @@ void Controller::printEvents()
 
 void Controller::CheckTimetable()
 {
+	for (int i = 0; trains_.size(); i++)
+	{
+		Train* tr = trains_.at(i);
+		vector<Event*> ev = getEventsRelatedTo(tr);
+		for (int j = 0; j < ev.size() - 1; j++)
+		{
+			
+		}
+	}
+}
 
+vector<Event*> Controller::getEventsRelatedTo(Train* tr)
+{
+	vector<Event*> events;
+	for (int i = 0; i < events_.size(); i++)
+	{
+		if (events_[i]->GetTrain() == tr) //Confronto gli indirizzi di memoria
+			events.push_back(events_.at(i));
+	}
+
+	return events; //Costruttore di move di vector usato, non viene fatta l'intera copia
 }
