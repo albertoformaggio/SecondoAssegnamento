@@ -1,9 +1,10 @@
 ﻿{
-  // Per altre informazioni su questo file, vedere https://go.microsoft.com/fwlink/?linkid=834763.
   "configurations": [
     {
       "name": "Rail",
-      "cacheRoot": "C:\\Users\\Anna\\Desktop\\coding\\SecondoAssegnamento\\Build"
+      "cacheRoot": "C:\\Users\\Anna\\Desktop\\coding\\SecondoAssegnamento\\Build\"",
+      "inheritEnvironments": [],
+      "variables": []
     }
   ]
 }

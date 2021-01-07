@@ -4,6 +4,6 @@
 standardPlatform::standardPlatform(bool s) //Mancano controlli
 	:Platform(occupied) {}
 
-int standardPlatform::fixSpeed(Train& t) const {
+int standardPlatform::fixSpeed(const Train& t) const {
 	return slowSpeed;
 }
