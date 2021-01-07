@@ -182,7 +182,7 @@ void Controller::printEvents()
 
 void Controller::CheckTimetable()
 {
-	for (int i = 0; trains_.size(); i++)
+	for (int i = 0; i < trains_.size(); i++)
 	{
 		Train* tr = trains_.at(i);
 		vector<Event*> ev = getEventsRelatedTo(tr);
