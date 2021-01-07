@@ -2,5 +2,6 @@
 
 int main()
 {
-	Controller c("ne_description.txt","timetables.txt");
+	Controller c("line_description.txt","timetables.txt");
+	c.printEvents();
 }
