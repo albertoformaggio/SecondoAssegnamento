@@ -16,6 +16,7 @@ public:
 	inline Station* GetStation() const { return station_; }
 	void SetTime(int time);
 	virtual void performAction() = 0;
+	//operator < 
 
 protected:
 	Event(int time, Train* train, Station* station) : time_{ time }, train_{ train }, station_{ station } {}		//Da aggiungere controlli per evitare che siano nullptr
