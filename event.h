@@ -2,6 +2,8 @@
 	@author Formaggio Alberto
 */
 
+#include <stdexcept>
+
 #ifndef Event_h
 #define Event_h
 
@@ -11,9 +13,10 @@ class Station;
 class Event
 {
 public:
-	int GetTime() const { return time_; }
-	Train* GetTrain() const { return train_; }
-	Station* GetStation() const { return station_; }
+	inline int GetTime() const { return time_; }
+	inline Train* GetTrain() const { return train_; }
+	inline Station* GetStation() const { return station_; }
+	void SetTime(int time);
 	virtual void performAction() = 0;
 
 protected:

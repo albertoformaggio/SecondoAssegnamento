@@ -11,7 +11,7 @@ Controller::Controller(string line_descr, string timetable)
 	GetStations(line_descr);
 	GetTimetable(timetable);
 	CheckStations();
-	CheckTimetable();
+	//CheckTimetable();
 }
 
 /* DA TESTAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
@@ -188,7 +188,21 @@ void Controller::CheckTimetable()
 		vector<Event*> ev = getEventsRelatedTo(tr);
 		for (int j = 0; j < ev.size() - 1; j++)
 		{
-			
+			int speed = 0;
+			int arrive_time = 0;
+			//Se la velocità è maggiore di quella massima, fai una rivalutazione di tutti gli eventi fino alla fine
+			//MI SERVE UNO DI QUESTI CONTROLLI
+			//if speed > tr->v_max     
+			//if arrive_time != evento.getTime() 
+			if(true)
+			{
+				int evaluated_delay = arrive_time - ev[j]->GetTime();
+				for (int k = j + 1; k < ev.size(); k++)
+				{
+					int cur_time = events_[k]->GetTime();
+					events_[k]->SetTime(cur_time + evaluated_delay);
+				}
+			}
 		}
 	}
 }
@@ -204,3 +218,17 @@ vector<Event*> Controller::getEventsRelatedTo(Train* tr)
 
 	return events; //Costruttore di move di vector usato, non viene fatta l'intera copia
 }
+
+/*int Controller::GetAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, Train* tr)
+{
+	const int minPerHours = 60;
+	if (time_leaving < 0 || delay_time < 0)
+		return -1;	//Meglio non lanciare eccezione se posso segnalare errore in altro modo
+	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * Train::distanceFromPark; //funzione per avere dist da parcheggio(5);
+	if (time_arrival < time_leaving)
+		time_arrival = (int)(distance / tr->v_max) * minPerHours + delay_time;
+	int time = (time_arrival - time_leaving - tr.getDelay() - 2 * Train::distanceFromPark / Train::speedInStation) / minPerHours;
+	int speed = distance / time;
+	
+	return speed; //Se speed è troppo elevata agisco di conseguenza nel chiamante
+}*/
