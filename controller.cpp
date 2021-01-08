@@ -96,13 +96,13 @@ void Controller::GetTimetable(string timetable)
 		switch (train_type)
 		{
 		case reg:
-			tr = new RegionalTrain(train_id);				//Devo inserirci un riferimento con &
+			tr = new RegionalTrain(train_id, first_station);				//Devo inserirci un riferimento con &			//METTII A POSTO QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 			break;
 		case hs:
-			tr = new HSTrain(train_id);
+			tr = new HSTrain(train_id, first_station);
 			break;
 		case hs_super:
-			tr = new HSTrainSuper(train_id);
+			tr = new HSTrainSuper(train_id, first_station);
 			
 			break;
 		}
@@ -199,7 +199,7 @@ void Controller::CheckTimetable()
 			//Se la velocità è maggiore di quella massima, fai una rivalutazione di tutti gli eventi fino alla fine
 			//MI SERVE UNO DI QUESTI CONTROLLI
 			//if speed > tr->v_max     
-			//if arrive_time != evento.getTime() 
+			//if arrive_time != evento.getTime()
 			if(true)
 			{
 				int evaluated_delay = arrive_time - ev[j].GetTime();
