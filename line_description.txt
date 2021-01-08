@@ -1,0 +1,8 @@
+Rovigo
+Stanghella 1 30
+S. Elena-Este 1 60
+Monselice 0 90
+Battaglia Terme 1 120
+Terme Euganee 0 160
+Abano 1 190
+Padova 0 230

@@ -11,9 +11,10 @@ class Station;
 class Event
 {
 public:
-	int GetTime() const { return time_; }
-	Train* GetTrain() const { return train_; }
-	Station* GetStation() const { return station_; }
+	inline int GetTime() const { return time_; }
+	inline Train* GetTrain() const { return train_; }
+	inline Station* GetStation() const { return station_; }
+	void SetTime(int time);
 	virtual void performAction() = 0;
 
 protected:
@@ -25,29 +26,23 @@ private:
 	Station* station_;
 };
 
-/*class PlatformRequest : public Event
+class PlatformRequest : public Event		//Avviene sia la comunicazione da treno a stazione che da stazione a treno
 {
 public:
 	void performAction() override;
 };
-
-class StationAnswer : public Event
-{
-public:
-	void performAction() override;
-};*/
 
 class TrainStop : public Event
 {
 public:
-	void performAction() override {}
+	void performAction() override;
 	TrainStop(int time, Train* train, Station* station) : Event(time, train, station) { }
 };
 
-/*class TrainDeparture : public Event
+class TrainDeparture : public Event
 {
 public:
 	void performAction() override;
-};*/
+};
 
 #endif // !Event

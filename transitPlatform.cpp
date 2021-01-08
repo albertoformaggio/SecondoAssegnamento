@@ -8,6 +8,6 @@ Platform::~Platform(){
 
 }
 
-int transitPlatform::fixSpeed(Train& t) const {
+int transitPlatform::fixSpeed(const Train& t) const {
 	return t.getSpeed();
 }

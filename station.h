@@ -27,7 +27,7 @@ public:
 
 protected:
 
-	void addStandardPlatform(standardPlatform track) { standardPlatforms.push_back(track); }
+	void addStandardPlatform(const standardPlatform track) { standardPlatforms.push_back(track); }
 
 	explicit Station(int distance, std::string name)
 		: kDistanceFromOrigin{ distance }, st_name{ name } {}
@@ -51,7 +51,7 @@ class localStation : public Station {
 public:
 	localStation(int distance, std::string name);
 
-	void addTransitPlatform(transitPlatform track) { transitPlatforms.push_back(track); }
+	void addTransitPlatform(const transitPlatform track) { transitPlatforms.push_back(track); }
 
 	transitPlatform getTransitPlatform() override;
 };

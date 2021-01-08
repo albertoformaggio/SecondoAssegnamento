@@ -26,8 +26,8 @@ The CXX compiler identification is MSVC, found in "C:/Users/User/source/repos/Se
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/Users/User/source/repos/SecondoAssegnamento/out/build/x64-Debug (impostazione predefinita)/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_41c87 && [1/2] Building CXX object CMakeFiles\cmTC_41c87.dir\CMakeCXXCompilerABI.cpp.obj
-[2/2] Linking CXX executable cmTC_41c87.exe
+Run Build Command(s):C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_79040 && [1/2] Building CXX object CMakeFiles\cmTC_79040.dir\CMakeCXXCompilerABI.cpp.obj
+[2/2] Linking CXX executable cmTC_79040.exe
 
 
 

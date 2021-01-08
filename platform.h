@@ -11,7 +11,7 @@ class Platform{ //da rivedere i tipi bool
 
 public:
 
-	virtual int fixSpeed(Train& t) const = 0;
+	virtual int fixSpeed(const Train& t) const = 0;
 
 	bool isEmpty() { return occupied == true; }	//ritorna true se il binario è libero false altrimenti
 	void reserve() { occupied = true; }			//mette il binario occupato
@@ -31,7 +31,7 @@ class transitPlatform : public Platform {
 public:
 	transitPlatform(bool s);
 
-	int fixSpeed(Train& t) const override;
+	int fixSpeed(const Train& t) const override;
 
 };
 
@@ -41,7 +41,7 @@ public:
 
 	standardPlatform(bool s);
 
-	int fixSpeed(Train& t) const override;
+	int fixSpeed(const Train& t) const override;
 };
 
 #endif
