@@ -96,13 +96,13 @@ void Controller::GetTimetable(string timetable)
 		switch (train_type)
 		{
 		case reg:
-			tr = new RegionalTrain(train_id);				//Devo inserirci un riferimento con &
+			tr = new RegionalTrain(train_id, first_station);				//Devo inserirci un riferimento con &			//METTII A POSTO QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 			break;
 		case hs:
-			tr = new HSTrain(train_id);
+			tr = new HSTrain(train_id, first_station);
 			break;
 		case hs_super:
-			tr = new HSTrainSuper(train_id);
+			tr = new HSTrainSuper(train_id, first_station);
 			
 			break;
 		}
@@ -173,18 +173,16 @@ void Controller::EraseEventsRelatedTo(Station* st)
 	}
 }
 
-bool Controller::EventIsLessThan(Event first, Event other)
-{
-	return false;
-}
-//implementare funzione da passare al sort per i confronti
+
 
 void Controller::printEvents()
 {
-	//sort(events_.begin(), events_.end());
+	sort(events_.begin(), events_.end());
 	for (int i = 0; i < events_.size(); i++)
 	{
-		//events_[i].performAction();
+		switch (events_[i].GetType())
+			case EventType::TrainStop: handleTrainStop(events_[i]);
+		break;
 	}
 }
 
@@ -201,7 +199,7 @@ void Controller::CheckTimetable()
 			//Se la velocità è maggiore di quella massima, fai una rivalutazione di tutti gli eventi fino alla fine
 			//MI SERVE UNO DI QUESTI CONTROLLI
 			//if speed > tr->v_max     
-			//if arrive_time != evento.getTime() 
+			//if arrive_time != evento.getTime()
 			if(true)
 			{
 				int evaluated_delay = arrive_time - ev[j].GetTime();
@@ -219,7 +217,10 @@ void Controller::CheckTimetable()
 
 void Controller::handleTrainStop(Event& ts)
 {
-	//ts.performAction();
+	int hour = ts.GetTime() / 60;
+	int minute = ts.GetTime() % 60;
+	cout << "Il treno " << ts.GetTrain()->identifying_number << " e' arrivato alla stazione " << ts.GetStation()->st_name << " alle ore " << hour << ":" << minute << endl;
+	cout << "con " << ts.GetTrain()->getDelay() << " minuti di ritardo." << endl;
 }
 
 vector<Event> Controller::GetEventsRelatedTo(Train* tr)

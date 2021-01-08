@@ -24,3 +24,8 @@ void Event::SetTime(int time)
 	cout << "Il treno " << GetTrain()->identifying_number << " e' arrivato alla stazione " << GetStation()->st_name << " alle ore " << hour << ":" << minute << endl;
 	cout << "con " << GetTrain()->getDelay() << " minuti di ritardo." << endl;
 }*/
+
+bool Event::operator < (const Event& other) const
+{
+	return time_ < other.time_;
+}
