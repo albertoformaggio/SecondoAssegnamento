@@ -3,6 +3,8 @@
 */
 
 #include "HSTrainSuper.h"
+#include "localStation.h"
+#include "mainStation.h"
 #include "platform.h"
 #include "station.h"
 

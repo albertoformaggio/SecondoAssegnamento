@@ -8,6 +8,7 @@
 #define station_h
 
 class Train;
+class Platform;
 #include "transitPlatform.h"
 #include "standardPlatform.h"
 

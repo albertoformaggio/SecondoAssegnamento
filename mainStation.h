@@ -1,5 +1,7 @@
 /* @author Michele Rieppi*/
 
+#include "station.h"
+
 class mainStation : public Station {
 public:
 	mainStation(int distance, std::string name);
