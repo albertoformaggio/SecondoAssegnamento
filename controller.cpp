@@ -4,6 +4,7 @@
 #include "controller.h"
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 
 
 using namespace std;
@@ -218,7 +219,8 @@ void Controller::handleTrainStop(Event& ts)
 {
 	int hour = ts.GetTime() / 60;
 	int minute = ts.GetTime() % 60;
-	cout << "Il treno " << ts.GetTrain()->identifying_number << " e' arrivato alla stazione " << ts.GetStation()->st_name << " alle ore " << hour << ":" << minute << endl;
+	cout << "Il treno " << ts.GetTrain()->identifying_number << " e' arrivato alla stazione " << ts.GetStation()->st_name << " alle ore ";
+	cout << std::setfill('0') << std::setw(2) << hour << ":" << minute << endl;
 	cout << "con " << ts.GetTrain()->getDelay() << " minuti di ritardo." << endl;
 }
 
