@@ -38,12 +38,13 @@ private:
 	void CheckStations();
 	void EraseEventsRelatedTo(Station* ev);
 	std::vector<Event> GetEventsRelatedTo(Train* tr);
-	bool EventIsLessThan(Event first, Event other);
-	void handleTrainStop(Event& ts);		//Non può funzionare così se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
+	void handleTrainStop(std::vector<Event>::iterator cur);		//Non può funzionare così se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
 	std::vector<Train*> trains_;
 	std::vector<Event> events_;		//Pensa se è meglio usare pq o vector.
+	const int max_wait = 20; //minuti di massima attesa di un treno
+	const int min_wait = 5;
 };
 
 #endif // !controller_h
