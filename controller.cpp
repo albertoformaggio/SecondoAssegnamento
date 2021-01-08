@@ -173,15 +173,11 @@ void Controller::EraseEventsRelatedTo(Station* st)
 	}
 }
 
-bool Controller::EventIsLessThan(Event first, Event other)
-{
-	return false;
-}
-//implementare funzione da passare al sort per i confronti
+
 
 void Controller::printEvents()
 {
-	//sort(events_.begin(), events_.end());
+	sort(events_.begin(), events_.end());
 	for (int i = 0; i < events_.size(); i++)
 	{
 		//events_[i].performAction();

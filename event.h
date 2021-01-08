@@ -23,7 +23,8 @@ public:
 	inline Station* GetStation() const { return station_; }
 	inline EventType GetType() const { return type_; }
 	void SetTime(int time);
-	Event(int time, Train* train, Station* station, EventType type) : time_{ time }, train_{ train }, station_{ station }, type_{ type } {}		//Da aggiungere controlli per evitare che siano nullptr	
+	Event(int time, Train* train, Station* station, EventType type) : time_{ time }, train_{ train }, station_{ station }, type_{ type } {}		//Da aggiungere controlli per evitare che siano nullptr
+	bool operator < (const Event& other) const;
 
 private:
 	int time_;
