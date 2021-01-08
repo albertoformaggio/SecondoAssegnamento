@@ -32,13 +32,13 @@ private:
 	void CheckStations();
 	void EraseEventsRelatedTo(Station* ev);
 	std::vector<Event*> GetEventsRelatedTo(Train* tr);
-	void handleEvent(TrainStop& ts);
+	void handleEvent(TrainStop& ts);		//Non può funzionare così se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 	void handleEvent(PlatformRequest& pr);
 	void handleEvent(TrainDeparture& td);
 
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
 	std::vector<Train*> trains_;
-	std::vector<Event*> events_;		//Pensa se è meglio usare pq o vector
+	std::vector<Event*> events_;		//Pensa se è meglio usare pq o vector. Potrei usare 2 vector: uno di eventi svolti e uno di eventi da svolgere
 };
 
 #endif // !controller_h
