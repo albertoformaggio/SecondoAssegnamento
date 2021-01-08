@@ -1,5 +1,8 @@
 /* @author Michele Rieppi */
 
+#ifndef standardPlatform_h
+#define standardPlatform_h
+
 #include "platform.h"
 
 class standardPlatform : public Platform {
@@ -10,3 +13,4 @@ public:
 
 	int fixSpeed(const Train& t) const override;
 };
+#endif

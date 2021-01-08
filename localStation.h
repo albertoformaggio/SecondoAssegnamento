@@ -1,5 +1,8 @@
 /* @author Michele Rieppi*/
 
+#ifndef localStation_h
+#define localStation_h
+
 #include "station.h"
 
 class localStation : public Station {
@@ -10,3 +13,5 @@ public:
 
 	transitPlatform getTransitPlatform(bool direction) override;
 };
+
+#endif
