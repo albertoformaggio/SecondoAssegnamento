@@ -5,17 +5,15 @@
 #ifndef controller_h
 #define controller_h
 
-#include "station.h"
-#include "train.h"
-#include "HSTrain.h"
-#include "HSTrainSuper.h"
-#include "RegionalTrain.h"
-#include "event.h"
 #include <vector>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <memory>
+
+class Train;
+class Event;
+class Station;
 
 class Controller
 {

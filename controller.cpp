@@ -2,8 +2,17 @@
 	@author Formaggio Alberto
 */
 #include "controller.h"
+#include "station.h"
+#include "train.h"
+#include "HSTrain.h"
+#include "HSTrainSuper.h"
+#include "RegionalTrain.h"
+#include "event.h"
+#include "localStation.h"
+#include "mainStation.h"
 #include <iostream>
 #include <algorithm>
+
 
 using namespace std;
 
