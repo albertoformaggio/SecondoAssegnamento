@@ -1,5 +1,8 @@
 /* @author Michele Rieppi */
+
 #include "station.h"
+#include "mainStation.h"
+#include "standardPlatform.h"
 
 mainStation::mainStation(int distance, std::string name)
 	: Station(distance, name) 

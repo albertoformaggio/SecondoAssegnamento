@@ -1,4 +1,8 @@
 /* @author Michele Rieppi */
+
+#include "localStation.h"
+#include "transitPlatform.h"
+#include "standardPlatform.h"
 #include "station.h"
 
 localStation::localStation(int distance, std::string name)

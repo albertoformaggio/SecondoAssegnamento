@@ -1,5 +1,5 @@
 /* @author Michele Rieppi */
-#include "platform.h"
+#include "standardPlatform.h"
 
 standardPlatform::standardPlatform(bool s, bool d) //Mancano controlli
 	:Platform(occupied, startFromOrigin) {}
