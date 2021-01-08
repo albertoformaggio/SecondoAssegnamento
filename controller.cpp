@@ -126,13 +126,13 @@ void Controller::GetTimetable(string timetable)
 					if (!(ss >> time))
 					{
 						time = -1;
-						Event* last = events_.at(events_.size() - 1);	//Ottengo l'ultimo evento di fermata inserito
-						const Station* lastStation = last->GetStation();		//manca copy constructor/move constructor						
-						tr->setAverageSpeed(*lastStation, *current_station, last->GetTime(), time, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
+						Event last = events_.at(events_.size() - 1);	//Ottengo l'ultimo evento di fermata inserito
+						const Station* lastStation = last.GetStation();		//manca copy constructor/move constructor						
+						tr->setAverageSpeed(*lastStation, *current_station, last.GetTime(), time, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
 																																					//Se l'orario di partenza non è valido (cioè negativo), calcolarlo usando il minor tempo possibile più ritardo (magari il ritardo lo metti con parametro di default = 0)
 					}
 					
-					Event* e = new TrainStop(time, tr, stations_.at(i));
+					Event e(time, tr, stations_.at(i), EventType::TrainStop);
 					events_.push_back(e);
 				}
 			}
@@ -166,7 +166,7 @@ void Controller::EraseEventsRelatedTo(Station* st)
 	auto it = events_.begin();
 	while(it < events_.end())
 	{
-		if ((**it).GetStation() == st)
+		if ((*it).GetStation() == st)
 			it = events_.erase(it);
 		else
 			it++;
@@ -175,16 +175,16 @@ void Controller::EraseEventsRelatedTo(Station* st)
 
 bool Controller::EventIsLessThan(Event first, Event other)
 {
-
+	return false;
 }
 //implementare funzione da passare al sort per i confronti
 
 void Controller::printEvents()
 {
-	sort(events_.begin(), events_.end());
+	//sort(events_.begin(), events_.end());
 	for (int i = 0; i < events_.size(); i++)
 	{
-		events_[i]->performAction();
+		//events_[i].performAction();
 	}
 }
 
@@ -193,7 +193,7 @@ void Controller::CheckTimetable()
 	for (int i = 0; i < trains_.size(); i++)
 	{
 		Train* tr = trains_.at(i);
-		vector<Event*> ev = GetEventsRelatedTo(tr);
+		vector<Event> ev = GetEventsRelatedTo(tr);
 		for (int j = 0; j < ev.size() - 1; j++)
 		{
 			int speed = 0;
@@ -204,30 +204,30 @@ void Controller::CheckTimetable()
 			//if arrive_time != evento.getTime() 
 			if(true)
 			{
-				int evaluated_delay = arrive_time - ev[j]->GetTime();
+				int evaluated_delay = arrive_time - ev[j].GetTime();
 				int k = j + 1;
 				for (k; k < ev.size(); k++)
 				{
-					int cur_time = events_[k]->GetTime();
-					events_[k]->SetTime(cur_time + evaluated_delay);
+					int cur_time = events_[k].GetTime();
+					events_[k].SetTime(cur_time + evaluated_delay);
 				}
-				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j]->GetStation()->st_name << " non compatibile con la velocità del treno. " << k - j << " orari cambiati di conseguenza";
+				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j].GetStation()->st_name << " non compatibile con la velocità del treno. " << k - j << " orari cambiati di conseguenza";
 			}
 		}
 	}
 }
 
-void Controller::handleEvent(TrainStop& ts)
+void Controller::handleTrainStop(Event& ts)
 {
-	ts.performAction();
+	//ts.performAction();
 }
 
-vector<Event*> Controller::GetEventsRelatedTo(Train* tr)
+vector<Event> Controller::GetEventsRelatedTo(Train* tr)
 {
-	vector<Event*> events;
+	vector<Event> events;
 	for (int i = 0; i < events_.size(); i++)
 	{
-		if (events_[i]->GetTrain() == tr) //Confronto gli indirizzi di memoria
+		if (events_[i].GetTrain() == tr) //Confronto gli indirizzi di memoria
 			events.push_back(events_.at(i));
 	}
 

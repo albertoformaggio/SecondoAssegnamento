@@ -23,13 +23,13 @@ Platform& HSTrainSuper::requirePlatform(Station* st)
 	localStation* ls = dynamic_cast<localStation*>(st);
 	if (ls != nullptr)
 	{
-		Platform& p = ls->getTransitPlatform();
+		Platform& p = ls->getTransitPlatform(startFromOrigin);
 		p.reserve();
 		return p;
 	}
 	else
 	{
-		Platform& p = st->getStandardPlatform();
+		Platform& p = st->getStandardPlatform(startFromOrigin);
 		p.reserve();
 		return p;
 	}

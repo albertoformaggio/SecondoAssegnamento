@@ -17,10 +17,10 @@ void Event::SetTime(int time)
 	time_ = time;
 }
 
-void TrainStop::performAction()
+/*void TrainStop::performAction()
 {
 	int hour = GetTime() / 60;
 	int minute = GetTime() % 60;
 	cout << "Il treno " << GetTrain()->identifying_number << " e' arrivato alla stazione " << GetStation()->st_name << " alle ore " << hour << ":" << minute << endl;
 	cout << "con " << GetTrain()->getDelay() << " minuti di ritardo." << endl;
-}
+}*/
