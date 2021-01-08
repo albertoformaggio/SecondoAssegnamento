@@ -18,10 +18,10 @@ Train* Station::removeParkedTrain() {
 	}
 }
 
-standardPlatform Station::getStandardPlatform() {
+standardPlatform Station::getStandardPlatform(bool direction) {
 	if (standardPlatforms.size() > 0)
 		for (int i = 0; i < standardPlatforms.size(); i++) {
-			if (standardPlatforms[i].isEmpty()) {
+			if (standardPlatforms[i].isEmpty() && standardPlatforms[i].startFromOrigin == direction) {
 				return standardPlatforms[i];
 				break;
 			}
