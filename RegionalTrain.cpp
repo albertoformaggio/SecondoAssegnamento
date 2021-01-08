@@ -21,7 +21,7 @@ void RegionalTrain::setSpeed(int s)
 
 Platform& RegionalTrain::requirePlatform(Station* st)
 {
-	Platform& p = st->getStandardPlatform();
+	Platform& p = st->getStandardPlatform(startFromOrigin);
 	p.reserve();
 	return p;
 }

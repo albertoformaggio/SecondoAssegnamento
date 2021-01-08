@@ -1,8 +1,8 @@
 /* @author Michele Rieppi */
 #include "platform.h"
 
-transitPlatform::transitPlatform(bool s) //Mancano controlli
-	:Platform(occupied) {}
+transitPlatform::transitPlatform(bool s, bool d) //Mancano controlli
+	:Platform(occupied, startFromOrigin) {}
 
 Platform::~Platform(){
 
