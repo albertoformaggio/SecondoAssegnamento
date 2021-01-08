@@ -173,6 +173,10 @@ void Controller::EraseEventsRelatedTo(Station* st)
 	}
 }
 
+bool Controller::EventIsLessThan(Event first, Event other)
+{
+
+}
 //implementare funzione da passare al sort per i confronti
 
 void Controller::printEvents()

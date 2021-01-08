@@ -32,6 +32,7 @@ private:
 	void CheckStations();
 	void EraseEventsRelatedTo(Station* ev);
 	std::vector<Event*> GetEventsRelatedTo(Train* tr);
+	bool EventIsLessThan(Event first, Event other);
 	void handleEvent(TrainStop& ts);		//Non può funzionare così se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 	void handleEvent(PlatformRequest& pr);
 	void handleEvent(TrainDeparture& td);
