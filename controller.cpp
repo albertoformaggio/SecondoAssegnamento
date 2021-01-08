@@ -182,8 +182,6 @@ void Controller::EraseEventsRelatedTo(Station* st)
 	}
 }
 
-
-
 void Controller::printEvents()
 {
 	sort(events_.begin(), events_.end());
