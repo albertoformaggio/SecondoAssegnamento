@@ -9,6 +9,7 @@
 
 class Train;
 #include "transitPlatform.h"
+#include "standardPlatform.h"
 
 class Station {
 public:
