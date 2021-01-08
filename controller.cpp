@@ -180,8 +180,10 @@ void Controller::printEvents()
 	for (int i = 0; i < events_.size(); i++)
 	{
 		switch (events_[i].GetType())
-			case EventType::TrainStop: handleTrainStop(events_[i]);
-		break;
+		{
+		case EventType::TrainStop: handleTrainStop(events_[i]); 
+			break;
+		}
 	}
 }
 
