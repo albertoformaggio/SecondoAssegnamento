@@ -180,7 +180,9 @@ void Controller::printEvents()
 	sort(events_.begin(), events_.end());
 	for (int i = 0; i < events_.size(); i++)
 	{
-		//events_[i].performAction();
+		switch (events_[i].GetType())
+			case EventType::TrainStop: handleTrainStop(events_[i]);
+		break;
 	}
 }
 
@@ -215,7 +217,10 @@ void Controller::CheckTimetable()
 
 void Controller::handleTrainStop(Event& ts)
 {
-	//ts.performAction();
+	int hour = ts.GetTime() / 60;
+	int minute = ts.GetTime() % 60;
+	cout << "Il treno " << ts.GetTrain()->identifying_number << " e' arrivato alla stazione " << ts.GetStation()->st_name << " alle ore " << hour << ":" << minute << endl;
+	cout << "con " << ts.GetTrain()->getDelay() << " minuti di ritardo." << endl;
 }
 
 vector<Event> Controller::GetEventsRelatedTo(Train* tr)
