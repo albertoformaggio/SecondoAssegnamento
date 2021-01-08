@@ -15,8 +15,9 @@ private:
 	int speed = 0;
 	int delay = 0;
 protected:
-	Train(int ID, bool d) : identifying_number{ ID }, startFromOrigin{ d } {}
+	Train(int ID, bool d, int v) : identifying_number{ ID }, startFromOrigin{ d } v_max{ v }{}
 public:
+	const int v_max;
 	const bool startFromOrigin;
 	const int identifying_number;
 	const int distanceFromPark = 5;
