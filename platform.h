@@ -22,29 +22,12 @@ public:
 	~Platform();
 
 protected: 
-	Platform(bool s, bool d) : occupied{ s }, startFromOrigin{ d } {}
 
+	Platform(bool s, bool d) : occupied{ s }, startFromOrigin{ d } {}
 	
 	bool occupied;		//true occupato false libero
 	
 	
-};
-
-class transitPlatform : public Platform {
-public:
-	transitPlatform(bool s, bool d);
-
-	int fixSpeed(const Train& t) const override;
-
-};
-
-class standardPlatform : public Platform {
-public:
-	const int slowSpeed = 80;		//DA CONTROLLARE ED IN CASO INSERIRE IN STATION PER AVERCI ACCESSO DAI METODI TRAIN
-
-	standardPlatform(bool s, bool d);
-
-	int fixSpeed(const Train& t) const override;
 };
 
 #endif

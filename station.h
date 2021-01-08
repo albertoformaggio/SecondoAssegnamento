@@ -8,7 +8,7 @@
 #define station_h
 
 class Train;
-#include "platform.h"
+#include "transitPlatform.h"
 
 class Station {
 public:
@@ -39,21 +39,6 @@ private:
 
 	std::queue<Train*> parked;
 
-};
-
-class mainStation : public Station {
-public:
-	mainStation(int distance, std::string name);
-	transitPlatform getTransitPlatform(bool direction) override { throw std::exception(); }
-};
-
-class localStation : public Station {
-public:
-	localStation(int distance, std::string name);
-
-	void addTransitPlatform(const transitPlatform track) { transitPlatforms.push_back(track); }
-
-	transitPlatform getTransitPlatform(bool direction) override;
 };
 
 #endif

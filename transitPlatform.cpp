@@ -1,5 +1,5 @@
 /* @author Michele Rieppi */
-#include "platform.h"
+#include "transitPlatform.h"
 
 transitPlatform::transitPlatform(bool s, bool d) //Mancano controlli
 	:Platform(occupied, startFromOrigin) {}

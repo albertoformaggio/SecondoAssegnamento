@@ -10,4 +10,4 @@ file(GLOB SRCFILES
 	*.h
 	*.txt)
 
-add_executable("${PROJECT_NAME}" ${SRCFILES})
+add_executable("${PROJECT_NAME}" ${SRCFILES} "standardPlatform.h" "localStation.h" "mainStation.h")
