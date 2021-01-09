@@ -44,8 +44,10 @@ private:
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
 	std::vector<Train*> trains_;
 	std::vector<Event> events_;		//Pensa se è meglio usare pq o vector.
-	const int max_wait = 20; //minuti di massima attesa di un treno
 	const int min_wait = 5;
+	const int distanceFromPark = 5;
+	const int speedInStation = 80;
+	const int kMinDistanceBetweenTrains = 10;
 };
 
 #endif // !controller_h

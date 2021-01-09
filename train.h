@@ -20,8 +20,6 @@ public:
 	const int max_speed;
 	const bool startFromOrigin;
 	const int identifying_number;
-	const int distanceFromPark = 5;
-	const int speedInStation = 80;
 	inline int getSpeed() const { return speed; }
 	inline int getDelay() const { return delay; }
 	virtual void setSpeed(int s);

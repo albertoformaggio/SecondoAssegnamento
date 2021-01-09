@@ -12,8 +12,8 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 	if (time_leaving < 0 || delay_time < 0)
 		return -1;
 
-	int timeAtFixedSpeed = (2 * t->distanceFromPark / t->speedInStation) * minPerHours;
-	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * t->distanceFromPark; //funzione per avere dist da parcheggio(5);
+	int timeAtFixedSpeed = (2 * distanceFromPark / speedInStation) * minPerHours;
+	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * distanceFromPark; //funzione per avere dist da parcheggio(5);
 	int minimumTime = (int)(distance / t->max_speed) * minPerHours + timeAtFixedSpeed + delay_time + t->getDelay();
 	
 	if (time_arrival - time_leaving < minimumTime)

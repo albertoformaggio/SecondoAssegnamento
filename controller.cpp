@@ -13,7 +13,7 @@ Controller::Controller(string line_descr, string timetable)
 	GetStations(line_descr);
 	GetTimetable(timetable);
 	CheckStations();
-	//CheckTimetable();
+	CheckTimetable();
 }
 
 /* DA TESTAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
@@ -130,7 +130,7 @@ void Controller::GetTimetable(string timetable)
 						time = -1;
 						Event last = events_.at(events_.size() - 1);	//Ottengo l'ultimo evento di fermata inserito
 						const Station* lastStation = last.GetStation();		//manca copy constructor/move constructor						
-						tr->setAverageSpeed(*lastStation, *current_station, last.GetTime(), time, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
+						getAverageSpeed(*lastStation, *current_station, last.GetTime(), time, tr, delay_time);		//Creare un metodo nella classe TRAIN che date 2 distanze, un tempo di partenza, un tempo di arrivo e un tempo di ritardo ritorni la distanza. 
 																																					//Se l'orario di partenza non � valido (cio� negativo), calcolarlo usando il minor tempo possibile pi� ritardo (magari il ritardo lo metti con parametro di default = 0)
 					}
 
@@ -180,13 +180,17 @@ void Controller::printEvents()
 	auto cur = events_.begin();
 	auto end = events_.end();
 	sort(cur, end);
-	for (cur; cur < end; cur++)
+	/*for (cur; cur < end; cur++)
 	{
 		switch (cur->GetType())
 		{
 		case EventType::TrainStop: handleTrainStop(cur);
 			break;
 		}
+	}*/
+	for (cur; cur < end; cur++)
+	{
+		cout << cur->GetStation()->st_name << " " << cur->GetTrain()->identifying_number << " " << cur->GetTime();
 	}
 }
 
@@ -196,15 +200,15 @@ void Controller::CheckTimetable()
 	{
 		Train* tr = trains_.at(i);
 		vector<Event> ev = GetEventsRelatedTo(tr);
-		for (int j = 0; j < ev.size() - 1; j++)
+		for (int j = 1; j < ev.size(); j++)
 		{
-			int speed = 0;
-			int arrive_time = 0;
-			//Se la velocit� � maggiore di quella massima, fai una rivalutazione di tutti gli eventi fino alla fine
-			//MI SERVE UNO DI QUESTI CONTROLLI
-			//if speed > tr->v_max     
-			//if arrive_time != evento.getTime()
-			if (true)
+			int arrive_time = ev.at(j).GetTime();			
+			int leave_time = ev.at(j - 1).GetTime();
+			Station* previous = ev.at(j - 1).GetStation();
+
+			getAverageSpeed(*previous, *(ev.at(j).GetStation()), leave_time, arrive_time, tr);
+			
+			if (arrive_time != ev.at(j).GetTime())
 			{
 				int evaluated_delay = arrive_time - ev[j].GetTime();
 				int k = j + 1;
@@ -213,7 +217,8 @@ void Controller::CheckTimetable()
 					int cur_time = events_[k].GetTime();
 					events_[k].SetTime(cur_time + evaluated_delay);
 				}
-				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j].GetStation()->st_name << " non compatibile con la velocit� del treno. " << k - j << " orari cambiati di conseguenza";
+				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j].GetStation()->st_name << " non compatibile" << endl;
+				cout << "con la velocita' del treno. " << k - j << " orari cambiati di conseguenza" << endl;
 			}
 		}
 	}
@@ -223,7 +228,7 @@ void Controller::CheckTimetable()
 
 void Controller::handleTrainStop(vector<Event>::iterator cur)
 {
-	//Stampo l'evento che � appena accaduto
+	//Stampo l'evento che e' appena accaduto
 	int hour = cur->GetTime() / 60;
 	int minute = cur->GetTime() % 60;
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' arrivato alla stazione " << cur->GetStation()->st_name << " alle ore ";
@@ -235,17 +240,26 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 	if (last_line_station != cur->GetStation())
 	{
 		int departure_time = min_wait + cur->GetTime();
+		/*vector<Event> this_train_events = GetEventsRelatedTo(cur->GetTrain());
+		auto this_train_it = this_train_events.begin();
+		//Posiziono cur_train all'interno della lista di eventi allo stesso livello di cur. Così facendo poi posso accedere alla stazione precedente e successiva nella tratta in modo molto più veloce
+		for ( ; this_train_it < this_train_events.end(); this_train_it++)
+		{
+			if (this_train_it->GetTime() == cur->GetTime())
+				break;
+		}*/
+		//Ora cur_train e cur puntano allo stesso evento ma in array diversi.
+		
 		if (dynamic_cast<localStation*>(cur->GetStation()) != nullptr)
 		{
-			//Gestisco gli eventi futuri generati da questo evento
-
+			/*//Gestisco gli eventi futuri generati da questo evento	
 			Station* next_station = nullptr;
 			int next_arrive_time = -1;
 			bool found = false;
-			//Guardo il prossimo orario di arrivo del treno
-			for (auto i = cur + 1; i < events_.end() && !found; i++)
+			//Cerco l'orario di arrivo di questo treno alla stazione successiva
+			for (auto i = this_train_it + 1; i < this_train_events.end(); i++)
 			{
-				if (i->GetTrain() == cur->GetTrain() && dynamic_cast<mainStation*>(i->GetStation()) != nullptr)
+				if (dynamic_cast<mainStation*>(i->GetStation()) != nullptr)
 				{
 					next_arrive_time = i->GetTime();
 					next_station = i->GetStation();
@@ -253,39 +267,42 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 				}
 			}
 
-			//Trovo la stazione precedente nel senso di marcia                                                POTREBBE ESSERE UTILE A QUALCUNO
-			/*Station* previous_station;
-			for (int i = 0; i < stations_.size(); i++)
-			{
-				const int x = e.GetTrain()->startFromOrigin ? i : stations_.size() - 1 - i;
-				if (stations_[x] == cur->GetStation())
-				{
-					previous_station = e.GetTrain()->startFromOrigin ? stations_[x - 1] : stations_[x + 1];
-				}
-			}*/
-
 			//Controllo che non ci sia un treno più veloce che per arrivare alla prossima stazione deve rallentare per colpa del treno corrente
 			Train* last_affected_train = nullptr;
 			int last_arrive_time;	//Tempo di arrivo alla prossima stazione dell'ultimo treno che passa per la stazione corrente
 			for (auto i = cur + 1; i < events_.end() && i->GetTime() < next_arrive_time; i++)
 			{
-				//Se la prossima stazione è la stessa, il treno è più prioritario di questo treno e il senso di percorrenza è lo stesso, il treno veloce potrebbe subire ritardo
-				if (i->GetStation() == next_station && dynamic_cast<RegionalTrain*>(i->GetTrain()) == nullptr && i->GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
+				//Se la prossima stazione è la stessa, il treno è più prioritario di questo treno e il senso di percorrenza è lo stesso, il treno veloce potrebbe subire ritardo, lo faccio passare prima di far partire il mio
+				//Tengo in considerazione solo l'ultimo treno che passa.
+				if (i->GetStation() == next_station && dynamic_cast<RegionalTrain*>(i->GetTrain()) == nullptr && i->GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin && i->GetType() == EventType::TrainStop)
 				{
 					last_affected_train = i->GetTrain();
 					last_arrive_time = i->GetTime();
 				}
 			}
 
-			//C'è un problema se il treno che deve arrivare prima di me alla prossima stazione, passa per questa stazione dopo la mia partenza
+			//Se un tale treno è presente, devo evitare che passi per la stazione dopo il treno che si è appena fermato è partito: lo rallenterebbe.
 			if (last_affected_train != nullptr)
 			{
+				//Calcolo la velocità che il treno in transito dovrebbe avere al passaggio per la stazione.
+				//Per farlo mi trovo la stazione principale precedente:
+				Station* previous_station = nullptr;
+				bool found = false;
+				for (auto i = this_train_it; i >= this_train_events.begin() && !found; i--)
+				{
+					if (dynamic_cast<mainStation*>(i->GetStation()) != nullptr)
+					{
+						previous_station = i->GetStation();
+						found = true;
+					}
+				}
+				//Ora cerco l'orario di partenza del treno interessato dalla stazione precedente
 				for (auto i = cur + 1; i < events_.end() && i->GetTime() <= last_arrive_time; i++)
 				{
-					if (i->GetTrain() == last_affected_train && i->GetStation() == cur->GetStation() && i->GetTime() > cur->GetTime())	//Cerco l'evento di richiesta di un binario = passaggio del treno per quellaa stazione
+					if (i->GetTrain() == last_affected_train && i->GetStation() == cur->GetStation() && (i->GetTime() + last_affected_train->getDelay()) > cur->GetTime())	//Cerco l'evento di richiesta di un binario = passaggio del treno per quella stazione
 						departure_time = i->GetTime() + 1;
 				}
-			}
+			}*/
 
 			/*for (cur; cur < events_.end() && max_departure_time > cur->GetTime(); cur++)				                   TEMPO DI ATTESA FISSO
 			{
@@ -297,7 +314,58 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 		}
 		else      //Nel caso di stazione principale invece faccio partire prima quello più prioritario tra quelli già presenti
 		{
+			//Da gestire se sono arrivato a fine corsa  => non ho una stazione successiva (codice già scritto prima)
 
+			Station* next_station = nullptr;
+			int next_arrive_time = -1;
+			bool found = false;
+			//Cerco l'orario di arrivo di questo treno alla stazione successiva
+			for (auto i = cur + 1; i < events_.end() && !found; i++)
+			{
+				if (i->GetTrain() == cur->GetTrain() && dynamic_cast<mainStation*>(i->GetStation()) != nullptr)
+				{
+					next_arrive_time = i->GetTime();
+					next_station = i->GetStation();
+					found = true;
+				}
+			}
+
+			vector<Train*> affected_trains; //Tutti i treni con cui il mio treno interagisce: potrebbero essersi fermati oppure no
+			vector<int> arrive_times;	//Tempo di arrivo alla prossima stazione dell'ultimo treno che passa per la stazione corrente
+			for (auto i = cur + 1; i < events_.end() && i->GetTime() < next_arrive_time; i++)
+			{
+				//Se la prossima stazione è la stessa, il senso di percorrenza è lo stesso, il treno più veloce potrebbe subire ritardo, lo faccio partire prima di far partire il mio
+				//Tengo in considerazione solo l'ultimo treno che parte.
+				if (i->GetStation() == next_station && i->GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin && i->GetType() == EventType::TrainStop)
+				{
+					affected_trains.push_back(i->GetTrain());
+					arrive_times.push_back(i->GetTime());
+				}
+			}
+
+			if (!affected_trains.empty())
+			{
+				const int minPerHour = 60;
+				
+				int time_to_leave = distanceFromPark / speedInStation * minPerHour;
+				int delay_added = 0;
+				for (int j = 0; j < affected_trains.size(); j++)
+				{
+					for (auto i = cur + 1; cur < events_.end() && departure_time < i->GetTime(); i++)		//Se si sono fermati alla stazione, allora adesso esiste già un evento di partenza dalla stazione
+					{
+						if (dynamic_cast<mainStation*>(i->GetStation()))
+						{
+							if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture && i->GetTrain() == affected_trains.at(j))
+							{
+								int speed_outside_station = getAverageSpeed(*(cur->GetStation()), *next_station, i->GetTime(), arrive_times.at(j), affected_trains.at(j));
+								departure_time = i->GetTime() + time_to_leave + (kMinDistanceBetweenTrains - distanceFromPark) / speed_outside_station * minPerHour;
+								delay_added = departure_time - i->GetTime() + time_to_leave;
+							}
+						}
+					}
+				}
+				cur->GetTrain()->editDelay(delay_added);
+			}
 		}
 		Event departure(departure_time, cur->GetTrain(), cur->GetStation(), EventType::TrainDeparture);
 	}
@@ -318,3 +386,44 @@ vector<Event> Controller::GetEventsRelatedTo(Train* tr)
 
 	return events; //Costruttore di move di vector usato, non viene fatta l'intera copia
 }
+
+
+
+
+//Trovo la stazione precedente nel senso di marcia                                                POTREBBE ESSERE UTILE A QUALCUNO
+			/*Station* previous_station;
+			for (int i = 0; i < stations_.size(); i++)
+			{
+				const int x = e.GetTrain()->startFromOrigin ? i : stations_.size() - 1 - i;
+				if (stations_[x] == cur->GetStation())
+				{
+					previous_station = e.GetTrain()->startFromOrigin ? stations_[x - 1] : stations_[x + 1];
+				}
+			}*/
+
+/*
+			//Calcolo la velocità che il treno in transito dovrebbe avere al passaggio per la stazione. Se il treno ora fosse su un'altra tratta, potrebbe avere velocità diversa.
+							//Per farlo mi trovo la stazione principale precedente:
+Station* previous_station = nullptr;
+bool found = false;
+for (auto i = this_train_it; i >= this_train_events.begin() && !found; i--)
+{
+	if (dynamic_cast<mainStation*>(i->GetStation()) != nullptr)
+	{
+		previous_station = i->GetStation();
+		found = true;
+	}
+}
+//Ora cerco l'orario di partenza del treno interessato dalla stazione precedente
+vector<Event> affected_train_events = GetEventsRelatedTo(last_affected_train);
+int previous_time_affected_train = 0;
+for (auto i = affected_train_events.begin(); i < affected_train_events.end(); i++)
+{
+	if (i->GetStation() == previous_station && i->GetType() == EventType::TrainStop)
+	{
+		previous_time_affected_train = i->GetTime();
+	}
+}
+
+int train_speed_between_stations = getAverageSpeed(*previous_station, *(cur->GetStation()), previous_time_affected_train, last_arrive_time, last_affected_train);
+*/

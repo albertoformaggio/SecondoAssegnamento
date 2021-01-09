@@ -12,8 +12,8 @@
 class RegionalTrain : public Train
 {
 public:
-	const int v_max = 160;
-	RegionalTrain(int ID, bool d) : Train(ID, d, v_max) {}
+	//const int v_max = 160;
+	RegionalTrain(int ID, bool d) : Train(ID, d, 160) {}
 	Platform& requirePlatform(Station* st) override;
 };
 

@@ -10,8 +10,8 @@
 class HSTrainSuper : public Train
 {
 public:
-	const int v_max = 300;
-	HSTrainSuper(int ID, bool d) : Train(ID, d, v_max) {}
+	//const int v_max = 300;
+	HSTrainSuper(int ID, bool d) : Train(ID, d, 300) {}
 	Platform& requirePlatform(Station* st) override;
 };
 
