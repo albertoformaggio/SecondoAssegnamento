@@ -9,14 +9,10 @@
 #include "train.h"
 class HSTrainSuper : public Train
 {
-private:
-
 public:
 	const int v_max = 300;
 	HSTrainSuper(int ID, bool d) : Train(ID, d, v_max) {}
-	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) override;
 	Platform& requirePlatform(Station* st) override;
-	void setSpeed(int s) override;
 };
 
 #endif

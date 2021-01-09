@@ -10,22 +10,11 @@ void Train::setSpeed(int s)
 { 
 	if (s < 0)
 		throw InvalidSpeed();
-	speed = s; 
+	if(s > max_speed)
+		speed = max_speed;
+	speed = s;	
 }
 
-void Train::setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed)
-{
-	const int minPerHours = 60;
-	if (time_leaving < 0 || delay_time < 0)
-		throw InvalidTime();
-	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin)-2*distanceFromPark; //funzione per avere dist da parcheggio(5);
-	if (time_arrival < time_leaving)
-		time_arrival = (int) (distance / max_speed) * minPerHours + delay_time;
-	int time = (time_arrival - time_leaving - getDelay() - 2*distanceFromPark / speedInStation) / minPerHours;
-	setSpeed(distance / time );
-	if (getSpeed() > max_speed)
-		setSpeed(max_speed);
-}
 void Train::editDelay(int d)
 {
 	setDelay(getDelay() + d);
