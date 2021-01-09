@@ -15,9 +15,9 @@ private:
 	int speed = 0;
 	int delay = 0;
 protected:
-	Train(int ID, bool d, int v) : identifying_number{ ID }, startFromOrigin{ d }, v_max{ v }{}
+	Train(int ID, bool d, int v) : identifying_number{ ID }, startFromOrigin{ d }, max_speed{ v }{}
 public:
-	const int v_max;
+	const int max_speed;
 	const bool startFromOrigin;
 	const int identifying_number;
 	const int distanceFromPark = 5;
@@ -26,11 +26,9 @@ public:
 	inline int getDelay() const { return delay; }
 	virtual void setSpeed(int s);
 	inline void setDelay(int d) { delay = d; }
-	virtual void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time = 0) = 0;
 	virtual Platform& requirePlatform(Station* st) = 0;
 	class InvalidTime {};
 	class InvalidSpeed {};
-	void setAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, int delay_time, int max_speed);
 	void editDelay(int d);
 	void leaving(Platform& pl);
 };
