@@ -229,6 +229,7 @@ void Controller::handleTrainStop(int cur)
 {
 	//Stampo l'evento che e' appena accaduto
 	int hour = events_[cur].GetTime() / 60;
+	hour %= 24;
 	int minute = events_[cur].GetTime() % 60;
 	cout << "Il treno " << events_[cur].GetTrain()->identifying_number << " e' arrivato alla stazione " << events_[cur].GetStation()->st_name << " alle ore ";
 	cout << std::setfill('0') << std::setw(2) << hour << ":" << std::setfill('0') << std::setw(2) << minute << endl;
@@ -238,10 +239,16 @@ void Controller::handleTrainStop(int cur)
 	Station* last_line_station = events_[cur].GetTrain()->startFromOrigin ? stations_[stations_.size() - 1] : stations_[0];
 	if (last_line_station != events_[cur].GetStation())
 	{
-		int departure_time = min_wait + events_[cur].GetTime();		
+		int departure_time = min_wait + events_[cur].GetTime() + events_[cur].GetTrain()->getDelay();		
 		Event departure(departure_time, events_[cur].GetTrain(), events_[cur].GetStation(), EventType::TrainDeparture);
 		events_.push_back(departure);
-		sort(events_.begin(), events_.end());
+		auto i = events_.begin();
+		while(i < events_.end())
+		{
+			i++;
+		}
+		//Ordino sulla base di tempo + ritardo solamente gli eventi che devono ancora essere analizzati
+		sort(i, events_.end());
 	}
 	else
 	{
