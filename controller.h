@@ -41,6 +41,7 @@ private:
 	std::vector<Event> GetEventsRelatedTo(Train* tr);
 	void handleTrainStop(std::vector<Event>::iterator cur);		//Non può funzionare così se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 	void handleTrainDeparture(std::vector<Event>::iterator cur);
+	int CheckDeparture(std::vector<Event>::iterator cur);
 
 	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
 	std::vector<Train*> trains_;
