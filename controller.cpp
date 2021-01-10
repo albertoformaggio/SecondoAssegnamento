@@ -353,15 +353,12 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 				{
 					for (auto i = cur + 1; cur < events_.end() && departure_time < i->GetTime(); i++)		//Se si sono fermati alla stazione, allora adesso esiste già un evento di partenza dalla stazione
 					{
-						if (dynamic_cast<mainStation*>(i->GetStation()))
+						if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture && i->GetTrain() == affected_trains.at(j))
 						{
-							if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture && i->GetTrain() == affected_trains.at(j))
-							{
-								int speed_outside_station = getAverageSpeed(*(cur->GetStation()), *next_station, i->GetTime(), arrive_times.at(j), affected_trains.at(j));
-								departure_time = i->GetTime() + time_to_leave + (kMinDistanceBetweenTrains - distanceFromPark) / speed_outside_station * minPerHour;
-								delay_added = departure_time - i->GetTime() + time_to_leave;
-							}
-						}
+							int speed_outside_station = getAverageSpeed(*(cur->GetStation()), *next_station, i->GetTime(), arrive_times.at(j), affected_trains.at(j));
+							departure_time = i->GetTime() + time_to_leave + (kMinDistanceBetweenTrains - distanceFromPark) / speed_outside_station * minPerHour;
+							delay_added = departure_time - i->GetTime() + time_to_leave;
+						}						
 					}
 				}
 				cur->GetTrain()->editDelay(delay_added);
