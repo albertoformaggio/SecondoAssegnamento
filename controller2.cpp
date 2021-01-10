@@ -2,6 +2,6 @@
 
 #include "controller.h"
 
-Platform* Controller::requestPlatform() {
-	
+Platform* Controller::requestPlatform(std::vector<Event>::iterator cur) {
+	if()
 }
