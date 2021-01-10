@@ -2,8 +2,6 @@
 	@author Anna Scarpa Falce
 */
 
-
-
 #ifndef RegionalTrain_h
 #define RegionalTrain_h
 

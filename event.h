@@ -11,6 +11,8 @@ class Station;
 enum class EventType
 {
 	PlatformRequest,
+	ArriveToPark,
+	LeavePark,
 	TrainStop,
 	TrainDeparture
 };

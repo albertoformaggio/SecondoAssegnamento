@@ -1,4 +1,4 @@
-/*!
+ï»¿/*!
 	@author Formaggio Alberto
 */
 
@@ -39,13 +39,15 @@ private:
 	void EraseEventsRelatedTo(Station* ev);
 	int getAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, Train* t, int delay_time = 0);
 	std::vector<Event> GetEventsRelatedTo(Train* tr);
-	void handleTrainStop(std::vector<Event>::iterator cur);		//Non può funzionare così se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
+	Platform* requestPlatform(std::vector<Event>::iterator cur);
+	void handleTrainStop(std::vector<Event>::iterator cur);		//Non puï¿½ funzionare cosï¿½ se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 	void handleTrainDeparture(std::vector<Event>::iterator cur);
+	void handleParking(std::vector<Event>::iterator cur);
 	int CheckDeparture(std::vector<Event>::iterator cur);
 
-	std::vector<Station*> stations_;		//uso pointer normali perchè tanto il distruttore è già definito dalle classi Station e Train
+	std::vector<Station*> stations_;		//uso pointer normali perchï¿½ tanto il distruttore ï¿½ giï¿½ definito dalle classi Station e Train
 	std::vector<Train*> trains_;
-	std::vector<Event> events_;		//Pensa se è meglio usare pq o vector.
+	std::vector<Event> events_;		//Pensa se ï¿½ meglio usare pq o vector.
 	const int min_wait = 5;
 	const int distanceFromPark = 5;
 	const int speedInStation = 80;
