@@ -3,5 +3,5 @@
 #include "controller.h"
 
 Platform* Controller::requestPlatform(std::vector<Event>::iterator cur) {
-	if()
+	return nullptr;
 }
