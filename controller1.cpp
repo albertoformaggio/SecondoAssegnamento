@@ -55,5 +55,14 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 
 void Controller::handleParking(std::vector<Event>::iterator cur)
 {
-
+	const int minPerHours = 60;
+	Train* t;
+	for (int i = 0; i < events_.size(); i++)
+	{
+		if (events_[i].GetType() == EventType::PlatformRequest && events_[i].GetTrain()->identifying_number == cur->GetTrain()->identifying_number && events_[i].GetStation() == cur->GetStation())
+			t = events_[i].GetTrain();
+	}
+	int speed = t->getSpeed();
+	int distance = 15;			//distanza richiesta-parcheggio
+	int time = static_cast<int>(round(static_cast<double>(distance / speed)*minPerHours));
 }
