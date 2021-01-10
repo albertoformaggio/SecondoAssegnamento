@@ -50,5 +50,6 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 			//se arrivano allo stesso momento allora guardo ritardo
 		}
+		//se avessi la direzione del treno(mem nell'evento) potrei sapere qual e' la stazine successiva
 	}
 }
