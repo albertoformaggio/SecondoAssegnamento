@@ -86,28 +86,64 @@ void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 	sort(events_.begin(), events_.end());
 }
 
-void handleParkLeaving(std::vector<Event>::iterator cur)
+void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 {
+	const int minPerHours = 60;
+	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
+	int timeAtStation = cur->GetTime() + timeAtFixedSpeed;
+	
+	
+	if (cur->GetStation()->getParkedTrain()->identifying_number == cur->GetTrain()->identifying_number)
+	{
+		bool start = false;
+		vector<int> v;
+
+		for (int i = 0; i < events_.size(); i++)
+		{
+			if (events_[i].GetType() == EventType::TrainDeparture
+				&& events_[i].GetStation() == cur->GetStation()
+				&& events_[i].GetTime() >= timeAtStation
+				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
+			{
+				v.push_back(events_[i].GetTime());
+			}
+			else if (events_[i].GetType() == EventType::TrainDeparture
+				&& events_[i].GetStation() == cur->GetStation()
+				&& events_[i].GetTime() < timeAtStation
+				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
+			{
+				int hour = cur->GetTime() / 60;
+				int minute = cur->GetTime() % 60;
+				cout << "Il treno " << cur->GetTrain()->identifying_number << " e' uscito dal parcheggio della stazione di ";
+				cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+				cout << std::setfill('0') << std::setw(2) << minute << endl;
+				cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
+				return;
+			}
+		}
+		auto minmax = minmax_element(v.begin(), v.end());
+		int firstLeaving = *minmax.first;
+		cur->GetTrain()->editDelay(firstLeaving - cur->GetTime());
+
+		//mi ritrovo con altri treni davanti...che faccio!?!?
+		//aggiorno evento leavePark di quelli dello stesso parcheggio con quel ritardo+1 (per sicurezza)
+		for (int i = 0; i < events_.size(); i++)
+		{
+			if (events_[i].GetType() == EventType::LeavePark
+				&& events_[i].GetStation() == cur->GetStation()
+				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
+			{
+				events_[i].SetTime(events_[i].GetTime() + firstLeaving + 1);
+				events_[i].GetTrain()->editDelay(firstLeaving + 1);
+			}
+		}
+	}
+	
+	int hour = cur->GetTime() / 60;
+	int minute = cur->GetTime() % 60;
+	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' uscito dal parcheggio della stazione di ";
+	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+	cout << std::setfill('0') << std::setw(2) << minute << endl;
+	cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 
 }
-
-/*TrainStop
-ora 8:00
-
-TrainPark :
-	ora 7 : 55
-	Tra tutti i treni attualmente parcheggiati, prendo l'evento di partenza dal parcheggio 
-	(creato in precedenza all'arrivo di tali treni) che avviene più avanti nel tempo(ad esempio 8:30 + 1)
-	Creo un evento di partenza dal parcheggio e il tempo tra questo istante e la partenza dal 
-	parcheggio diventa il mio ritardo temporaneo del treno
-	Train.addDelay(36 minuti)
-
-
-	Arrivano le 8:30.
-	Ci sono altri treni prima di me che stanno aspettando ? (top della queue != me)
-	No, bene allora potrei partire.Guardo in stazione : tutti i binari sono occupati ? 
-	(magari mi faccio ritornare una lista di platforms e guardo quelle libere oppure con gli eventi 
-	di traindeparture)
-	->Sì, allora il treno deve aspettare che l'altro treno sia partito. Ad esempio parte alle 8:45
-	Bene, allora faccio train.addDelay(14 minuti)
-	->No, non faccio nulla perchè posso partire dalla stazione e fermarmi in un binario.*/
