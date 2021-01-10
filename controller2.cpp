@@ -29,6 +29,3 @@ void Controller::requestPlatform(std::vector<Event>::iterator cur) { //richiesta
 	//Prendo il binario di transito se il treno non è regionale
 
 }
-Platform* Controller::requestPlatform(std::vector<Event>::iterator cur) {
-	if()
-}
