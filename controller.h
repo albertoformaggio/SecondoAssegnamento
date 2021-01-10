@@ -40,7 +40,7 @@ private:
 	int getAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, Train* t, int delay_time = 0);
 	std::vector<Event> GetEventsRelatedTo(Train* tr);
 	Platform* requestPlatform(std::vector<Event>::iterator cur);
-	void handleTrainStop(std::vector<Event>::iterator cur);		//Non pu� funzionare cos� se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
+	void handleTrainStop(int cur);		//Non pu� funzionare cos� se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 	void handleTrainDeparture(std::vector<Event>::iterator cur);
 	void handleParking(std::vector<Event>::iterator cur);
 	int CheckDeparture(std::vector<Event>::iterator cur);
