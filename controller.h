@@ -42,7 +42,8 @@ private:
 	Platform* requestPlatform(std::vector<Event>::iterator cur);
 	void handleTrainStop(int cur);		//Non pu� funzionare cos� se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
 	void handleTrainDeparture(std::vector<Event>::iterator cur);
-	void handleParking(std::vector<Event>::iterator cur);
+	void handleArrivalToPark(std::vector<Event>::iterator cur);
+	void handleParkLeaving(std::vector<Event>::iterator cur);
 	int CheckDeparture(std::vector<Event>::iterator cur);
 
 	std::vector<Station*> stations_;		//uso pointer normali perch� tanto il distruttore � gi� definito dalle classi Station e Train
