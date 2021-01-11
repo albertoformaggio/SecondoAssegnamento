@@ -222,6 +222,19 @@ void Controller::printEvents()
 	}*/
 }
 
+Controller::~Controller()
+{
+	for each (Train* tr in trains_)
+	{
+		delete tr;
+	}
+
+	for each (Station * st in stations_)
+	{
+		delete st;
+	}
+}
+
 void Controller::CheckTimetable()
 {
 	for (int i = 0; i < trains_.size(); i++)
@@ -239,7 +252,7 @@ void Controller::CheckTimetable()
 			if (arrive_time != ev.at(j).GetTime())
 			{
 				int evaluated_delay = arrive_time - ev[j].GetTime();
-				int k = j + 1;
+				int k = j;
 				for (k; k < ev.size(); k++)
 				{
 					int cur_time = events_[k].GetTime();
@@ -265,7 +278,7 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 	cout << "con " << cur->GetTrain()->getDelay() << " minuti di ritardo." << endl;
 
 	//Prima controlla che non sia il capolinea del treno. Ottengo l'ultima stazione della tratta secondo il senso di marcia del treno
-	Station* last_line_station = cur->GetTrain()->startFromOrigin ? stations_[stations_.size() - 1] : stations_[0];
+	//Station* last_line_station = cur->GetTrain()->startFromOrigin ? stations_[stations_.size() - 1] : stations_[0];
 	auto i = cur + 1;
 	bool found = false;
 	while (i < events_.end() && i->GetTrain() != cur->GetTrain())

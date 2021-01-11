@@ -30,7 +30,7 @@ Platform* Station::getStandardPlatform(bool direction) {
 }
 
 Station::~Station(){
-	while (parked.empty())
+	while (!parked.empty())
 		parked.pop();
 }
 
