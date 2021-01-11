@@ -25,14 +25,15 @@ localStation::localStation(int distance, std::string name)
 
 }
 
-transitPlatform localStation::getTransitPlatform(bool direction){
+Platform* localStation::getTransitPlatform(bool direction){
 	if(transitPlatforms.size() > 0)
 		for (int i = 0; i < transitPlatforms.size(); i++) {
 			if (transitPlatforms[i].isEmpty() && transitPlatforms[i].startFromOrigin == direction) {
-				return transitPlatforms[i];
+				return &transitPlatforms[i];
 				break;
 			}
 		}
+	return &parkPlatform(false, direction);
 }
 
 

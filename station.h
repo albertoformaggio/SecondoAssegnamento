@@ -27,7 +27,7 @@ public:
 	Train* removeParkedTrain();
 
 	Platform* getStandardPlatform(bool direction);
-	virtual transitPlatform getTransitPlatform(bool direction) = 0;
+	virtual Platform* getTransitPlatform(bool direction) = 0;
 	~Station();
 
 	bool operator< (const Event& other) const;
