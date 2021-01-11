@@ -30,10 +30,10 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		}
 		else {
 			Station* next_station = GetNextStation(cur->GetStation(), cur->GetTrain());						//Trovo la prossima stazione
-			Train* last_train = nullptr;
+			Train* last_train = nullptr;	//Event* last_event
 			for (auto i = cur - 1; i >= events_.begin(); i--)												//Ciclo sugli eventi
 				if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture) {	//Se ci sono eventi di partenza dalla stazione in cui sto per passare
-					last_train = i->GetTrain();																//Se trovo un treno che mi dà problemi me lo salvo
+					last_train = i->GetTrain();    //Last_event = i																//Se trovo un treno che mi dà problemi me lo salvo
 					break;
 				}
 			if (last_train != nullptr) {
@@ -49,7 +49,7 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 			}
 			for (auto i = cur - 1; i >= events_.begin(); i--)												//Ciclo sugli eventi
 				if (dynamic_cast<RegionalTrain*>(i->GetTrain()) == nullptr && i->GetType() == EventType::PlatformRequest) {
-					last_train = i->GetTrain();
+					last_train = i->GetTrain();		//if(last_event == nullptr !! last_event->GetTime() < i->GetTime())		//Last event contiene ultimo evento relativo a un treno regionale, i punta a un alta velocitò
 					break;
 				}
 		}

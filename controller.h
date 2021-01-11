@@ -30,6 +30,7 @@ public:
 	Controller(std::string line_descr, std::string timetable);
 	static constexpr int kMinDistanceBetweenStations = 20;
 	void printEvents();		//SOLO PER DEBUGGING
+	~Controller();
 
 private:
 	void GetStations(std::string line_descr);
