@@ -8,7 +8,7 @@
 #include "localStation.h"
 #include "mainStation.h"
 
-Platform& HSTrain::requirePlatform(Station* st)
+Platform* HSTrain::requirePlatform(Station* st)
 {
 	localStation* ls = dynamic_cast<localStation*>(st);
 	if (ls != nullptr)
@@ -19,7 +19,7 @@ Platform& HSTrain::requirePlatform(Station* st)
 	}
 	else
 	{
-		Platform& p = st->getStandardPlatform(startFromOrigin);
+		Platform* p = st->getStandardPlatform(startFromOrigin);
 		p.reserve();
 		return p;
 	}

@@ -12,7 +12,7 @@ class HSTrain : public Train
 public:
 	//const int v_max = 240;
 	HSTrain(int ID, bool d) : Train(ID, d, 240) {}
-	Platform& requirePlatform(Station* st) override;
+	Platform* requirePlatform(Station* st) override;
 };
 
 #endif

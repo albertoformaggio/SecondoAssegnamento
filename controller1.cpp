@@ -92,7 +92,6 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	int timeAtStation = cur->GetTime() + timeAtFixedSpeed;
 	
-	
 	if (cur->GetStation()->getParkedTrain()->identifying_number == cur->GetTrain()->identifying_number)
 	{
 		bool start = false;
@@ -125,7 +124,6 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 		int firstLeaving = *minmax.first;
 		cur->GetTrain()->editDelay(firstLeaving - cur->GetTime());
 
-		//mi ritrovo con altri treni davanti...che faccio!?!?
 		//aggiorno evento leavePark di quelli dello stesso parcheggio con quel ritardo+1 (per sicurezza)
 		for (int i = 0; i < events_.size(); i++)
 		{
@@ -145,5 +143,7 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
 	cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
+
+	sort(events_.begin(), events_.end());
 
 }
