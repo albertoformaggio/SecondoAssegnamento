@@ -30,8 +30,6 @@ public:
 	virtual Platform* getTransitPlatform(bool direction) = 0;
 	~Station();
 
-	bool operator< (const Event& other) const;
-
 protected:
 
 	void addStandardPlatform(const standardPlatform track) { standardPlatforms.push_back(track); }
@@ -47,6 +45,8 @@ private:
 	std::queue<Train*> parked;
 
 };
+
+bool isFartherThan(const Station* first, const Station* other);
 
 #endif
 
