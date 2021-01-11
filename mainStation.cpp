@@ -19,9 +19,6 @@ mainStation::mainStation(int distance, std::string name)
 		
 }
 
-Station::~Station(){
-
-}
 
 
 
