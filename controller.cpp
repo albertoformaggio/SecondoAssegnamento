@@ -65,9 +65,11 @@ void Controller::GetStations(string line_descr)
 		else
 			stations_.push_back(new localStation(distance, station_name));
 	}
-	sort(stations_.begin(), stations_.end());
+	sort(stations_.begin(), stations_.end(), isFartherThan);
 	lines_file.close();
 }
+
+
 
 
 void Controller::GetTimetable(string timetable)

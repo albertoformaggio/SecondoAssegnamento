@@ -47,6 +47,7 @@ private:
 	void handleParkLeaving(std::vector<Event>::iterator cur);
 	int CheckDeparture(std::vector<Event>::iterator cur);
 	Station* GetNextStation(Station* current_station, Train* tr);
+	
 
 	std::vector<Station*> stations_;		//uso pointer normali perch� tanto il distruttore � gi� definito dalle classi Station e Train
 	std::vector<Train*> trains_;

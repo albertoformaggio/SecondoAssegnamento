@@ -34,7 +34,8 @@ Station::~Station(){
 		parked.pop();
 }
 
-bool Station::operator<(const Event& other) const{
-	return kDistanceFromOrigin < other.GetStation()->kDistanceFromOrigin;
+bool isFartherThan(const Station* first, const Station* other)
+{
+	return first->kDistanceFromOrigin < other->kDistanceFromOrigin;
 }
 
