@@ -200,7 +200,12 @@ void Controller::printEvents()
 		case EventType::TrainDeparture: cout << events_[i].GetTrain()->identifying_number << " " << events_[i].GetStation()->st_name << " " << events_[i].GetTime() << endl;
 			CheckDeparture(events_.begin() + i);
 			break;
-		case EventType::PlatformRequest: handle
+		case EventType::PlatformRequest: handlePlatformRequest(events_.begin() + i);
+			break;
+		case EventType::ArriveToPark: handleArrivalToPark(events_.begin() + i);
+			break;
+		case EventType::LeavePark: handleParkLeaving(events_.begin() + i);
+			break;
 		}
 	}
 	/*for (cur; cur < end; cur++)
