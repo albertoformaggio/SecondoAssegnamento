@@ -195,16 +195,15 @@ void Controller::printEvents()
 		int old_train_delay = cur_iterator->GetTrain()->getDelay();	//Un treno può essere spostato nel futuro solo se il ritardo aumenta
 		switch (events_[i].GetType())
 		{
-		case EventType::TrainStop: handleTrainStop(events_.begin() + i);
+		case EventType::TrainStop: handleTrainStop(cur_iterator);
 			break;
-		case EventType::TrainDeparture: cout << events_[i].GetTrain()->identifying_number << " " << events_[i].GetStation()->st_name << " " << events_[i].GetTime() << endl;
-			CheckDeparture(events_.begin() + i);
+		case EventType::TrainDeparture: handleTrainDeparture(cur_iterator);
 			break;
-		case EventType::PlatformRequest: handlePlatformRequest(events_.begin() + i);
+		case EventType::PlatformRequest: handlePlatformRequest(cur_iterator);
 			break;
-		case EventType::ArriveToPark: handleArrivalToPark(events_.begin() + i);
+		case EventType::ArriveToPark: handleArrivalToPark(cur_iterator);
 			break;
-		case EventType::LeavePark: handleParkLeaving(events_.begin() + i);
+		case EventType::LeavePark: handleParkLeaving(cur_iterator);
 			break;
 		}
 		
@@ -351,7 +350,7 @@ int Controller::CheckDeparture(vector<Event>::iterator cur)
 				//Altrimenti se il treno non è regionale ed esiste già un evento di richiesta del binario, aspetto che il treno (che sarà più prioritario di quello corrente), passi
 				else if (dynamic_cast<RegionalTrain*>(i->GetTrain()) == nullptr && i->GetType() == EventType::PlatformRequest)
 				{
-					const int safe_delay = 3;	//Prima di far partire il treno aspetto per 3 mitnuti che il treno davanti a me si sia distanziato di più di 10 chilometri per almeno 3 minuti
+					const int safe_delay = 3;	//Prima di far partire il treno aspetto per 3 minuti che il treno davanti a me si sia distanziato di più di 10 chilometri
 					int speed_outside_station = i->GetTrain()->getSpeed();
 					const int wait_kilometers = 30; //quando il treno fa la richiesta deve fare 20km per arrivare alla stazione e poi devo aspettare 10km per far partire il treno dopo per mantenere la distanza tra i 2
 					departure_time = i->GetTime() + i->GetTrain()->getDelay() + static_cast<int>(static_cast<double>(wait_kilometers) / speed_outside_station * minPerHour) + safe_delay;
