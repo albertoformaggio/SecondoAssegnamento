@@ -358,6 +358,20 @@ int Controller::CheckDeparture(vector<Event>::iterator cur)
 }
 
 
+Station* Controller::GetNextStation(Station* current_station, Train* tr)
+{
+	Station* next_station;
+	for (int i = 0; i < stations_.size(); i++)
+	{
+		const int x = tr->startFromOrigin ? i : stations_.size() - 1 - i;
+		if (stations_[x] == current_station)
+		{
+			next_station = tr->startFromOrigin ? stations_[x + 1] : stations_[x - 1];
+			return next_station;
+		}
+	}
+}
+
 
 
 //Trovo la stazione precedente nel senso di marcia                                                POTREBBE ESSERE UTILE A QUALCUNO
