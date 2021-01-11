@@ -8,6 +8,6 @@
 class parkPlatform : public Platform {
 public:
 	parkPlatform(bool s, bool d);
-
+	int fixSpeed(const Train& t) const override;
 };
 #endif

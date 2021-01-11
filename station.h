@@ -9,8 +9,11 @@
 
 class Train;
 class Platform;
+
 #include "transitPlatform.h"
 #include "standardPlatform.h"
+#include "parkPlatform.h"
+#include "event.h"
 
 class Station {
 public:
@@ -23,9 +26,11 @@ public:
 	void addParkedTrain(Train& t) { parked.push(&t); }
 	Train* removeParkedTrain();
 
-	standardPlatform getStandardPlatform(bool direction);
+	Platform* getStandardPlatform(bool direction);
 	virtual transitPlatform getTransitPlatform(bool direction) = 0;
 	~Station();
+
+	bool operator< (const Event& other) const;
 
 protected:
 
