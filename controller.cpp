@@ -191,8 +191,8 @@ void Controller::printEvents()
 	int i = 0;
 	while(i < events_.size())
 	{
-		bool modified_event = false;
-		sort(events_.begin() + i, events_.end());
+		auto cur_iterator = events_.begin() + i;
+		int old_train_delay = cur_iterator->GetTrain()->getDelay();	//Un treno può essere spostato nel futuro solo se il ritardo aumenta
 		switch (events_[i].GetType())
 		{
 		case EventType::TrainStop: handleTrainStop(events_.begin() + i);
@@ -208,9 +208,14 @@ void Controller::printEvents()
 			break;
 		}
 		
-		//Se un evento è stato modificato, nella posizione i-esima dopo aver fatto il sort ci sarà un altro evento che deve essere considerato
-		if (!modified_event)
+		//Posso aver invalidato l'iteratore facendo push back di un evento
+		//Se il treno ha diminuito il suo ritardo o questo è rimasto costante, allora l'evento è accaduto e posso spostarmi avanti nella lista di eventi
+		//Se invece il ritardo è aumentato, facendo il sort questo verrà spostato avanti nella lista di eventi e l'evento che arriverà nella posizione i-esima deve ancora essere eseguito:
+		//non posso quindi far avanzare l'indice.
+		if (old_train_delay <= (events_.begin() + i)->GetTrain()->getDelay());
 			i++;
+
+		sort(events_.begin() + i, events_.end());
 	}
 	/*for (cur; cur < end; cur++)
 	{
@@ -340,7 +345,7 @@ int Controller::CheckDeparture(vector<Event>::iterator cur)
 				if (i->GetType() == EventType::TrainDeparture)
 				{
 					int speed_outside_station = getAverageSpeed(*(cur->GetStation()), *next_station, i->GetTime(), last_arrive_time, last_affected_train);
-					//Devo aspettare che il treno faccia 5 chilometri lenti e poi altri 5 alla sua velocità di crociera
+					//Devo aspettare che il treno faccia 5 chilometri lenti a 80km/h e poi altri 5 alla sua velocità di crociera
 					departure_time = i->GetTime() + time_to_leave + static_cast<int>((static_cast<double>(kMinDistanceBetweenTrains) - distanceFromPark) / speed_outside_station * minPerHour);
 				}
 				//Altrimenti se il treno non è regionale ed esiste già un evento di richiesta del binario, aspetto che il treno (che sarà più prioritario di quello corrente), passi
