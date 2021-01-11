@@ -118,6 +118,7 @@ void Controller::GetTimetable(string timetable)
 			trains_.push_back(tr);
 			bool forward = first_station == 0;
 			const int delay_time = 10;
+			bool first_insertion = true;
 			for (int i = 0; i < stations_.size(); i++)
 			{
 				const int x = forward ? i : (stations_.size() - 1) - i;
@@ -134,8 +135,17 @@ void Controller::GetTimetable(string timetable)
 																																					//Se l'orario di partenza non � valido (cio� negativo), calcolarlo usando il minor tempo possibile pi� ritardo (magari il ritardo lo metti con parametro di default = 0)
 					}
 
-					Event e(time, tr, stations_.at(x), EventType::TrainStop);
-					events_.push_back(e);
+					if (first_insertion)	//Il primo orario della lista sarà un evento di partenza e non di stop. Eseguo l'if perchè non è detto che la prima stazione sia principale
+					{
+						Event e(time, tr, stations_.at(x), EventType::TrainDeparture);
+						events_.push_back(e);
+						first_insertion = false;
+					}
+					else
+					{
+						Event e(time, tr, stations_.at(x), EventType::TrainStop);
+						events_.push_back(e);						
+					}					
 				}
 			}
 		}
@@ -179,16 +189,18 @@ void Controller::printEvents()
 {
 	//Controlla se puoi incrementare o meno l'indice
 
-	sort(events_.begin(), events_.begin());
+	//sort(events_.begin(), events_.begin());
 	for (int i = 0; i < events_.size(); i++)
 	{
+		sort(events_.begin() + i, events_.end());
 		switch (events_[i].GetType())
 		{
-		case EventType::TrainStop: handleTrainStop(i);
+		case EventType::TrainStop: handleTrainStop(events_.begin() + i);
 			break;
 		case EventType::TrainDeparture: cout << events_[i].GetTrain()->identifying_number << " " << events_[i].GetStation()->st_name << " " << events_[i].GetTime() << endl;
 			CheckDeparture(events_.begin() + i);
 			break;
+		case EventType::PlatformRequest: handle
 		}
 	}
 	/*for (cur; cur < end; cur++)
@@ -229,30 +241,33 @@ void Controller::CheckTimetable()
 
 //Il ritardo del treno va aggiunto a TUTTI gli eventi successivi quando arrivo in parcheggio => solo i parcheggi mi fanno perdere tempo rispetto alla tabella di marcia
 
-void Controller::handleTrainStop(int cur)
+void Controller::handleTrainStop(vector<Event>::iterator cur)
 {
 	//Stampo l'evento che e' appena accaduto
-	int hour = (events_[cur].GetTime() + events_[cur].GetTrain()->getDelay()) / 60;
+	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
 	hour %= 24;
-	int minute = (events_[cur].GetTime() + events_[cur].GetTrain()->getDelay()) % 60;
-	cout << "Il treno " << events_[cur].GetTrain()->identifying_number << " e' arrivato alla stazione " << events_[cur].GetStation()->st_name << " alle ore ";
+	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % 60;
+	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' arrivato alla stazione " << cur->GetStation()->st_name << " alle ore ";
 	cout << std::setfill('0') << std::setw(2) << hour << ":" << std::setfill('0') << std::setw(2) << minute << endl;
-	cout << "con " << events_[cur].GetTrain()->getDelay() << " minuti di ritardo." << endl;
+	cout << "con " << cur->GetTrain()->getDelay() << " minuti di ritardo." << endl;
 
 	//Prima controlla che non sia il capolinea del treno. Ottengo l'ultima stazione della tratta secondo il senso di marcia del treno
-	Station* last_line_station = events_[cur].GetTrain()->startFromOrigin ? stations_[stations_.size() - 1] : stations_[0];
-	if (events_[cur].GetStation() != stations_[0] && events_[cur].GetStation() != stations_[stations_.size() - 1])
+	Station* last_line_station = cur->GetTrain()->startFromOrigin ? stations_[stations_.size() - 1] : stations_[0];
+	auto i = cur + 1;
+	bool found = false;
+	while (i < events_.end() && i->GetTrain() != cur->GetTrain())
+		i++;
+
+	//Se i non è la fine dell'array, c'è un altro evento da gestire di partenza
+	if (i != events_.end())
 	{
-		int departure_time = min_wait + events_[cur].GetTime() + events_[cur].GetTrain()->getDelay();
-		Event departure(departure_time, events_[cur].GetTrain(), events_[cur].GetStation(), EventType::TrainDeparture);
+		int departure_time = min_wait + cur->GetTime() + cur->GetTrain()->getDelay();
+		Event departure(departure_time, cur->GetTrain(), cur->GetStation(), EventType::TrainDeparture);
 		events_.push_back(departure);
-		auto it = events_.begin() + cur;
-		//Ordino sulla base di tempo + ritardo solamente gli eventi che devono ancora essere analizzati
-		sort(it, events_.end());
 	}
-	else if (last_line_station == events_[cur].GetStation())
+	else
 	{
-		cout << "Il treno " << events_[cur].GetTrain()->identifying_number << " e' arrivato alla fine della corsa con un ritardo di " << events_[cur].GetTrain()->getDelay() << " minuti" << endl;
+		cout << "Il treno " << cur->GetTrain()->identifying_number << " e' arrivato alla fine della corsa con un ritardo di " << cur->GetTrain()->getDelay() << " minuti" << endl;
 	}
 }
 

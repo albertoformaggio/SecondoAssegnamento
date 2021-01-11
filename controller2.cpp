@@ -1,7 +1,7 @@
 /* @author Michele Rieppi */
 
 #include "controller.h"
-void Controller::requestPlatform(std::vector<Event>::iterator cur) { //richiesta di un binario alla stazione successiva (che so già)
+void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //richiesta di un binario alla stazione successiva (che so già)
 
 	const int minPerHours = 60;
 	const int distanceToPark = 15;	//distanza da percorrere in km
