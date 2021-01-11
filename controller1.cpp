@@ -32,10 +32,45 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 	return v;
 }
 
-/*void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
+void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 {
-	if (dynamic_cast<mainStation*>(cur->GetStation()) != nullptr)
+	int departureTime = CheckDeparture(cur);
+	if (cur->GetTime() != departureTime)
+		cur->GetTrain()->editDelay(departureTime - cur->GetTime());
+
+	int minPerHours = 60;
+	int maxTime = 5 / 80 *60 + 5*60;
+	
+	Train* trainOnTrak = nullptr;
+	int trainTimeLeaving = 0;
+	for (int i = 0; i < events_.size(); i++)
 	{
+		if (events_[i].GetStation() == cur->GetStation() && events_[i].GetType() == EventType::TrainDeparture
+			&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin
+			&& events_[i].GetTime() < cur->GetTime() && events_[i].GetTime() > maxTime)
+		{
+			
+			trainOnTrak = events_[i].GetTrain();
+			trainTimeLeaving = events_[i].GetTime();
+			int v = events_[i].GetTrain()->getSpeed();
+		}
+	}
+
+	if (trainOnTrak != nullptr)
+	{
+		int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
+		int deltaT = cur->GetTime() - trainTimeLeaving;
+
+	}
+
+	cur->GetTrain()->setSpeed(5); //usare getAverageSpeed
+
+
+	/*if (dynamic_cast<mainStation*>(cur->GetStation()) != nullptr)
+	{
+		
+
+		
 		//vettore dei treni papabili per la partenza
 		std::vector<Train*> t;
 		for (int i = 0; i < events_.size(); i++)
@@ -55,8 +90,8 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 			//se arrivano allo stesso momento allora guardo ritardo
 		}
 		//se avessi la direzione del treno(mem nell'evento) potrei sapere qual e' la stazine successiva
-	}
-}*/
+	}*/
+}
 
 void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 {
