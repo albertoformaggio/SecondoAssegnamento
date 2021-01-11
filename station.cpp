@@ -29,6 +29,12 @@ Platform* Station::getStandardPlatform(bool direction) {
 	return &parkPlatform(false, direction);
 }
 
+Station::~Station(){
+	while (parked.empty())
+		parked.pop();
+}
+
 bool Station::operator<(const Event& other) const{
 	return kDistanceFromOrigin < other.GetStation()->kDistanceFromOrigin;
 }
+
