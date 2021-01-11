@@ -6,9 +6,9 @@
 #include "platform.h"
 #include "station.h"
 
-Platform& RegionalTrain::requirePlatform(Station* st)
+Platform* RegionalTrain::requirePlatform(Station* st)
 {
 	Platform* p = st->getStandardPlatform(startFromOrigin);
-	p.reserve();
+	p->reserve();
 	return p;
 }

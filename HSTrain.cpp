@@ -14,13 +14,13 @@ Platform* HSTrain::requirePlatform(Station* st)
 	if (ls != nullptr)
 	{
 		Platform* p = st->getTransitPlatform(startFromOrigin);
-		p.reserve();
+		p->reserve();
 		return p;
 	}
 	else
 	{
 		Platform* p = st->getStandardPlatform(startFromOrigin);
-		p.reserve();
+		p->reserve();
 		return p;
 	}
 }
