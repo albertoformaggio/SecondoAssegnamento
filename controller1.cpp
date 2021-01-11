@@ -96,11 +96,13 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 {
+	cur->GetStation()->addParkedTrain(*cur->GetTrain());
 	int hour = cur->GetTime() / 60;
 	int minute = cur->GetTime() % 60;
 	
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' arrivato al parcheggio della stazione di ";
-	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+	cout << cur->GetStation()->st_name;
+	cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
 	cout << "con " << cur->GetTrain()->getDelay() << " minuti di ritardo." << endl;
 	
@@ -146,12 +148,14 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 				&& events_[i].GetTime() < timeAtStation
 				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
 			{
+				cur->GetStation()->removeParkedTrain();
 				int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
 				int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
 				cout << "Il treno " << cur->GetTrain()->identifying_number << " e' uscito dal parcheggio della stazione di ";
-				cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
-				cout << std::setfill('0') << std::setw(2) << minute << endl;
-				cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
+				cout << cur->GetStation()->st_name;
+				//cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+				//cout << std::setfill('0') << std::setw(2) << minute << endl;
+				//cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 				return;
 			}
 		}
@@ -166,16 +170,16 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 				&& events_[i].GetStation() == cur->GetStation()
 				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
 			{
-				events_[i].SetTime(events_[i].GetTime() + firstLeaving + 1);
 				events_[i].GetTrain()->editDelay(firstLeaving + 1);
 			}
 		}
 	}
-	
+	cur->GetStation()->removeParkedTrain();
 	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
 	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' uscito dal parcheggio della stazione di ";
-	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
-	cout << std::setfill('0') << std::setw(2) << minute << endl;
-	cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
+	cout << cur->GetStation()->st_name;
+	//cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+	//cout << std::setfill('0') << std::setw(2) << minute << endl;
+	//cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 }
