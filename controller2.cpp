@@ -18,24 +18,26 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		Event park(cur->GetTime() + time, cur->GetTrain(), cur->GetStation(), EventType::ArriveToPark);	//Caso in cui ho un binario di parcheggio creo l'evento di parcheggio
 		events_.push_back(park);
 	}
-	else {
-		Event stop(cur->GetTime() + distanceToPark + timeAtFixedSpeed, cur->GetTrain(), cur->GetStation(), EventType::TrainStop);	//Caso in cui ho binario standard creo l'evento di fermata del treno
-		events_.push_back(stop);
-	}
+	
 
-	if (dynamic_cast<localStation*>(cur->GetStation()) != nullptr)							//Nel caso di una stazione locale
+	if (dynamic_cast<localStation*>(cur->GetStation()) != nullptr) {							//Nel caso di una stazione locale
 		if (dynamic_cast<RegionalTrain*>(cur->GetTrain()) != nullptr) {						//Nel caso in cui il treno sia regionale controllo se c'è il binario per fermarsi
 			p = cur->GetStation()->getStandardPlatform(cur->GetTrain()->startFromOrigin);	//Controllo che ci sia un binario standard disponibile
 			if (dynamic_cast<parkPlatform*>(p) != nullptr) {									//Se non ho binari disponibili	
 				Event park(cur->GetTime() + time, cur->GetTrain(), cur->GetStation(), EventType::ArriveToPark);	//Caso in cui ho un binario di parcheggio creo l'evento di parcheggio
 				events_.push_back(park);
 			}
-			else {
-				Event stop(cur->GetTime() + distanceToPark + timeAtFixedSpeed, cur->GetTrain(), cur->GetStation(), EventType::TrainStop);	//Caso in cui ho binario standard creo l'evento di fermata del treno
-				events_.push_back(stop);
-			}	
 		}
-
-	//Prendo il binario di transito se il treno non è regionale
+		else {
+			Station* next_station = GetNextStation(cur->GetStation(), cur->GetTrain());						//Trovo la prossima stazione
+			for(auto i = events_.begin(); i < cur; i++)														//Ciclo sugli eventi
+				if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture) {	//Se ci sono eventi di partenza dalla stazione in cui sto per passare
+					for (auto j = events_.begin(); j < cur; j++) {
+						if( j->GetType() != EventType::TrainStop )
+					}
+				}
+		}
+	}
+	
 
 }
