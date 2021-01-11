@@ -16,7 +16,6 @@ Controller::Controller(string line_descr, string timetable)
 	CheckTimetable();
 }
 
-/* DA TESTAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE*/
 void Controller::GetStations(string line_descr)
 {
 	ifstream lines_file;
@@ -29,7 +28,7 @@ void Controller::GetStations(string line_descr)
 		throw FileNotFoundException();
 	}
 
-	//Gestisco la stazione di origine in modo "speciale", ha parametri diversi
+	//Gestisco la stazione di origine in modo "speciale", ha parametri diversi.
 
 	string station_name;
 	string line;
@@ -38,7 +37,8 @@ void Controller::GetStations(string line_descr)
 	int distance = 0;
 	ss >> station_name;
 
-	//Suppongo la prima stazione come principale, Ha distanza 0 dall'origine. Nel file � solo presente il nome
+	//SCELTA DI PROGETTO:
+	//La stazione di origine, avendo solamente il nome e nessuna informazione sul suo tipo, viene considerata principale
 	stations_.push_back(new mainStation(distance, station_name));
 
 	int station_type_number = 0;
@@ -69,7 +69,7 @@ void Controller::GetStations(string line_descr)
 	lines_file.close();
 }
 
-/* DA TESTAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE, MANCA COSTRUTTORE STATION*/
+
 void Controller::GetTimetable(string timetable)
 {
 	ifstream time_file;
@@ -188,10 +188,10 @@ void Controller::EraseEventsRelatedTo(Station* st)
 void Controller::printEvents()
 {
 	//Controlla se puoi incrementare o meno l'indice
-
-	//sort(events_.begin(), events_.begin());
-	for (int i = 0; i < events_.size(); i++)
+	int i = 0;
+	while(i < events_.size())
 	{
+		bool modified_event = false;
 		sort(events_.begin() + i, events_.end());
 		switch (events_[i].GetType())
 		{
@@ -207,6 +207,10 @@ void Controller::printEvents()
 		case EventType::LeavePark: handleParkLeaving(events_.begin() + i);
 			break;
 		}
+		
+		//Se un evento è stato modificato, nella posizione i-esima dopo aver fatto il sort ci sarà un altro evento che deve essere considerato
+		if (!modified_event)
+			i++;
 	}
 	/*for (cur; cur < end; cur++)
 	{
