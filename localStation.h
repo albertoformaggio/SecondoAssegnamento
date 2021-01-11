@@ -11,7 +11,7 @@ public:
 
 	void addTransitPlatform(const transitPlatform track) { transitPlatforms.push_back(track); }
 
-	transitPlatform getTransitPlatform(bool direction) override;
+	Platform* getTransitPlatform(bool direction) override;
 };
 
 #endif
