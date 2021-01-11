@@ -30,12 +30,23 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		}
 		else {
 			Station* next_station = GetNextStation(cur->GetStation(), cur->GetTrain());						//Trovo la prossima stazione
-			for(auto i = events_.begin(); i < cur; i++)														//Ciclo sugli eventi
+			Train* last_train = nullptr;
+			for (auto i = cur - 1; i >= events_.begin(); i--)												//Ciclo sugli eventi
 				if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture) {	//Se ci sono eventi di partenza dalla stazione in cui sto per passare
-					for (auto j = events_.begin(); j < cur; j++) {
-						if( j->GetType() != EventType::TrainStop )
+					last_train = i->GetTrain();
+					break;
+				}
+			if (last_train != nullptr) {
+				bool found = false;
+				for (auto i = cur - 1; i >= events_.begin(); i--) {
+					if (next_station == i->GetStation() && i->GetType() == EventType::PlatformRequest && i->GetTrain() == last_train) {
+						found = true;
+						break;
 					}
 				}
+				if (!found)
+					last_train = nullptr;
+			}
 		}
 	}
 	
