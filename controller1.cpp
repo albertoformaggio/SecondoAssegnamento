@@ -86,8 +86,8 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 		v = trainOnTrak->getSpeed();
 	cur->GetTrain()->setSpeed(v); 
 
-	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
-	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
+	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
+	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' partito dalla stazione di ";
 	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
@@ -96,9 +96,10 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 {
+	int minPerHours = 60;
 	cur->GetStation()->addParkedTrain(*cur->GetTrain());
-	int hour = cur->GetTime() / 60;
-	int minute = cur->GetTime() % 60;
+	int hour = (cur->GetTrain()->getDelay()) / minPerHours;
+	int minute = (cur->GetTrain()->getDelay()) % minPerHours;
 	
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' arrivato al parcheggio della stazione di ";
 	cout << cur->GetStation()->st_name;
@@ -176,7 +177,7 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 	}
 	cur->GetStation()->removeParkedTrain();
 	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
-	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
+	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % 60;
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' uscito dal parcheggio della stazione di ";
 	cout << cur->GetStation()->st_name;
 	//cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
