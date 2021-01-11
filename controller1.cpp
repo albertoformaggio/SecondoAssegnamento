@@ -81,7 +81,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 		}
 	cur->GetTrain()->editDelay(delay);
 
-	int v = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime() + delay, timeArriving, 0);
+	int v = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime() + delay, timeArriving, cur->GetTrain(), 0);
 	if (trainOnTrak != nullptr && v > trainOnTrak->getSpeed())
 		v = trainOnTrak->getSpeed();
 	cur->GetTrain()->setSpeed(v); 
