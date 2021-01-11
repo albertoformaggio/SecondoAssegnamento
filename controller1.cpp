@@ -20,7 +20,7 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 
 	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * distanceFromPark; //funzione per avere dist da parcheggio(5);
-	int minimumTime = (int)(distance / t->max_speed) * minPerHours + timeAtFixedSpeed + delay_time + t->getDelay();
+	int minimumTime = (int)(((double)distance / t->max_speed) * minPerHours) + timeAtFixedSpeed + delay_time + t->getDelay();
 	
 	if (time_arrival - time_leaving < minimumTime)
 		time_arrival = minimumTime + time_leaving;
