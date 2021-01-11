@@ -83,7 +83,7 @@ void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 
 	Event e(latestDeparture+1, cur->GetTrain(), cur->GetStation(), EventType::LeavePark);
 	events_.push_back(e);
-	sort(events_.begin(), events_.end());
+	//sort(events_.begin(), events_.end());
 }
 
 void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
@@ -144,6 +144,5 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
 	cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 
-	sort(events_.begin(), events_.end());
-
+	//sort(events_.begin(), events_.end());
 }

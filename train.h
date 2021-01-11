@@ -24,7 +24,7 @@ public:
 	inline int getDelay() const { return delay; }
 	virtual void setSpeed(int s);
 	inline void setDelay(int d) { delay = d; }
-	virtual Platform& requirePlatform(Station* st) = 0;
+	virtual Platform* requirePlatform(Station* st) = 0;
 	class InvalidTime {};
 	class InvalidSpeed {};
 	void editDelay(int d);

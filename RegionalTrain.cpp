@@ -8,7 +8,7 @@
 
 Platform& RegionalTrain::requirePlatform(Station* st)
 {
-	Platform& p = st->getStandardPlatform(startFromOrigin);
+	Platform* p = st->getStandardPlatform(startFromOrigin);
 	p.reserve();
 	return p;
 }
