@@ -201,7 +201,7 @@ void Controller::printEvents()
 			break;
 		case EventType::TrainDeparture: handleTrainDeparture(cur_iterator);
 			break;
-		case EventType::PlatformRequest: handlePlatformRequest(cur_iterator);
+		case EventType::PlatformRequest: ;
 			break;
 		case EventType::ArriveToPark: handleArrivalToPark(cur_iterator);
 			break;
