@@ -68,7 +68,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	if (delay != 0)
 		return;
 	Station* to = GetNextStation(cur->GetStation(), cur->GetTrain());
-	int timeArriving;
+	int timeArriving = -1;
 	vector<Event> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
 
 	for (int i = 0; i < relatedToTrain.size(); i++)

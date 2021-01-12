@@ -202,7 +202,7 @@ void Controller::printEvents()
 			break;
 		case EventType::TrainDeparture: handleTrainDeparture(cur_iterator);
 			break;
-		case EventType::PlatformRequest: ;
+		case EventType::PlatformRequest: cout << "Il treno " << cur_iterator->GetTrain()->identifying_number << " ha richiesto un binario alla stazione " << cur_iterator->GetStation()->st_name << cur_iterator->GetTrain()->getSpeed()<< endl;
 			break;
 		case EventType::ArriveToPark: handleArrivalToPark(cur_iterator);
 			break;
