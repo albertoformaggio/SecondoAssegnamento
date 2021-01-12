@@ -5,6 +5,8 @@
 #include "standardPlatform.h"
 #include "station.h"
 
+
+//Costruttore local station
 localStation::localStation(int distance, std::string name)
 	: Station(distance, name)
 {
@@ -25,6 +27,7 @@ localStation::localStation(int distance, std::string name)
 
 }
 
+//Ritorna un binario di transito
 Platform* localStation::getTransitPlatform(bool direction){
 	if(transitPlatforms.size() > 0)
 		for (int i = 0; i < transitPlatforms.size(); i++) {
