@@ -93,9 +93,10 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		//La distanza da questa stazione alla prossima richiesta è di: distanza tra le stazioni (entrambi fanno la richiesta quando si trovano 20 kilometri prima
 			if (dynamic_cast<localStation*>(cur->GetStation()) != nullptr)
 			{
-				int time_until_request = static_cast<int>(round(static_cast<double>(abs(cur->GetStation()->kDistanceFromOrigin - nextStation->kDistanceFromOrigin)) / cur->GetTrain()->getSpeed() * minPerHours));
+				int distance = nextStation->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin;
+				int time_until_request = static_cast<int>(round((static_cast<double>(distance) / cur->GetTrain()->getSpeed()) * minPerHours));
 				Event request(cur->GetTime() + time_until_request, cur->GetTrain(), nextStation, EventType::PlatformRequest);
-				//events_.push_back(request);
+				events_.push_back(request);
 			}
 		}
 	}
