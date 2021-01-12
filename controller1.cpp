@@ -72,12 +72,12 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 	Station* to = GetNextStation(cur->GetStation(), cur->GetTrain());
 	int timeArriving = -1;
-	vector<Event> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
+	vector<Event*> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
 
 	for (int i = 0; i < relatedToTrain.size(); i++)
-		if (relatedToTrain[i].GetStation() == to && events_[i].GetType() == EventType::TrainStop)
+		if (relatedToTrain[i]->GetStation() == to && events_[i].GetType() == EventType::TrainStop)
 		{
-			timeArriving = relatedToTrain[i].GetTime() + relatedToTrain[i].GetTrain()->getDelay();
+			timeArriving = relatedToTrain[i]->GetTime() + relatedToTrain[i]->GetTrain()->getDelay();
 		}
 	
 

@@ -192,7 +192,7 @@ void Controller::printEvents()
 	cout << endl << endl << "==========Inizio stampa eventi==========" << endl << endl;
 	int i = 0;
 	sort(events_.begin(), events_.end());
-	while(i < events_.size())
+	/*while(i < events_.size())
 	{
 		auto cur_iterator = events_.begin() + i;
 		int old_train_delay = cur_iterator->GetTrain()->getDelay();	//Un treno può essere spostato nel futuro solo se il ritardo aumenta
@@ -220,13 +220,13 @@ void Controller::printEvents()
 			i++;
 
 		sort(events_.begin() + i, events_.end());
-	}
+	}*/
 
 	//Ciclo di stampa degli eventi creati in fase di lettura del file dopo aver controllato la timetable e che la distanza tra le stazioni fosse maggiore di 20km
-	/*for (cur; cur < end; cur++)
+	for (int i = 0; i < events_.size(); i++)
 	{
-		cout << cur->GetStation()->st_name << " " << cur->GetTrain()->identifying_number << " " << cur->GetTime();
-	}*/
+		cout << events_[i].GetStation()->st_name << " " << events_[i].GetTrain()->identifying_number << " " << events_[i].GetTime() << endl;
+	}
 }
 
 Controller::~Controller()
@@ -247,25 +247,25 @@ void Controller::CheckTimetable()
 	for (int i = 0; i < trains_.size(); i++)
 	{
 		Train* tr = trains_.at(i);
-		vector<Event> ev = GetEventsRelatedTo(tr);
+		vector<Event*> ev = GetEventsRelatedTo(tr);
 		for (int j = 1; j < ev.size(); j++)
 		{
-			int arrive_time = ev.at(j).GetTime();
-			int leave_time = ev.at(j - 1).GetTime();
-			Station* previous = ev.at(j - 1).GetStation();
+			int arrive_time = ev.at(j)->GetTime();
+			int leave_time = ev.at(j - 1)->GetTime();
+			Station* previous = ev.at(j - 1)->GetStation();
 
-			getAverageSpeed(*previous, *(ev.at(j).GetStation()), leave_time, arrive_time, tr);
+			getAverageSpeed(*previous, *(ev.at(j)->GetStation()), leave_time, arrive_time, tr);
 
-			if (arrive_time != ev.at(j).GetTime())
+			if (arrive_time != ev.at(j)->GetTime())
 			{
-				int evaluated_delay = arrive_time - ev[j].GetTime();
+				int evaluated_delay = arrive_time - ev[j]->GetTime();
 				int k = j;
 				for (k; k < ev.size(); k++)
 				{
-					int cur_time = events_[k].GetTime();
-					events_[k].SetTime(cur_time + evaluated_delay);
+					int cur_time = ev[k]->GetTime();
+					ev[k]->SetTime(cur_time + evaluated_delay);
 				}
-				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j].GetStation()->st_name << endl;
+				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j]->GetStation()->st_name << endl;
 				cout << "non compatibile con la velocita' del treno. " << k - j << " orari cambiati di conseguenza" << endl;
 			}
 		}
@@ -304,13 +304,13 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 	}
 }
 
-vector<Event> Controller::GetEventsRelatedTo(Train* tr)
+vector<Event*> Controller::GetEventsRelatedTo(Train* tr)
 {
-	vector<Event> events;
+	vector<Event*> events;
 	for (int i = 0; i < events_.size(); i++)
 	{
 		if (events_[i].GetTrain() == tr) //Confronto gli indirizzi di memoria
-			events.push_back(events_.at(i));
+			events.push_back(&events_.at(i));
 	}
 
 	return events; //Costruttore di move di vector usato, non viene fatta l'intera copia
