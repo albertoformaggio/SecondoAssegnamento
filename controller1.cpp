@@ -88,7 +88,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 	//generazione richiesta di binario per la stazione successiva
 	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
-	int timeBeforePlatformRequest = static_cast<int>(round((2 * static_cast<double>(distance) / v) * minPerHours));
+	int timeBeforePlatformRequest = static_cast<int>(round((static_cast<double>(distance) / cur->GetTrain()->getSpeed()) * minPerHours));
 	Event e(timeBeforePlatformRequest + timeAtFixedSpeed + cur->GetTime(), cur->GetTrain(), to, EventType::PlatformRequest);
 
 	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
