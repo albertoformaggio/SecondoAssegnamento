@@ -2,7 +2,7 @@
 
 #include "controller.h"
 #include <iomanip>
-//AGGIUNGI TUTTI I GETDELAY AD i->GetTime() e cur->GetTime()
+//DEVI AGGIUNGERE I GETDELAY() AD i->GetTime() e cur->GetTime()
 
 void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //richiesta di un binario alla stazione successiva (che so già)
 
@@ -32,7 +32,8 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 			}
 		}
 		else {																								//Altrimenti transito fino alla prossima stazione, devo capire quando farò richiesta e adatterò la mia velocità
-			Station* next_station = GetNextStation(cur->GetStation(), cur->GetTrain());						//Trovo la prossima stazione
+			Station* nextStation = GetNextStation(cur->GetStation(), cur->GetTrain());						//Trovo la prossima stazione
+			/*
 			Event* last_event = nullptr;
 			for (auto i = events_.begin(); i < cur; i++)												//Ciclo sugli eventi
 				if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture) {	//Se ci sono eventi di partenza dalla stazione in cui sto per passare
@@ -80,15 +81,15 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 				cur->GetTrain()->setSpeed(last_event->GetTrain()->getSpeed());
 			else
 				cur->GetTrain()->setSpeed(speed);
-
+				
 			int timeOnTrack = static_cast<int>(round(static_cast<double>(abs(cur->GetStation()->kDistanceFromOrigin - next_station->kDistanceFromOrigin)) / cur->GetTrain()->getSpeed() * minPerHours));
-			const int delay = timeOnTrack - arrival_time;
+			const int delay = timeOnTrack - arrivalTime;
 			cur->GetTrain()->editDelay(delay);	//Se la differenza è negativa, viene aggiunto un ritardo negativo, cioè il treno recupera ritardo 
-
+			*/
 		//Ora ti manca da calcolare il tempo che ci metti per arrivare a fare la nuova richiesta
 		//La distanza da questa stazione alla prossima richiesta è di: distanza tra le stazioni (entrambi fanno la richiesta quando si trovano 20 kilometri prima
-			int time_until_request = static_cast<int>(round(static_cast<double>(abs(cur->GetStation()->kDistanceFromOrigin - next_station->kDistanceFromOrigin)) / cur->GetTrain()->getSpeed() * minPerHours));
-			Event request(cur->GetTime() + time_until_request + cur->GetTrain()->getDelay(), cur->GetTrain(), next_station, EventType::PlatformRequest);
+			int time_until_request = static_cast<int>(round(static_cast<double>(abs(cur->GetStation()->kDistanceFromOrigin - nextStation->kDistanceFromOrigin)) / cur->GetTrain()->getSpeed() * minPerHours));
+			Event request(cur->GetTime() + time_until_request, cur->GetTrain(), nextStation, EventType::PlatformRequest);
 			events_.push_back(request);
 		}
 	}
