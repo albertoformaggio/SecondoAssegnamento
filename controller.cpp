@@ -289,7 +289,7 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 	//Se i non è la fine dell'array, c'è un altro evento da gestire di partenza
 	if (i != events_.end())
 	{
-		int departure_time = min_wait + cur->GetTime() + cur->GetTrain()->getDelay();
+		int departure_time = min_wait + cur->GetTime();
 		Event departure(departure_time, cur->GetTrain(), cur->GetStation(), EventType::TrainDeparture);
 		events_.push_back(departure);
 	}
