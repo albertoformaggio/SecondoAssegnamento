@@ -3,13 +3,13 @@
 
 
 Train* Station::getParkedTrain() {
-	if (hasParkedTrain())
+	if (!hasParkedTrain())
 		throw std::exception();
 	else return parked.front();
 }
 
 Train* Station::removeParkedTrain() {
-	if (hasParkedTrain())
+	if (!hasParkedTrain())
 		throw std::exception();
 	else {
 		Train* rmv = parked.front();
