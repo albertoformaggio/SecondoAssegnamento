@@ -265,8 +265,8 @@ void Controller::CheckTimetable()
 					int cur_time = events_[k].GetTime();
 					events_[k].SetTime(cur_time + evaluated_delay);
 				}
-				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j].GetStation()->st_name << " non compatibile" << endl;
-				cout << "con la velocita' del treno. " << k - j << " orari cambiati di conseguenza" << endl;
+				cout << "Orario di arrivo del treno " << tr->identifying_number << " alla stazione " << ev[j].GetStation()->st_name << endl;
+				cout << " non compatibile" << "con la velocita' del treno. " << k - j << " orari cambiati di conseguenza" << endl;
 			}
 		}
 	}
