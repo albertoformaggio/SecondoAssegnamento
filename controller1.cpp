@@ -35,7 +35,7 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 {
 	int departureTime = CheckDeparture(cur);
-	if (cur->GetTime() != departureTime)
+	if ((cur->GetTime() + cur->GetTrain()->getDelay()) != departureTime)
 	{
 		cur->GetTrain()->editDelay(departureTime - cur->GetTime());
 		return;
