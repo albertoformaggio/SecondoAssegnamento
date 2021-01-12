@@ -80,7 +80,6 @@ void Controller::GetTimetable(string timetable)
 	if (!time_file.is_open())
 	{
 		cerr << "The file named: " << timetable << "doesn't exist";
-		//line_file.close(); Se lo lascio potrebbe lanciare eccezione,           DA TESTARE 
 		throw FileNotFoundException();
 	}
 
@@ -96,11 +95,11 @@ void Controller::GetTimetable(string timetable)
 
 		ss >> train_id >> first_station >> train_type;
 		bool from_origin = first_station == 0;
-		Train* tr;
+		Train* tr = nullptr;
 		switch (train_type)
 		{
 		case reg:
-			tr = new RegionalTrain(train_id, from_origin);				//Devo inserirci un riferimento con &			//METTII A POSTO QUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+			tr = new RegionalTrain(train_id, from_origin);
 			break;
 		case hs:
 			tr = new HSTrain(train_id, from_origin);
@@ -113,7 +112,8 @@ void Controller::GetTimetable(string timetable)
 
 		if (ss.eof()) //Se il file non ha nemmeno l'orario di partenza, ignoro il treno passato
 		{
-			cerr << "Il treno " << train_id << " non ha un orario di partenza: non pu� esistere";
+			cerr << "Il treno " << train_id << " non ha un orario di partenza: non puo' esistere" << endl;
+			delete tr;
 		}
 		else
 		{
@@ -189,7 +189,6 @@ void Controller::EraseEventsRelatedTo(Station* st)
 
 void Controller::printEvents()
 {
-	//Controlla se puoi incrementare o meno l'indice
 	cout << endl << endl << "==========Inizio stampa eventi==========" << endl << endl;
 	int i = 0;
 	sort(events_.begin(), events_.end());
@@ -203,7 +202,7 @@ void Controller::printEvents()
 			break;
 		case EventType::TrainDeparture: handleTrainDeparture(cur_iterator);
 			break;
-		case EventType::PlatformRequest: handlePlatformRequest(cur_iterator);
+		case EventType::PlatformRequest: ;
 			break;
 		case EventType::ArriveToPark: handleArrivalToPark(cur_iterator);
 			break;
@@ -211,7 +210,8 @@ void Controller::printEvents()
 			break;
 		}
 		
-		//Posso aver invalidato l'iteratore facendo push back di un evento
+		//Posso aver invalidato l'iteratore facendo push back di un evento, quindi lo ricreo.
+
 		//Se il treno ha diminuito il suo ritardo o questo è rimasto costante, allora l'evento è accaduto e posso spostarmi avanti nella lista di eventi
 		//Se invece il ritardo è aumentato, facendo il sort questo verrà spostato avanti nella lista di eventi e l'evento che arriverà nella posizione i-esima deve ancora essere eseguito:
 		//non posso quindi far avanzare l'indice.
@@ -221,6 +221,8 @@ void Controller::printEvents()
 
 		sort(events_.begin() + i, events_.end());
 	}
+
+	//Ciclo di stampa degli eventi creati in fase di lettura del file dopo aver controllato la timetable e che la distanza tra le stazioni fosse maggiore di 20km
 	/*for (cur; cur < end; cur++)
 	{
 		cout << cur->GetStation()->st_name << " " << cur->GetTrain()->identifying_number << " " << cur->GetTime();
@@ -346,9 +348,13 @@ int Controller::CheckDeparture(vector<Event>::iterator cur)
 		}
 	}
 
-	Event* last_event = nullptr;
-	int last_time = dynamic_cast<RegionalTrain*>(cur->GetTrain()) != nullptr ? next_local_arrive_time : next_main_arrive_time;
-	for (auto i = cur + 1; i < events_.end() && (i->GetTime() + i->GetTrain()->getDelay()) <= last_time; i++)
+	//Cerco l'ultimo evento di un treno regionale e non regionale che deve arrivare alla prossima stazione prima di me. Faccio un'unica scansione. 
+	//Uso quindi il tempo di arrivo alla prossima stazione principale (che in genere è >= del tempo di arrivo alla prossima stazione).
+	//Così facendo però potrei trovare anche un treno che arriva alla prossima stazione nel lasso di tempo next_local_time < t < next_main_time. In seguito lo scarto
+	Event* last_event_regional = nullptr;
+	Event* last_event_non_regional = nullptr;
+	//int last_time = dynamic_cast<RegionalTrain*>(cur->GetTrain()) != nullptr ? next_local_arrive_time : next_main_arrive_time;
+	for (auto i = cur + 1; i < events_.end() && (i->GetTime() + i->GetTrain()->getDelay()) <= next_main_arrive_time; i++)
 	{
 		//Se la prossima stazione è la stessa, il senso di percorrenza è lo stesso, il treno più veloce potrebbe subire ritardo, lo faccio partire prima di far partire il mio
 		//Tengo in considerazione solo l'ultimo treno che parte.
@@ -356,26 +362,63 @@ int Controller::CheckDeparture(vector<Event>::iterator cur)
 		{
 			if (i->GetStation() == next_main_station && i->GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin && i->GetType() == EventType::TrainStop && i->GetTrain() != cur->GetTrain())
 			{
-				last_event = &(*i);
+				last_event_non_regional = &(*i);
 			}
 		}
 		else
 		{
 			if (i->GetStation() == next_local_station && i->GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin && i->GetType() == EventType::TrainStop && i->GetTrain() != cur->GetTrain())
 			{
-				last_event = &(*i);
+				last_event_regional = &(*i);
 			}
 		}
 	}
 
+	//Scarto il tempo se questo non è nel range che mi interessa
+	if (last_event_regional != nullptr && last_event_regional->GetTime() + last_event_regional->GetTrain()->getDelay() > next_local_arrive_time)
+		last_event_regional = nullptr;
+
+	//A me interessa solo l'ultimo tra i 2 eventi (regionale e non regionale) che è capitato. Se ce ne sono più di uno.
+	//Partendo dall'inizio degli eventi, appena ne trovo uno che è accaduto: quello è il meno recente => lo scarto.
+	if (last_event_non_regional != nullptr && last_event_regional != nullptr)
+	{
+		for (auto i = events_.begin(); i < cur; i++)
+		{
+			//Se il treno non regionale è partito da questa stazione
+			if (i->GetStation() == cur->GetStation() && last_event_non_regional->GetTrain() == i->GetTrain() && i->GetType() == EventType::TrainDeparture)
+			{
+				last_event_non_regional = nullptr;
+				break;
+			}
+			//O se il treno non regionale è transitato per questa stazione
+			else if (i->GetStation() == cur->GetStation() && last_event_non_regional->GetTrain() == i->GetTrain() && i->GetType() == EventType::PlatformRequest && dynamic_cast<localStation*>(i->GetStation()) != nullptr)
+			{
+				last_event_non_regional = nullptr;
+				break;
+			}
+				
+			//O se il treno regionale è partito da questa stazione
+			else if (i->GetStation() == cur->GetStation() && last_event_non_regional->GetTrain() == i->GetTrain() && i->GetType() == EventType::TrainDeparture)
+			{
+				last_event_regional = nullptr;
+				break;
+			}
+		}
+	}
+
+	//Tengo solo l'evento non nullo
+	Event* last_event = last_event_non_regional == nullptr ? last_event_regional : last_event_non_regional;
+	
+	//Se un tale evento esiste devo posticipare la mia partenza
 	if (last_event != nullptr)
 	{
 		const int minPerHour = 60;
-
+		int next_time_arrive = last_event->GetTime() + last_event->GetTrain()->getDelay();
 		int time_to_leave = static_cast<int>(static_cast<double>(distanceFromPark) / speedInStation * minPerHour);
 		bool found = false;
-		for (auto i = cur + 1; cur < events_.end() && last_time >= (i->GetTime() + i->GetTrain()->getDelay()) && !found; i++)		//Se si sono fermati alla stazione, allora adesso esiste già un evento di partenza dalla stazione
+		for (auto i = cur + 1; cur < events_.end() && next_time_arrive >= (i->GetTime() + i->GetTrain()->getDelay()) && !found; i++)		//Se si sono fermati alla stazione, allora adesso esiste già un evento di partenza dalla stazione
 		{
+			//Cerco l'ora a cui il treno davanti a me deve partire o transitare (se non regionale).
 			if (cur->GetStation() == i->GetStation() && i->GetTrain() == last_event->GetTrain())
 			{
 				//Se per il treno che deve arrivare alla stazione dopo della mia è già definito un evento di partenza => si è già fermato alla stazione e sta aspettando, 
@@ -401,8 +444,6 @@ int Controller::CheckDeparture(vector<Event>::iterator cur)
 		}
 	}
 	return departure_time;
-
-
 }
 
 

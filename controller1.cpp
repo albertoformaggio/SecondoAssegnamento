@@ -37,7 +37,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	int departureTime = CheckDeparture(cur);
 	if ((cur->GetTime() + cur->GetTrain()->getDelay()) != departureTime)
 	{
-		cur->GetTrain()->editDelay(departureTime - cur->GetTime());
+		cur->GetTrain()->editDelay(departureTime - (cur->GetTime() + cur->GetTrain()->getDelay()));
 		return;
 	}
 	
