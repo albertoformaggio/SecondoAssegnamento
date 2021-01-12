@@ -32,13 +32,13 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 	return v;
 }
 
-void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
+bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 {
 	int departureTime = CheckDeparture(cur);
 	if ((cur->GetTime() + cur->GetTrain()->getDelay()) != departureTime)
 	{
 		cur->GetTrain()->editDelay(departureTime - (cur->GetTime() + cur->GetTrain()->getDelay()));
-		return;
+		return false;
 	}
 	
 	int minPerHours = 60;
@@ -68,7 +68,14 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	}
 	cur->GetTrain()->editDelay(delay);
 	if (delay != 0)
-		return;
+		return false;
+
+	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
+	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
+	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' partito dalla stazione di ";
+	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+	cout << std::setfill('0') << std::setw(2) << minute << endl;
+	cout << "con un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 
 	Station* to = GetNextStation(cur->GetStation(), cur->GetTrain());
 	int timeArriving = -1;
@@ -91,18 +98,13 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	timeArriving = cur->GetTime() + cur->GetTrain()->getDelay() + (int)(round(((double)abs(cur->GetStation()->kDistanceFromOrigin - to->kDistanceFromOrigin - (2 * distanceFromPark)) / v) * minPerHours) + 2 * timeAtFixedSpeed);
 	delay = copyTimeArriving - timeArriving;
 	delay = delay < 0 ? 0 : delay;
+	
 
+	cur->GetTrain()->editDelay(delay - cur->GetTrain()->getDelay());
 	//generazione richiesta di binario per la stazione successiva
 	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
 	int timeBeforePlatformRequest = static_cast<int>(round((static_cast<double>(distance) / cur->GetTrain()->getSpeed()) * minPerHours));
 	Event e(timeBeforePlatformRequest + timeAtFixedSpeed + cur->GetTime(), cur->GetTrain(), to, EventType::PlatformRequest);
-
-	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
-	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
-	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' partito dalla stazione di ";
-	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
-	cout << std::setfill('0') << std::setw(2) << minute << endl;
-	cout << "con un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 
 	events_.push_back(e);
 
