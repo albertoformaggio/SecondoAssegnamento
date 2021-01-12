@@ -9,7 +9,7 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 	const int distanceToPark = 15;	//distanza da percorrere in km
 	const int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));	//Tempo per tratto lento 
 
-	std::cout << "Il treno" << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << " un binario alle ore " << cur->GetTime();
+	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << " un binario alle ore " << cur->GetTime();
 
 
 	int time_to_park = static_cast<int>(round(static_cast<double>(distanceToPark) / cur->GetTrain()->getSpeed() * minPerHours)); //Caso in cui la stazione successiva è stazione principale
@@ -33,27 +33,25 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		else {																								//Altrimenti transito fino alla prossima stazione, devo capire quando farò richiesta e adatterò la mia velocità
 			Station* next_station = GetNextStation(cur->GetStation(), cur->GetTrain());						//Trovo la prossima stazione
 			Event* last_event = nullptr;
-			for (auto i = cur - 1; i >= events_.begin(); i--)												//Ciclo sugli eventi
+			for (auto i = events_.begin(); i < cur; i++)												//Ciclo sugli eventi
 				if (cur->GetStation() == i->GetStation() && i->GetType() == EventType::TrainDeparture) {	//Se ci sono eventi di partenza dalla stazione in cui sto per passare
 					last_event = &(*i);																		//Se trovo un treno che mi dà problemi me lo salvo
-					break;
 				}
-			if (last_event != nullptr) {
-				bool found = false;
-				for (auto i = cur - 1; i >= events_.begin(); i--) {
-					if (next_station == i->GetStation() && i->GetType() == EventType::PlatformRequest && &(*i) == last_event) {
-						found = true;
-						break;
-					}
-				}
-				if (!found)
-					last_event = nullptr;
-			}
 			for (auto i = cur - 1; i >= events_.begin(); i--) {												//Ciclo sugli eventi
 				if (dynamic_cast<RegionalTrain*>(i->GetTrain()) == nullptr && i->GetType() == EventType::PlatformRequest && cur->GetStation() == i->GetStation()) {
 					if (last_event == nullptr || last_event->GetTime() < i->GetTime())						//Last event contiene ultimo evento relativo a un treno regionale, i punta a un alta velocità
 						last_event = &(*i);
 				}
+			}
+			if (last_event != nullptr) {																//Guardo se l'ultimo treno che è passato per questa stazione (se esiste) è già arrivato alla stazione successiva
+				bool found = false;
+				for (auto i = events_.begin(); i < cur; i++) {
+					if (next_station == i->GetStation() && i->GetType() == EventType::PlatformRequest && i->GetTrain() == last_event->GetTrain()) {
+						found = true;
+					}
+				}
+				if (!found)
+					last_event = nullptr;
 			}
 
 			int arrival_time = -1;
