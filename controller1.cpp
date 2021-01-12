@@ -81,11 +81,6 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	int timeArriving = -1;
 	vector<Event*> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
 
-	//generazione richiesta di binario per la stazione successiva
-	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
-	int timeBeforePlatformRequest = static_cast<int>(round((static_cast<double>(distance) / cur->GetTrain()->getSpeed()) * minPerHours));
-	Event e(timeBeforePlatformRequest + timeAtFixedSpeed + cur->GetTime() + cur->GetTrain()->getDelay(), cur->GetTrain(), to, EventType::PlatformRequest);
-
 	for (int i = 0; i < relatedToTrain.size(); i++)
 		if (relatedToTrain[i]->GetStation() == to && events_[i].GetType() == EventType::TrainStop)
 		{
@@ -98,6 +93,11 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	cur->GetTrain()->setSpeed(v); 
 	int copyTimeArriving = timeArriving;
 	v = cur->GetTrain()->getSpeed();
+
+	//generazione richiesta di binario per la stazione successiva
+	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
+	int timeBeforePlatformRequest = static_cast<int>(round((static_cast<double>(distance) / cur->GetTrain()->getSpeed()) * minPerHours));
+	Event e(timeBeforePlatformRequest + timeAtFixedSpeed + cur->GetTime() + cur->GetTrain()->getDelay(), cur->GetTrain(), to, EventType::PlatformRequest);
 
 	timeArriving = cur->GetTime() + cur->GetTrain()->getDelay() + (int)(round(((double)abs(cur->GetStation()->kDistanceFromOrigin - to->kDistanceFromOrigin - (2 * distanceFromPark)) / v) * minPerHours) + 2 * timeAtFixedSpeed);
 	delay = copyTimeArriving - timeArriving;
