@@ -93,6 +93,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 {
+	//stampa degll'arrivo inparcheggio
 	int minPerHours = 60;
 	cur->GetStation()->addParkedTrain(*cur->GetTrain());
 	int hour = (cur->GetTrain()->getDelay()) / minPerHours;
@@ -100,10 +101,11 @@ void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 	
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' arrivato al parcheggio della stazione di ";
 	cout << cur->GetStation()->st_name;
-	cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
-	cout << std::setfill('0') << std::setw(2) << minute << endl;
-	cout << "con " << cur->GetTrain()->getDelay() << " minuti di ritardo." << endl;
+	//cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+	//cout << std::setfill('0') << std::setw(2) << minute << endl;
+	//cout << "con " << cur->GetTrain()->getDelay() << " minuti di ritardo." << endl;
 	
+	//vettore di orari di uscita dal parcheggio dei treni parcheggiati
 	vector<int> v;
 	for (int i = 0; i < events_.size(); i++)
 	{
@@ -115,7 +117,9 @@ void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 	}
 	auto minmax = minmax_element(v.begin(), v.end());
 	int latestDeparture = *minmax.second;
-	cur->GetTrain()->editDelay(cur->GetTime() - latestDeparture);
+	//prendo l'rario di uscita di quello davanti a me e aggiungo al treno un ritardo pari a quanto deve
+	//aspettare affinchè sia il primo dei treni parcheggiati
+	cur->GetTrain()->editDelay(latestDeparture - cur->GetTime());
 
 	Event e(latestDeparture+1, cur->GetTrain(), cur->GetStation(), EventType::LeavePark);
 	events_.push_back(e);
@@ -129,7 +133,7 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 	
 	if (cur->GetStation()->getParkedTrain()->identifying_number == cur->GetTrain()->identifying_number)
 	{
-		bool start = false;
+		//vettore degli orari dei treni che partirebbero dopo l'arrivo del treno in stazione
 		vector<int> v;
 
 		for (int i = 0; i < events_.size(); i++)
@@ -141,34 +145,23 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 			{
 				v.push_back(events_[i].GetTime());
 			}
-			else if (events_[i].GetType() == EventType::TrainDeparture
-				&& events_[i].GetStation() == cur->GetStation()
-				&& events_[i].GetTime() < timeAtStation
-				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
-			{
-				cur->GetStation()->removeParkedTrain();
-				int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
-				int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) / 60;
-				cout << "Il treno " << cur->GetTrain()->identifying_number << " e' uscito dal parcheggio della stazione di ";
-				cout << cur->GetStation()->st_name;
-				//cout << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
-				//cout << std::setfill('0') << std::setw(2) << minute << endl;
-				//cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
-				return;
-			}
 		}
-		auto minmax = minmax_element(v.begin(), v.end());
-		int firstLeaving = *minmax.first;
-		cur->GetTrain()->editDelay(firstLeaving - cur->GetTime());
 
-		//aggiorno evento leavePark di quelli dello stesso parcheggio con quel ritardo+1 (per sicurezza)
-		for (int i = 0; i < events_.size(); i++)
+		if (!v.empty())
 		{
-			if (events_[i].GetType() == EventType::LeavePark
-				&& events_[i].GetStation() == cur->GetStation()
-				&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
+			auto minmax = minmax_element(v.begin(), v.end());
+			int firstLeaving = *minmax.first;
+			cur->GetTrain()->editDelay(firstLeaving - cur->GetTime());
+
+			//aggiorno evento leavePark di quelli dello stesso parcheggio con quel ritardo+1 (per sicurezza)
+			for (int i = 0; i < events_.size(); i++)
 			{
-				events_[i].GetTrain()->editDelay(firstLeaving + 1);
+				if (events_[i].GetType() == EventType::LeavePark
+					&& events_[i].GetStation() == cur->GetStation()
+					&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin)
+				{
+					events_[i].GetTrain()->editDelay(firstLeaving + 1);
+				}
 			}
 		}
 	}
