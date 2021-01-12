@@ -87,7 +87,6 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
 	int timeBeforePlatformRequest = static_cast<int>(round((2 * static_cast<double>(distance) / v) * minPerHours));
 	Event e(timeBeforePlatformRequest + timeAtFixedSpeed, cur->GetTrain(), to, EventType::PlatformRequest);
-	events_.push_back(e);
 
 	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
 	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
@@ -95,6 +94,9 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
 	cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
+
+	events_.push_back(e);
+
 }
 
 void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
