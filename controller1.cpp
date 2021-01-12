@@ -96,7 +96,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	cout << "Il treno " << cur->GetTrain()->identifying_number << " e' partito dalla stazione di ";
 	cout << cur->GetStation()->st_name << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
-	cout << "accumulando un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
+	cout << "con un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 
 	events_.push_back(e);
 
