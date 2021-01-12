@@ -190,6 +190,7 @@ void Controller::EraseEventsRelatedTo(Station* st)
 void Controller::printEvents()
 {
 	//Controlla se puoi incrementare o meno l'indice
+	cout << endl << endl << "==========Inizio stampa eventi==========" << endl << endl;
 	int i = 0;
 	sort(events_.begin(), events_.end());
 	while(i < events_.size())
@@ -202,7 +203,7 @@ void Controller::printEvents()
 			break;
 		case EventType::TrainDeparture: handleTrainDeparture(cur_iterator);
 			break;
-		case EventType::PlatformRequest: ;
+		case EventType::PlatformRequest: handlePlatformRequest(cur_iterator);
 			break;
 		case EventType::ArriveToPark: handleArrivalToPark(cur_iterator);
 			break;

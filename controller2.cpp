@@ -1,6 +1,7 @@
 /* @author Michele Rieppi */
 
 #include "controller.h"
+#include <iomanip>
 //AGGIUNGI TUTTI I GETDELAY AD i->GetTime() e cur->GetTime()
 
 void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //richiesta di un binario alla stazione successiva (che so già)
@@ -9,7 +10,7 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 	const int distanceToPark = 15;	//distanza da percorrere in km
 	const int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));	//Tempo per tratto lento 
 
-	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << " un binario alle ore " << cur->GetTime() << std::endl;
+	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << std::endl;
 
 
 	int time_to_park = static_cast<int>(round(static_cast<double>(distanceToPark) / cur->GetTrain()->getSpeed() * minPerHours)); //Caso in cui la stazione successiva è stazione principale
