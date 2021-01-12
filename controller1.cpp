@@ -36,7 +36,10 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 {
 	int departureTime = CheckDeparture(cur);
 	if (cur->GetTime() != departureTime)
+	{
 		cur->GetTrain()->editDelay(departureTime - cur->GetTime());
+		return;
+	}
 	
 	int minPerHours = 60;
 	int maxTime = distanceFromPark / speedInStation * minPerHours + distanceFromPark * minPerHours;
@@ -61,6 +64,9 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 		int deltaT = cur->GetTime() - trainTimeLeaving;
 		delay = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / trainOnTrak->getSpeed()) * minPerHours)) + (timeAtFixedSpeed - deltaT);
 	}
+	cur->GetTrain()->editDelay(delay);
+	if (delay != 0)
+		return;
 	Station* to = GetNextStation(cur->GetStation(), cur->GetTrain());
 	int timeArriving;
 	vector<Event> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
@@ -70,7 +76,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 		{
 			timeArriving = relatedToTrain[i].GetTime();
 		}
-	cur->GetTrain()->editDelay(delay);
+	
 
 	int v = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime() + delay, timeArriving, cur->GetTrain(), 0);
 	if (trainOnTrak != nullptr && v > trainOnTrak->getSpeed())
