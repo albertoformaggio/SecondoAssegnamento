@@ -214,8 +214,7 @@ void Controller::printEvents()
 		//Posso aver invalidato l'iteratore facendo push back di un evento, quindi lo ricreo.
 
 		//Se il treno ha diminuito il suo ritardo o questo è rimasto costante, allora l'evento è accaduto e posso spostarmi avanti nella lista di eventi
-		//Se invece il ritardo è aumentato, facendo il sort questo verrà spostato avanti nella lista di eventi e l'evento che arriverà nella posizione i-esima deve ancora essere eseguito:
-		//non posso quindi far avanzare l'indice.
+		
 		int new_train_delay = (events_.begin() + i)->GetTrain()->getDelay();
 		if (increment)
 			i++;
