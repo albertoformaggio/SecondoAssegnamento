@@ -12,7 +12,8 @@ void Train::setSpeed(int s)
 		throw InvalidSpeed();
 	if(s > max_speed)
 		speed = max_speed;
-	speed = s;	
+	else
+		speed = s;	
 }
 
 void Train::editDelay(int d)
