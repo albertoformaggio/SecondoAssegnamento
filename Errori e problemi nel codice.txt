@@ -1,1 +1,3 @@
-Si considerano i treni alta velocità e alta velocità super come se partissero dalla prima stazione principale presente, non transitano per le locali precedenti, se presenti (supponendo essi partano dalla parte opposta rispetto all'origine).
+- Si considerano i treni alta velocità e alta velocità super come se partissero dalla prima stazione principale presente, non transitano per le locali precedenti, se presenti (supponendo essi partano dalla parte opposta rispetto all'origine).
+
+- Non testati i metodi di ingresso e uscita dal parcheggio

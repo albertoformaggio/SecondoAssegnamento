@@ -10,7 +10,11 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 	const int distanceToPark = 15;	//distanza da percorrere in km
 	const int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));	//Tempo per tratto lento 
 
-	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << cur->GetTrain()->getSpeed() <<std::endl;
+	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
+	hour %= 24;
+	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
+
+	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << " " << hour << ":" << minute << std::endl;
 
 
 	int time_to_park = static_cast<int>(round(static_cast<double>(distanceToPark) / cur->GetTrain()->getSpeed() * minPerHours)); //Caso in cui la stazione successiva è stazione principale
@@ -93,10 +97,10 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		//La distanza da questa stazione alla prossima richiesta è di: distanza tra le stazioni (entrambi fanno la richiesta quando si trovano 20 kilometri prima
 			if (dynamic_cast<localStation*>(cur->GetStation()) != nullptr)
 			{
-				int distance = nextStation->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin;
+				int distance = abs(nextStation->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin);
 				int time_until_request = static_cast<int>(round((static_cast<double>(distance) / cur->GetTrain()->getSpeed()) * minPerHours));
 				Event request(cur->GetTime() + time_until_request, cur->GetTrain(), nextStation, EventType::PlatformRequest);
-				events_.push_back(request);
+				//events_.push_back(request);
 			}
 		}
 	}
