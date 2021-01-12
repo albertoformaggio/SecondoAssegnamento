@@ -94,5 +94,5 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 		}
 	}
 
-
+	
 }

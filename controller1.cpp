@@ -18,7 +18,7 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 	if (time_leaving < 0 || delay_time < 0)
 		return -1;
 
-	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
+	int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * distanceFromPark; //funzione per avere dist da parcheggio(5);
 	int minimumTime = (int)(((double)distance / t->max_speed) * minPerHours) + timeAtFixedSpeed + delay_time + t->getDelay();
 	
@@ -42,7 +42,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	}
 	
 	int minPerHours = 60;
-	int maxTime = distanceFromPark / speedInStation * minPerHours + distanceFromPark * minPerHours;
+	int maxTime = (int)((double)distanceFromPark / speedInStation * minPerHours) + distanceFromPark * minPerHours;
 	
 	Train* trainOnTrak = nullptr;
 	int trainTimeLeaving = 0;
@@ -60,11 +60,11 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	}
 
 	int delay = 0;
-	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
+	int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	if (trainOnTrak != nullptr)
 	{
 		int deltaT = cur->GetTime() + cur->GetTrain()->getDelay() - trainTimeLeaving;
-		delay = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / trainOnTrak->getSpeed()) * minPerHours)) + (timeAtFixedSpeed - deltaT);
+		delay = static_cast<int>(round((static_cast<double>(distanceFromPark) / trainOnTrak->getSpeed()) * minPerHours)) + (timeAtFixedSpeed - deltaT);
 	}
 	cur->GetTrain()->editDelay(delay);
 	if (delay != 0)
@@ -89,7 +89,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	//generazione richiesta di binario per la stazione successiva
 	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
 	int timeBeforePlatformRequest = static_cast<int>(round((2 * static_cast<double>(distance) / v) * minPerHours));
-	Event e(timeBeforePlatformRequest + timeAtFixedSpeed, cur->GetTrain(), to, EventType::PlatformRequest);
+	Event e(timeBeforePlatformRequest + timeAtFixedSpeed + cur->GetTime(), cur->GetTrain(), to, EventType::PlatformRequest);
 
 	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
 	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
@@ -162,7 +162,7 @@ void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 		{
 			auto minmax = minmax_element(v.begin(), v.end());
 			int firstLeaving = *minmax.first;
-			cur->GetTrain()->editDelay(firstLeaving - cur->GetTime());
+			cur->GetTrain()->editDelay(firstLeaving - cur->GetTime() - cur->GetTrain()->getDelay());
 
 			//aggiorno evento leavePark di quelli dello stesso parcheggio con quel ritardo+1 (per sicurezza)
 			for (int i = 0; i < events_.size(); i++)
