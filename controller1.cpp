@@ -18,15 +18,15 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 	if (time_leaving < 0 || delay_time < 0)
 		return -1;
 
-	int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
+	int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(2*distanceFromPark) / speedInStation) * minPerHours));
 	int distance = abs(from.kDistanceFromOrigin - to.kDistanceFromOrigin) - 2 * distanceFromPark; //funzione per avere dist da parcheggio(5);
-	int minimumTime = (int)(((double)distance / t->max_speed) * minPerHours) + timeAtFixedSpeed + delay_time + t->getDelay();
+	int minimumTime = (int)(((double)distance / t->max_speed) * minPerHours) + timeAtFixedSpeed + delay_time;
 	
 	if (time_arrival - time_leaving < minimumTime)
 		time_arrival = minimumTime + time_leaving;
 
 	int deltaT = time_arrival - time_leaving;
-	int time = deltaT - t->getDelay() - timeAtFixedSpeed;
+	int time = deltaT - timeAtFixedSpeed;
 	int v = (int)(round(((double)distance / time) * minPerHours));
 
 	return v;
@@ -42,7 +42,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	}
 	
 	int minPerHours = 60;
-	int maxTime = (int)((double)distanceFromPark / speedInStation * minPerHours) + distanceFromPark * minPerHours;
+	int maxTime = (int)((double)distanceFromPark / speedInStation * minPerHours + (double)distanceFromPark/300 * minPerHours);
 	
 	Train* trainOnTrak = nullptr;
 	int trainTimeLeaving = 0;
@@ -80,11 +80,17 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 			timeArriving = relatedToTrain[i]->GetTime() + relatedToTrain[i]->GetTrain()->getDelay();
 		}
 	
-
+	int v1 = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime(), timeArriving, cur->GetTrain(), 0);
 	int v = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime() + cur->GetTrain()->getDelay() + delay, timeArriving, cur->GetTrain(), 0);
 	if (trainOnTrak != nullptr && v > trainOnTrak->getSpeed())
 		v = trainOnTrak->getSpeed();
 	cur->GetTrain()->setSpeed(v); 
+	int copyTimeArriving = timeArriving;
+	v = cur->GetTrain()->getSpeed();
+
+	timeArriving = cur->GetTime() + cur->GetTrain()->getDelay() + (int)(round(((double)abs(cur->GetStation()->kDistanceFromOrigin - to->kDistanceFromOrigin - (2 * distanceFromPark)) / v) * minPerHours) + 2 * timeAtFixedSpeed);
+	delay = copyTimeArriving - timeArriving;
+	delay = delay < 0 ? 0 : delay;
 
 	//generazione richiesta di binario per la stazione successiva
 	int distance = to->kDistanceFromOrigin - cur->GetStation()->kDistanceFromOrigin - 25;
