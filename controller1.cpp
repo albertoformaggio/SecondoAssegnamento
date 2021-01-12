@@ -11,6 +11,9 @@
 
 using namespace std;
 
+//funzione che cambia l'orario di arrivo alla stazione successiva del treno se neanche andando alla velocità massima può
+//arrivarci e restituisce il valore della velocità che il treno deve avere per percorrere il tratto tra le 2 stazioni
+//non tenendo conto dei 2 tratti da 5km fatti a velocità fissa
 int Controller::getAverageSpeed(const Station& from, const Station& to, int time_leaving, int& time_arrival, Train* t, int delay_time)
 {
 	const int minPerHours = 60;
@@ -32,8 +35,11 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 	return v;
 }
 
+//gestione dell'arrivo del treno in stazione, settaggio della velocità che deve avere nel tratto intermedio e generazione
+//degli eventi di richiesta del binario alla stazione successiva
 bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 {
+	//controlla se può partire o se ci sono treni più prioritari che devono partire prima
 	int departureTime = CheckDeparture(cur);
 	if ((cur->GetTime() + cur->GetTrain()->getDelay()) != departureTime)
 	{
@@ -44,6 +50,7 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	int minPerHours = 60;
 	int maxTime = (int)((double)distanceFromPark / speedInStation * minPerHours + (double)distanceFromPark/300 * minPerHours);
 	
+	//controlli sulla presenza di treni sulla tratta a meno di 10 km dalla stazione
 	Train* trainOnTrak = nullptr;
 	int trainTimeLeaving = 0;
 	for (int i = 0; i < events_.size(); i++)
@@ -58,7 +65,8 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 			trainTimeLeaving = events_[i].GetTime() + events_[i].GetTrain()->getDelay();
 		}
 	}
-
+	
+	//aggiornamento del ritardo con eventuale recupero
 	int delay = 0;
 	int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	if (trainOnTrak != nullptr)
@@ -66,9 +74,7 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 		int deltaT = cur->GetTime() + cur->GetTrain()->getDelay() - trainTimeLeaving;
 		delay = static_cast<int>(round((static_cast<double>(distanceFromPark) / trainOnTrak->getSpeed()) * minPerHours)) + (timeAtFixedSpeed - deltaT);
 	}
-	/*cur->GetTrain()->editDelay(delay);
-	if (delay != 0)
-		return false;*/
+
 
 	int hour = (cur->GetTime() + cur->GetTrain()->getDelay()) / minPerHours;
 	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
@@ -77,6 +83,7 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	cout << std::setfill('0') << std::setw(2) << minute << endl;
 	cout << "con un ritardo di " << cur->GetTrain()->getDelay() << " minuti." << endl;
 
+	//ricerca degli elementi necessari ad invocare getAverageSpeed nella lista di eventi
 	Station* to = GetNextStation(cur->GetStation(), cur->GetTrain());
 	int timeArriving = -1;
 	vector<Event*> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
@@ -109,6 +116,8 @@ bool Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 
 }
 
+//gestisce l'arrivo al parcheggio verificando se il treno corrente sia il primo a poter uscire altrimenti gli si incrementa
+//il ritardo
 void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 {
 	//stampa degll'arrivo inparcheggio
@@ -143,6 +152,8 @@ void Controller::handleArrivalToPark(std::vector<Event>::iterator cur)
 	events_.push_back(e);
 }
 
+//gestisce la partenza dal parcheggio facendo attenzione alla presenza di eventuali treni ancora fermi in stazione
+//ritardando la partenza di quelli in stazione
 void Controller::handleParkLeaving(std::vector<Event>::iterator cur)
 {
 	const int minPerHours = 60;

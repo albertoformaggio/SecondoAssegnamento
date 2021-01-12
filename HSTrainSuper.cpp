@@ -8,6 +8,7 @@
 #include "platform.h"
 #include "station.h"
 
+//funzione che richiede binari alla stazione, se locale richiede un binario di transito altrimenti standard
 Platform* HSTrainSuper::requirePlatform(Station* st)
 {
 	localStation* ls = dynamic_cast<localStation*>(st);
