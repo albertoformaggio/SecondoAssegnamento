@@ -95,7 +95,7 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 			{
 				int time_until_request = static_cast<int>(round(static_cast<double>(abs(cur->GetStation()->kDistanceFromOrigin - nextStation->kDistanceFromOrigin)) / cur->GetTrain()->getSpeed() * minPerHours));
 				Event request(cur->GetTime() + time_until_request, cur->GetTrain(), nextStation, EventType::PlatformRequest);
-				events_.push_back(request);
+				//events_.push_back(request);
 			}
 		}
 	}
