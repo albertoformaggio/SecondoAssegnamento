@@ -1,6 +1,7 @@
 /* @author Michele Rieppi */
 #include "parkPlatform.h"
 
+//Costruttore binario parcheggio
 parkPlatform::parkPlatform(bool s, bool d)
 	:Platform(occupied, startFromOrigin) {}
 
