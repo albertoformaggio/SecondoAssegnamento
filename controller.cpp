@@ -16,6 +16,10 @@ Controller::Controller(string line_descr, string timetable)
 	CheckTimetable();
 }
 
+/*!
+ * @brief Legge tutte le stazioni fornite in input
+ * @param line_descr file con le stazioni
+*/
 void Controller::GetStations(string line_descr)
 {
 	ifstream lines_file;
@@ -71,7 +75,10 @@ void Controller::GetStations(string line_descr)
 
 
 
-
+/*!
+ * @brief Legge una timetable da input
+ * @param timetable nome del file da cui leggere la timetable
+*/
 void Controller::GetTimetable(string timetable)
 {
 	ifstream time_file;
@@ -155,6 +162,9 @@ void Controller::GetTimetable(string timetable)
 	time_file.close();
 }
 
+/*!
+ * @brief Controlla se le stazioni sono almeno ad una distanza di 20km
+*/
 void Controller::CheckStations()
 {
 	auto prev = stations_.begin();
@@ -175,6 +185,10 @@ void Controller::CheckStations()
 	}
 }
 
+/*!
+ * @brief Data una certa stazione, elimina tutti gli eventi legati ad essa
+ * @param st 
+*/
 void Controller::EraseEventsRelatedTo(Station* st)
 {
 	auto it = events_.begin();
@@ -187,6 +201,9 @@ void Controller::EraseEventsRelatedTo(Station* st)
 	}
 }
 
+/*!
+ * @brief Stampa gli eventi in ordine cronologico
+*/
 void Controller::printEvents()
 {
 	cout << endl << endl << "==========Inizio stampa eventi==========" << endl << endl;
@@ -230,6 +247,9 @@ void Controller::printEvents()
 	}*/
 }
 
+/*!
+ * @brief Elimina tutti gli oggetti creati in memoria
+*/
 Controller::~Controller()
 {
 	for each (Train* tr in trains_)
@@ -243,8 +263,12 @@ Controller::~Controller()
 	}
 }
 
+/*!
+ * @brief Controlla se la timetable è corretta
+*/
 void Controller::CheckTimetable()
 {
+	//per tutti i treni controllo che la distanza sia compatibile con le velocità massime
 	for (int i = 0; i < trains_.size(); i++)
 	{
 		Train* tr = trains_.at(i);
@@ -255,8 +279,10 @@ void Controller::CheckTimetable()
 			int leave_time = ev.at(j - 1)->GetTime();
 			Station* previous = ev.at(j - 1)->GetStation();
 
+			//arrive_time passato per ref, se il tempo è troppo breve viene ritronato il valore corretto
 			getAverageSpeed(*previous, *(ev.at(j)->GetStation()), leave_time, arrive_time, tr);
 
+			//Se il valore ritornato è diverso da quello presente nella timetable, devo aggiornare tutti gli orari
 			if (arrive_time != ev.at(j)->GetTime())
 			{
 				int evaluated_delay = arrive_time - ev[j]->GetTime();
@@ -305,6 +331,11 @@ void Controller::handleTrainStop(vector<Event>::iterator cur)
 	}
 }
 
+/*!
+ * @brief Ritorna un vector con i puntatori agli eventi del treno passato
+ * @param tr treno di cui si vogliono ottenere gli eventi
+ * @return vettore
+*/
 vector<Event*> Controller::GetEventsRelatedTo(Train* tr)
 {
 	vector<Event*> events;
@@ -318,6 +349,11 @@ vector<Event*> Controller::GetEventsRelatedTo(Train* tr)
 }
 
 
+/*!
+ * @brief Controlla se l'orario di partenza è compatibile con quello degli altri treni presenti alla stazione al momento in cui il treno dovrebbe partire
+ * @param cur iteratore all'evento corrente
+ * @return l'orario della partenza corretto
+*/
 int Controller::CheckDeparture(vector<Event>::iterator cur)
 {
 	//Controlla di non essere ultima stazione della tratta
