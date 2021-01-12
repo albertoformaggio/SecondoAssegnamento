@@ -192,6 +192,7 @@ void Controller::printEvents()
 	cout << endl << endl << "==========Inizio stampa eventi==========" << endl << endl;
 	int i = 0;
 	sort(events_.begin(), events_.end());
+	bool increment = true;
 	while(i < events_.size())
 	{
 		auto cur_iterator = events_.begin() + i;
@@ -200,7 +201,7 @@ void Controller::printEvents()
 		{
 		case EventType::TrainStop: handleTrainStop(cur_iterator);
 			break;
-		case EventType::TrainDeparture: handleTrainDeparture(cur_iterator);
+		case EventType::TrainDeparture: increment = handleTrainDeparture(cur_iterator);
 			break;
 		case EventType::PlatformRequest: handlePlatformRequest(cur_iterator);
 			break;
@@ -216,7 +217,7 @@ void Controller::printEvents()
 		//Se invece il ritardo è aumentato, facendo il sort questo verrà spostato avanti nella lista di eventi e l'evento che arriverà nella posizione i-esima deve ancora essere eseguito:
 		//non posso quindi far avanzare l'indice.
 		int new_train_delay = (events_.begin() + i)->GetTrain()->getDelay();
-		if (old_train_delay >= new_train_delay)
+		if (increment)
 			i++;
 
 		sort(events_.begin() + i, events_.end());

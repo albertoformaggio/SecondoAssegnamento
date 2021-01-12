@@ -42,7 +42,7 @@ private:
 	std::vector<Event*> GetEventsRelatedTo(Train* tr);
 	void handlePlatformRequest(std::vector<Event>::iterator cur);
 	void handleTrainStop(std::vector<Event>::iterator cur);		//Non pu� funzionare cos� se passo puntatore a Event, devo per forza dynamic_cast, altrimenti si cambia totalmente approccio
-	void handleTrainDeparture(std::vector<Event>::iterator cur);
+	bool handleTrainDeparture(std::vector<Event>::iterator cur);
 	void handleArrivalToPark(std::vector<Event>::iterator cur);
 	void handleParkLeaving(std::vector<Event>::iterator cur);
 	int CheckDeparture(std::vector<Event>::iterator cur);
