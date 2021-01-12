@@ -27,7 +27,7 @@ int Controller::getAverageSpeed(const Station& from, const Station& to, int time
 
 	int deltaT = time_arrival - time_leaving;
 	int time = deltaT - t->getDelay() - timeAtFixedSpeed;
-	int v = (int)(distance / time);
+	int v = (int)(round(((double)distance / time) * minPerHours));
 
 	return v;
 }
