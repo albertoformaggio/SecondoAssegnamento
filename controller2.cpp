@@ -14,7 +14,8 @@ void Controller::handlePlatformRequest(std::vector<Event>::iterator cur) { //ric
 	hour %= 24;
 	int minute = (cur->GetTime() + cur->GetTrain()->getDelay()) % minPerHours;
 
-	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << " " << hour << ":" << minute << std::endl;
+	std::cout << "Il treno " << cur->GetTrain()->identifying_number << " richiede alla stazione " << cur->GetStation()->st_name << " " << " alle ore " << std::setfill('0') << std::setw(2) << hour << ":";
+	std::cout << std::setfill('0') << std::setw(2) << minute << std::endl;
 
 
 	int time_to_park = static_cast<int>(round(static_cast<double>(distanceToPark) / cur->GetTrain()->getSpeed() * minPerHours)); //Caso in cui la stazione successiva è stazione principale
