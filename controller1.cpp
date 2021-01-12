@@ -60,7 +60,7 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	}
 
 	int delay = 0;
-	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
+	int timeAtFixedSpeed = static_cast<int>(round((static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	if (trainOnTrak != nullptr)
 	{
 		int deltaT = cur->GetTime() + cur->GetTrain()->getDelay() - trainTimeLeaving;

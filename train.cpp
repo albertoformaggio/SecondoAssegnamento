@@ -12,7 +12,7 @@ void Train::setSpeed(int s)
 		throw InvalidSpeed();
 	if(s > max_speed)
 		speed = max_speed;
-	else
+	//else
 		speed = s;	
 }
 
