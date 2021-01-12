@@ -36,7 +36,10 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 {
 	int departureTime = CheckDeparture(cur);
 	if (cur->GetTime() != departureTime)
+	{
 		cur->GetTrain()->editDelay(departureTime - cur->GetTime());
+		return;
+	}
 	
 	int minPerHours = 60;
 	int maxTime = distanceFromPark / speedInStation * minPerHours + distanceFromPark * minPerHours;
