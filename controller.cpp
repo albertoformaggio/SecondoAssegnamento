@@ -192,7 +192,7 @@ void Controller::printEvents()
 	cout << endl << endl << "==========Inizio stampa eventi==========" << endl << endl;
 	int i = 0;
 	sort(events_.begin(), events_.end());
-	/*while(i < events_.size())
+	while(i < events_.size())
 	{
 		auto cur_iterator = events_.begin() + i;
 		int old_train_delay = cur_iterator->GetTrain()->getDelay();	//Un treno può essere spostato nel futuro solo se il ritardo aumenta
@@ -220,13 +220,13 @@ void Controller::printEvents()
 			i++;
 
 		sort(events_.begin() + i, events_.end());
-	}*/
+	}
 
 	//Ciclo di stampa degli eventi creati in fase di lettura del file dopo aver controllato la timetable e che la distanza tra le stazioni fosse maggiore di 20km
-	for (int i = 0; i < events_.size(); i++)
+	/*for (int i = 0; i < events_.size(); i++)
 	{
 		cout << events_[i].GetStation()->st_name << " " << events_[i].GetTrain()->identifying_number << " " << events_[i].GetTime() << endl;
-	}
+	}*/
 }
 
 Controller::~Controller()
