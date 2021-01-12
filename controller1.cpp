@@ -50,23 +50,26 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	{
 		if (events_[i].GetStation() == cur->GetStation() && events_[i].GetType() == EventType::TrainDeparture
 			&& events_[i].GetTrain()->startFromOrigin == cur->GetTrain()->startFromOrigin
-			&& events_[i].GetTime() < cur->GetTime() && events_[i].GetTime() > maxTime)
+			&& events_[i].GetTime() + events_[i].GetTrain()->getDelay() < cur->GetTime() + cur->GetTrain()->getDelay() 
+			&& events_[i].GetTime() + events_[i].GetTrain()->getDelay() > maxTime)
 		{
 
 			trainOnTrak = events_[i].GetTrain();
-			trainTimeLeaving = events_[i].GetTime();
+			trainTimeLeaving = events_[i].GetTime() + events_[i].GetTrain()->getDelay();
 		}
 	}
+
 	int delay = 0;
 	int timeAtFixedSpeed = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / speedInStation) * minPerHours));
 	if (trainOnTrak != nullptr)
 	{
-		int deltaT = cur->GetTime() - trainTimeLeaving;
+		int deltaT = cur->GetTime() + cur->GetTrain()->getDelay() - trainTimeLeaving;
 		delay = static_cast<int>(round((2 * static_cast<double>(distanceFromPark) / trainOnTrak->getSpeed()) * minPerHours)) + (timeAtFixedSpeed - deltaT);
 	}
 	cur->GetTrain()->editDelay(delay);
 	if (delay != 0)
 		return;
+
 	Station* to = GetNextStation(cur->GetStation(), cur->GetTrain());
 	int timeArriving = -1;
 	vector<Event> relatedToTrain = GetEventsRelatedTo(cur->GetTrain());
@@ -74,11 +77,11 @@ void Controller::handleTrainDeparture(std::vector<Event>::iterator cur)
 	for (int i = 0; i < relatedToTrain.size(); i++)
 		if (relatedToTrain[i].GetStation() == to && events_[i].GetType() == EventType::TrainStop)
 		{
-			timeArriving = relatedToTrain[i].GetTime();
+			timeArriving = relatedToTrain[i].GetTime() + relatedToTrain[i].GetTrain()->getDelay();
 		}
 	
 
-	int v = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime() + delay, timeArriving, cur->GetTrain(), 0);
+	int v = getAverageSpeed(*cur->GetStation(), *to, cur->GetTime() + cur->GetTrain()->getDelay() + delay, timeArriving, cur->GetTrain(), 0);
 	if (trainOnTrak != nullptr && v > trainOnTrak->getSpeed())
 		v = trainOnTrak->getSpeed();
 	cur->GetTrain()->setSpeed(v); 
