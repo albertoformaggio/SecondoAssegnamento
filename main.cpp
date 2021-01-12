@@ -3,6 +3,6 @@
 
 int main()
 {
-	Controller c("line_description.txt","timetables.txt");
+	Controller c("line_description.txt","timetables_2.txt");
 	c.printEvents();
 }
