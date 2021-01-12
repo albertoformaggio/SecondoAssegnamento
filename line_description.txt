@@ -1,8 +1,8 @@
 Rovigo
 Stanghella 1 30
-S. Elena-Este 1 100
-Monselice 0 200
-Battaglia Terme 1 300
-Terme Euganee 0 400
-Abano 1 500
-Padova 0 600
+S. Elena-Este 1 60
+Monselice 0 100
+Battaglia Terme 1 140
+Terme Euganee 0 165
+Abano 1 180
+Padova 0 210

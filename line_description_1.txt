@@ -1,9 +1,9 @@
 Bologna Centrale
 Bologna Corticella 1 50
-Castel Maggiore 1 100
-S. Giorgio Di Piano 1 140
-S. Pietro In Casale 0 180
-Galliera 1 200
+Castel Maggiore 1 80
+S. Giorgio Di Piano 1 120
+S. Pietro In Casale 0 160
+Galliera 1 190
 Ferrara 0 230
 Occhiobello 1 280
 Arqua 1 320

@@ -195,6 +195,7 @@ void Controller::printEvents()
 	bool increment = true;
 	while(i < events_.size())
 	{
+		increment = true;
 		auto cur_iterator = events_.begin() + i;
 		int old_train_delay = cur_iterator->GetTrain()->getDelay();	//Un treno può essere spostato nel futuro solo se il ritardo aumenta
 		switch (events_[i].GetType())

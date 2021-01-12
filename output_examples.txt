@@ -1,343 +1,251 @@
-line_description_1 e timetable_1
+line_description e timetables_2
 
-Il treno 114 non ha un orario di partenza: non puo' esistere
-Orario di arrivo del treno 111 alla stazione S. Pietro In Casale
-non compatibile con la velocita' del treno. 6 orari cambiati di conseguenza
-Orario di arrivo del treno 111 alla stazione Galliera
+Orario di arrivo del treno 11 alla stazione Battaglia Terme
+non compatibile con la velocita' del treno. 3 orari cambiati di conseguenza
+Orario di arrivo del treno 11 alla stazione Terme Euganee
+non compatibile con la velocita' del treno. 2 orari cambiati di conseguenza
+Orario di arrivo del treno 13 alla stazione Battaglia Terme
 non compatibile con la velocita' del treno. 5 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione Ferrara
-non compatibile con la velocita' del treno. 7 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione S. Giorgio Di Piano
-non compatibile con la velocita' del treno. 4 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione S. Pietro In Casale
-non compatibile con la velocita' del treno. 6 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione Galliera
-non compatibile con la velocita' del treno. 5 orari cambiati di conseguenza
+Orario di arrivo del treno 15 alla stazione Stanghella
+non compatibile con la velocita' del treno. 2 orari cambiati di conseguenza
 
 
 ==========Inizio stampa eventi==========
 
-Il treno 112 e' partito dalla stazione di Bologna alle ore 00:30
+Il treno 12 e' partito dalla stazione di Rovigo alle ore 00:30
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Bologna alle ore 00:35
-con un ritardo di 15 minuti.
-Il treno 114 e' partito dalla stazione di Bologna alle ore 00:39
-con un ritardo di 19 minuti.
-Il treno 112 richiede un binario alla stazione Bologna Corticella
-Il treno 111 richiede un binario alla stazione Bologna Corticella
-Il treno 114 richiede un binario alla stazione Bologna Corticella
-Il treno 113 e' partito dalla stazione di Rovigo alle ore 01:00
+Il treno 12 richiede un binario alla stazione Stanghella
+Il treno 11 e' partito dalla stazione di Rovigo alle ore 00:36
+con un ritardo di 16 minuti.
+Il treno 11 richiede un binario alla stazione Stanghella
+Il treno 13 e' partito dalla stazione di Padova alle ore 01:00
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Arqua
-Il treno 111 e' arrivato alla stazione Bologna Corticella alle ore 01:00
+Il treno 13 richiede un binario alla stazione Terme Euganee
+Il treno 11 e' arrivato alla stazione Stanghella alle ore 01:00
 con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Bologna Corticella alle ore 01:00
-con 0 minuti di ritardo.
-Il treno 114 e' partito dalla stazione di Bologna Corticella alle ore 01:05
+Il treno 11 e' partito dalla stazione di Stanghella alle ore 01:05
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Bologna Corticella alle ore 01:09
-con un ritardo di 4 minuti.
-Il treno 114 richiede un binario alla stazione Castel Maggiore
-Il treno 111 richiede un binario alla stazione Castel Maggiore
-Il treno 113 e' arrivato alla stazione Arqua alle ore 01:30
+Il treno 11 richiede un binario alla stazione S. Elena-Este
+Il treno 11 e' arrivato alla stazione S. Elena-Este alle ore 01:30
 con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Castel Maggiore alle ore 01:30
-con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione Castel Maggiore alle ore 01:30
-con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Arqua alle ore 01:35
+Il treno 11 e' partito dalla stazione di S. Elena-Este alle ore 01:35
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Occhiobello
-Il treno 114 e' partito dalla stazione di Castel Maggiore alle ore 01:35
+Il treno 12 e' arrivato alla stazione Monselice alle ore 01:40
+con 0 minuti di ritardo.
+Il treno 15 e' partito dalla stazione di Padova alle ore 01:40
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Castel Maggiore alle ore 01:35
+Il treno 15 richiede un binario alla stazione Terme Euganee
+Il treno 11 richiede un binario alla stazione Monselice
+Il treno 12 e' partito dalla stazione di Monselice alle ore 01:45
 con un ritardo di 0 minuti.
-Il treno 114 richiede un binario alla stazione S. Giorgio Di Piano
-Il treno 111 richiede un binario alla stazione S. Giorgio Di Piano
-Il treno 114 e' arrivato alla stazione S. Giorgio Di Piano alle ore 01:55
+Il treno 12 richiede un binario alla stazione Battaglia Terme
+Il treno 11 e' arrivato alla stazione Monselice alle ore 01:55
 con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione S. Giorgio Di Piano alle ore 01:55
-con 0 minuti di ritardo.
-Il treno 113 e' arrivato alla stazione Occhiobello alle ore 02:00
-con 0 minuti di ritardo.
-Il treno 112 e' arrivato alla stazione S. Pietro In Casale alle ore 02:00
-con 0 minuti di ritardo.
-Il treno 114 e' partito dalla stazione di S. Giorgio Di Piano alle ore 02:00
+Il treno 11 e' partito dalla stazione di Monselice alle ore 02:00
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di S. Giorgio Di Piano alle ore 02:00
+Il treno 13 e' arrivato alla stazione Terme Euganee alle ore 02:10
+con 0 minuti di ritardo.
+Il treno 11 richiede un binario alla stazione Battaglia Terme
+Il treno 11 e' arrivato alla stazione Battaglia Terme alle ore 02:14
+con 0 minuti di ritardo.
+Il treno 13 e' partito dalla stazione di Terme Euganee alle ore 02:15
 con un ritardo di 0 minuti.
-Il treno 113 e' partito dalla stazione di Occhiobello alle ore 02:05
+Il treno 13 richiede un binario alla stazione Battaglia Terme
+Il treno 11 e' partito dalla stazione di Battaglia Terme alle ore 02:19
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Ferrara
-Il treno 112 e' partito dalla stazione di S. Pietro In Casale alle ore 02:05
+Il treno 13 e' arrivato alla stazione Battaglia Terme alle ore 02:23
+con 0 minuti di ritardo.
+Il treno 11 richiede un binario alla stazione Terme Euganee
+Il treno 11 e' arrivato alla stazione Terme Euganee alle ore 02:27
+con 0 minuti di ritardo.
+Il treno 13 e' partito dalla stazione di Battaglia Terme alle ore 02:28
 con un ritardo di 0 minuti.
-Il treno 114 richiede un binario alla stazione S. Pietro In Casale
-Il treno 111 richiede un binario alla stazione S. Pietro In Casale
-Il treno 112 richiede un binario alla stazione Galliera
-Il treno 114 e' arrivato alla stazione S. Pietro In Casale alle ore 02:14
+Il treno 13 richiede un binario alla stazione Monselice
+Il treno 12 e' arrivato alla stazione Terme Euganee alle ore 02:30
 con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione S. Pietro In Casale alle ore 02:14
-con 0 minuti di ritardo.
-Il treno 111 e' partito dalla stazione di S. Pietro In Casale alle ore 02:19
+Il treno 12 e' partito dalla stazione di Terme Euganee alle ore 02:35
 con un ritardo di 0 minuti.
-Il treno 114 e' partito dalla stazione di S. Pietro In Casale alle ore 02:23
-con un ritardo di 4 minuti.
-Il treno 113 e' arrivato alla stazione Ferrara alle ore 02:23
+Il treno 11 e' partito dalla stazione di Terme Euganee alle ore 02:41
+con un ritardo di 9 minuti.
+Il treno 12 richiede un binario alla stazione Padova
+Il treno 11 richiede un binario alla stazione Padova
+Il treno 13 e' arrivato alla stazione Monselice alle ore 02:58
 con 0 minuti di ritardo.
-Il treno 111 richiede un binario alla stazione Galliera
-Il treno 113 e' partito dalla stazione di Ferrara alle ore 02:28
+Il treno 13 e' partito dalla stazione di Monselice alle ore 03:03
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Galliera
-Il treno 111 e' arrivato alla stazione Galliera alle ore 02:29
+Il treno 13 richiede un binario alla stazione S. Elena-Este
+Il treno 12 e' arrivato alla stazione Padova alle ore 03:10
 con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Galliera alle ore 02:29
-con 0 minuti di ritardo.
-Il treno 114 richiede un binario alla stazione Galliera
-Il treno 111 e' partito dalla stazione di Galliera alle ore 02:34
+Il treno 12 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 14 e' partito dalla stazione di Rovigo alle ore 03:20
 con un ritardo di 0 minuti.
-Il treno 114 e' partito dalla stazione di Galliera alle ore 02:34
+Il treno 15 e' arrivato alla stazione Terme Euganee alle ore 03:20
+con 0 minuti di ritardo.
+Il treno 13 e' arrivato alla stazione S. Elena-Este alle ore 03:23
+con 0 minuti di ritardo.
+Il treno 15 e' partito dalla stazione di Terme Euganee alle ore 03:25
 con un ritardo di 0 minuti.
-Il treno 112 e' arrivato alla stazione Ferrara alle ore 02:40
+Il treno 15 richiede un binario alla stazione Battaglia Terme
+Il treno 14 richiede un binario alla stazione Stanghella
+Il treno 11 e' arrivato alla stazione Padova alle ore 03:27
 con 0 minuti di ritardo.
-Il treno 112 e' partito dalla stazione di Ferrara alle ore 02:45
+Il treno 11 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 13 e' partito dalla stazione di S. Elena-Este alle ore 03:28
 con un ritardo di 0 minuti.
-Il treno 111 richiede un binario alla stazione Ferrara
-Il treno 114 richiede un binario alla stazione Ferrara
-Il treno 112 richiede un binario alla stazione Occhiobello
-Il treno 113 e' arrivato alla stazione Galliera alle ore 02:58
+Il treno 13 richiede un binario alla stazione Stanghella
+Il treno 13 e' arrivato alla stazione Stanghella alle ore 03:38
 con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Galliera alle ore 03:03
+Il treno 13 e' partito dalla stazione di Stanghella alle ore 03:43
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione S. Pietro In Casale
-Il treno 111 e' arrivato alla stazione Ferrara alle ore 03:04
+Il treno 13 richiede un binario alla stazione Rovigo
+Il treno 15 e' arrivato alla stazione Battaglia Terme alle ore 03:50
 con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Ferrara alle ore 03:04
-con 0 minuti di ritardo.
-Il treno 114 e' partito dalla stazione di Ferrara alle ore 03:09
+Il treno 15 e' partito dalla stazione di Battaglia Terme alle ore 03:55
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Ferrara alle ore 03:13
-con un ritardo di 4 minuti.
-Il treno 112 e' arrivato alla stazione Rovigo alle ore 03:20
+Il treno 15 richiede un binario alla stazione Monselice
+Il treno 13 e' arrivato alla stazione Rovigo alle ore 03:58
 con 0 minuti di ritardo.
-Il treno 112 e' arrivato alla fine della corsa con un ritardo di 0 minuti
-Il treno 114 richiede un binario alla stazione Occhiobello
-Il treno 113 e' arrivato alla stazione S. Pietro In Casale alle ore 03:23
+Il treno 13 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 15 e' arrivato alla stazione Monselice alle ore 04:20
 con 0 minuti di ritardo.
-Il treno 111 richiede un binario alla stazione Occhiobello
-Il treno 113 e' partito dalla stazione di S. Pietro In Casale alle ore 03:28
+Il treno 15 e' partito dalla stazione di Monselice alle ore 04:25
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione S. Giorgio Di Piano
-Il treno 114 e' arrivato alla stazione Occhiobello alle ore 03:29
+Il treno 15 richiede un binario alla stazione S. Elena-Este
+Il treno 15 e' arrivato alla stazione S. Elena-Este alle ore 04:50
 con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione Occhiobello alle ore 03:29
-con 0 minuti di ritardo.
-Il treno 111 e' partito dalla stazione di Occhiobello alle ore 03:34
+Il treno 15 e' partito dalla stazione di S. Elena-Este alle ore 04:55
 con un ritardo di 0 minuti.
-Il treno 114 e' partito dalla stazione di Occhiobello alle ore 03:38
-con un ritardo di 4 minuti.
-Il treno 113 e' arrivato alla stazione S. Giorgio Di Piano alle ore 03:42
+Il treno 15 richiede un binario alla stazione Stanghella
+Il treno 14 e' arrivato alla stazione Monselice alle ore 05:00
 con 0 minuti di ritardo.
-Il treno 111 richiede un binario alla stazione Arqua
-Il treno 113 e' partito dalla stazione di S. Giorgio Di Piano alle ore 03:47
+Il treno 15 e' arrivato alla stazione Stanghella alle ore 05:05
+con 0 minuti di ritardo.
+Il treno 14 e' partito dalla stazione di Monselice alle ore 05:05
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Castel Maggiore
-Il treno 114 richiede un binario alla stazione Arqua
-Il treno 111 e' arrivato alla stazione Arqua alle ore 03:59
-con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Arqua alle ore 03:59
-con 0 minuti di ritardo.
-Il treno 113 e' arrivato alla stazione Castel Maggiore alle ore 04:02
-con 0 minuti di ritardo.
-Il treno 111 e' partito dalla stazione di Arqua alle ore 04:04
+Il treno 15 e' partito dalla stazione di Stanghella alle ore 05:10
 con un ritardo di 0 minuti.
-Il treno 114 e' partito dalla stazione di Arqua alle ore 04:04
+Il treno 15 richiede un binario alla stazione Rovigo
+Il treno 14 richiede un binario alla stazione Battaglia Terme
+Il treno 15 e' arrivato alla stazione Rovigo alle ore 05:30
+con 0 minuti di ritardo.
+Il treno 15 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 14 e' arrivato alla stazione Terme Euganee alle ore 05:50
+con 0 minuti di ritardo.
+Il treno 14 e' partito dalla stazione di Terme Euganee alle ore 05:55
 con un ritardo di 0 minuti.
-Il treno 113 e' partito dalla stazione di Castel Maggiore alle ore 04:07
+Il treno 14 richiede un binario alla stazione Padova
+Il treno 14 e' arrivato alla stazione Padova alle ore 07:55
+con 0 minuti di ritardo.
+Il treno 14 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 16 e' partito dalla stazione di Rovigo alle ore 08:20
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Bologna Corticella
-Il treno 111 richiede un binario alla stazione Rovigo
-Il treno 114 richiede un binario alla stazione Rovigo
-Il treno 111 e' arrivato alla stazione Rovigo alle ore 04:29
+Il treno 16 richiede un binario alla stazione Stanghella
+Il treno 16 e' arrivato alla stazione Monselice alle ore 08:50
 con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla fine della corsa con un ritardo di 0 minuti
-Il treno 114 e' arrivato alla stazione Rovigo alle ore 04:29
-con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla fine della corsa con un ritardo di 0 minuti
-Il treno 113 e' arrivato alla stazione Bologna Corticella alle ore 04:57
-con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Bologna Corticella alle ore 05:02
+Il treno 16 e' partito dalla stazione di Monselice alle ore 08:55
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Bologna
-Il treno 113 e' arrivato alla stazione Bologna alle ore 05:32
+Il treno 16 richiede un binario alla stazione Battaglia Terme
+Il treno 16 e' arrivato alla stazione Terme Euganee alle ore 09:10
 con 0 minuti di ritardo.
-Il treno 113 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 16 e' partito dalla stazione di Terme Euganee alle ore 09:15
+con un ritardo di 0 minuti.
+Il treno 16 richiede un binario alla stazione Padova
+Il treno 16 e' arrivato alla stazione Padova alle ore 09:30
+con 0 minuti di ritardo.
+Il treno 16 e' arrivato alla fine della corsa con un ritardo di 0 minuti
 
 
-===================================================================================================================
 
-line_description e timetable_1:
 
-Orario di arrivo del treno 111 alla stazione Monselice
-non compatibile con la velocita' del treno. 5 orari cambiati di conseguenza
-Orario di arrivo del treno 111 alla stazione Battaglia Terme
-non compatibile con la velocita' del treno. 4 orari cambiati di conseguenza
-Orario di arrivo del treno 111 alla stazione Terme Euganee
-non compatibile con la velocita' del treno. 3 orari cambiati di conseguenza
-Orario di arrivo del treno 111 alla stazione Abano
-non compatibile con la velocita' del treno. 2 orari cambiati di conseguenza
-Orario di arrivo del treno 111 alla stazione Padova
-non compatibile con la velocita' del treno. 1 orari cambiati di conseguenza
-Orario di arrivo del treno 112 alla stazione Terme Euganee
-non compatibile con la velocita' del treno. 2 orari cambiati di conseguenza
-Orario di arrivo del treno 112 alla stazione Padova
-non compatibile con la velocita' del treno. 1 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione Abano
-non compatibile con la velocita' del treno. 7 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione Terme Euganee
-non compatibile con la velocita' del treno. 6 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione Battaglia Terme
-non compatibile con la velocita' del treno. 5 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione Monselice
-non compatibile con la velocita' del treno. 4 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione S. Elena-Este
-non compatibile con la velocita' del treno. 3 orari cambiati di conseguenza
-Orario di arrivo del treno 113 alla stazione Stanghella
-non compatibile con la velocita' del treno. 2 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione Monselice
-non compatibile con la velocita' del treno. 5 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione Battaglia Terme
-non compatibile con la velocita' del treno. 4 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione Terme Euganee
-non compatibile con la velocita' del treno. 3 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione Abano
-non compatibile con la velocita' del treno. 2 orari cambiati di conseguenza
-Orario di arrivo del treno 114 alla stazione Padova
+
+
+
+
+
+
+line_description_1 e timetables.txt
+
+Orario di arrivo del treno 5678 alla stazione Bologna
 non compatibile con la velocita' del treno. 1 orari cambiati di conseguenza
 
 
 ==========Inizio stampa eventi==========
 
-Il treno 112 e' partito dalla stazione di Rovigo alle ore 00:30
+Il treno 1597 e' partito dalla stazione di Bologna alle ore 00:40
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Rovigo alle ore 00:35
-con un ritardo di 15 minuti.
-Il treno 112 richiede un binario alla stazione Stanghella
-Il treno 114 e' partito dalla stazione di Rovigo alle ore 00:39
-con un ritardo di 19 minuti.
-Il treno 111 richiede un binario alla stazione Stanghella
-Il treno 114 richiede un binario alla stazione Stanghella
-Il treno 113 e' partito dalla stazione di Padova alle ore 01:00
+Il treno 4321 e' partito dalla stazione di Bologna alle ore 00:45
+con un ritardo di 35 minuti.
+Il treno 1597 richiede un binario alla stazione Bologna Corticella
+Il treno 4321 richiede un binario alla stazione Bologna Corticella
+Il treno 4321 e' arrivato alla stazione Bologna Corticella alle ore 01:00
+con 0 minuti di ritardo.
+Il treno 4321 e' partito dalla stazione di Bologna Corticella alle ore 01:05
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Abano
-Il treno 111 e' arrivato alla stazione Stanghella alle ore 01:00
-con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Stanghella alle ore 01:00
-con 0 minuti di ritardo.
-Il treno 114 e' partito dalla stazione di Stanghella alle ore 01:05
+Il treno 4321 richiede un binario alla stazione Castel Maggiore
+Il treno 5678 e' partito dalla stazione di Rovigo alle ore 01:40
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Stanghella alle ore 01:09
-con un ritardo di 4 minuti.
-Il treno 114 richiede un binario alla stazione S. Elena-Este
-Il treno 114 e' arrivato alla stazione S. Elena-Este alle ore 01:30
+Il treno 5678 richiede un binario alla stazione Arqua
+Il treno 1597 e' arrivato alla stazione S. Pietro In Casale alle ore 02:17
 con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione S. Elena-Este alle ore 01:30
-con 0 minuti di ritardo.
-Il treno 111 richiede un binario alla stazione S. Elena-Este
-Il treno 114 e' partito dalla stazione di S. Elena-Este alle ore 01:35
+Il treno 1597 e' partito dalla stazione di S. Pietro In Casale alle ore 02:22
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di S. Elena-Este alle ore 01:35
+Il treno 1597 richiede un binario alla stazione Galliera
+Il treno 4321 e' arrivato alla stazione Castel Maggiore alle ore 02:30
+con 0 minuti di ritardo.
+Il treno 4321 e' partito dalla stazione di Castel Maggiore alle ore 02:35
 con un ritardo di 0 minuti.
-Il treno 113 e' arrivato alla stazione Abano alle ore 01:41
+Il treno 4321 richiede un binario alla stazione S. Giorgio Di Piano
+Il treno 1597 e' arrivato alla stazione Ferrara alle ore 03:02
 con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Abano alle ore 01:46
+Il treno 1597 e' partito dalla stazione di Ferrara alle ore 03:07
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Terme Euganee
-Il treno 112 e' arrivato alla stazione Monselice alle ore 02:00
+Il treno 1597 richiede un binario alla stazione Occhiobello
+Il treno 5678 e' arrivato alla stazione Ferrara alle ore 03:20
 con 0 minuti di ritardo.
-Il treno 112 e' partito dalla stazione di Monselice alle ore 02:05
+Il treno 5678 e' partito dalla stazione di Ferrara alle ore 03:25
 con un ritardo di 0 minuti.
-Il treno 114 richiede un binario alla stazione Monselice
-Il treno 111 richiede un binario alla stazione Monselice
-Il treno 114 e' arrivato alla stazione Monselice alle ore 02:11
+Il treno 5678 richiede un binario alla stazione Galliera
+Il treno 4321 e' arrivato alla stazione S. Giorgio Di Piano alle ore 03:50
 con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione Monselice alle ore 02:11
-con 0 minuti di ritardo.
-Il treno 111 e' partito dalla stazione di Monselice alle ore 02:16
+Il treno 4321 e' partito dalla stazione di S. Giorgio Di Piano alle ore 03:55
 con un ritardo di 0 minuti.
-Il treno 114 e' partito dalla stazione di Monselice alle ore 02:20
-con un ritardo di 4 minuti.
-Il treno 113 e' arrivato alla stazione Terme Euganee alle ore 02:22
+Il treno 4321 richiede un binario alla stazione S. Pietro In Casale
+Il treno 1597 e' arrivato alla stazione Rovigo alle ore 04:08
 con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Terme Euganee alle ore 02:27
+Il treno 1597 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 5678 e' arrivato alla stazione S. Pietro In Casale alle ore 04:10
+con 0 minuti di ritardo.
+Il treno 5678 e' partito dalla stazione di S. Pietro In Casale alle ore 04:15
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Battaglia Terme
-Il treno 112 richiede un binario alla stazione Battaglia Terme
-Il treno 111 richiede un binario alla stazione Battaglia Terme
-Il treno 111 e' arrivato alla stazione Battaglia Terme alle ore 02:52
+Il treno 5678 richiede un binario alla stazione S. Giorgio Di Piano
+Il treno 5678 e' arrivato alla stazione Bologna alle ore 04:48
 con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Battaglia Terme alle ore 02:52
+Il treno 5678 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 4321 e' arrivato alla stazione S. Pietro In Casale alle ore 04:50
 con 0 minuti di ritardo.
-Il treno 114 richiede un binario alla stazione Battaglia Terme
-Il treno 112 e' arrivato alla stazione Terme Euganee alle ore 02:55
-con 0 minuti di ritardo.
-Il treno 111 e' partito dalla stazione di Battaglia Terme alle ore 02:57
+Il treno 4321 e' partito dalla stazione di S. Pietro In Casale alle ore 04:55
 con un ritardo di 0 minuti.
-Il treno 114 e' partito dalla stazione di Battaglia Terme alle ore 02:57
+Il treno 4321 richiede un binario alla stazione Galliera
+Il treno 4321 e' arrivato alla stazione Galliera alle ore 05:30
+con 0 minuti di ritardo.
+Il treno 4321 e' partito dalla stazione di Galliera alle ore 05:35
 con un ritardo di 0 minuti.
-Il treno 112 e' partito dalla stazione di Terme Euganee alle ore 03:00
+Il treno 4321 richiede un binario alla stazione Ferrara
+Il treno 4321 e' arrivato alla stazione Ferrara alle ore 05:59
+con 0 minuti di ritardo.
+Il treno 4321 e' partito dalla stazione di Ferrara alle ore 06:04
 con un ritardo di 0 minuti.
-Il treno 113 e' arrivato alla stazione Battaglia Terme alle ore 03:03
+Il treno 4321 richiede un binario alla stazione Occhiobello
+Il treno 4321 e' arrivato alla stazione Occhiobello alle ore 06:32
 con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Battaglia Terme alle ore 03:08
+Il treno 4321 e' partito dalla stazione di Occhiobello alle ore 06:37
 con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Monselice
-Il treno 112 richiede un binario alla stazione Abano
-Il treno 111 richiede un binario alla stazione Terme Euganee
-Il treno 114 richiede un binario alla stazione Terme Euganee
-Il treno 111 e' arrivato alla stazione Terme Euganee alle ore 03:33
+Il treno 4321 richiede un binario alla stazione Arqua
+Il treno 4321 e' arrivato alla stazione Arqua alle ore 07:01
 con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Terme Euganee alle ore 03:33
-con 0 minuti di ritardo.
-Il treno 114 e' partito dalla stazione di Terme Euganee alle ore 03:38
+Il treno 4321 e' partito dalla stazione di Arqua alle ore 07:06
 con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Terme Euganee alle ore 03:42
-con un ritardo di 4 minuti.
-Il treno 113 e' arrivato alla stazione Monselice alle ore 03:44
+Il treno 4321 richiede un binario alla stazione Rovigo
+Il treno 4321 e' arrivato alla stazione Rovigo alle ore 07:34
 con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di Monselice alle ore 03:49
-con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione S. Elena-Este
-Il treno 112 e' arrivato alla stazione Padova alle ore 03:50
-con 0 minuti di ritardo.
-Il treno 112 e' arrivato alla fine della corsa con un ritardo di 0 minuti
-Il treno 114 richiede un binario alla stazione Abano
-Il treno 114 e' arrivato alla stazione Abano alle ore 04:14
-con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla stazione Abano alle ore 04:14
-con 0 minuti di ritardo.
-Il treno 111 richiede un binario alla stazione Abano
-Il treno 114 e' partito dalla stazione di Abano alle ore 04:19
-con un ritardo di 0 minuti.
-Il treno 111 e' partito dalla stazione di Abano alle ore 04:19
-con un ritardo di 0 minuti.
-Il treno 113 e' arrivato alla stazione S. Elena-Este alle ore 04:25
-con 0 minuti di ritardo.
-Il treno 113 e' partito dalla stazione di S. Elena-Este alle ore 04:30
-con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Stanghella
-Il treno 114 richiede un binario alla stazione Padova
-Il treno 111 richiede un binario alla stazione Padova
-Il treno 113 e' arrivato alla stazione Stanghella alle ore 04:55
-con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla stazione Padova alle ore 04:55
-con 0 minuti di ritardo.
-Il treno 114 e' arrivato alla fine della corsa con un ritardo di 0 minuti
-Il treno 111 e' arrivato alla stazione Padova alle ore 04:55
-con 0 minuti di ritardo.
-Il treno 111 e' arrivato alla fine della corsa con un ritardo di 0 minuti
-Il treno 113 e' partito dalla stazione di Stanghella alle ore 05:00
-con un ritardo di 0 minuti.
-Il treno 113 richiede un binario alla stazione Rovigo
-Il treno 113 e' arrivato alla stazione Rovigo alle ore 05:15
-con 0 minuti di ritardo.
-Il treno 113 e' arrivato alla fine della corsa con un ritardo di 0 minuti
+Il treno 4321 e' arrivato alla fine della corsa con un ritardo di 0 minuti
